@@ -18,12 +18,12 @@ body {
   width: 20%;
   height: 99.6%;
   position: fixed;
-  top: 2px;
+  top: 0.125rem;
   background-color: #5a6276;
 }
 
 .logo {
-  height: 50px;
+  height: 3.125rem;
   border-bottom: 1px solid #8b919f;
   background-color: #ffffff;
   width: 100%;
@@ -35,10 +35,10 @@ body {
 }
 .logo span i,
 .sidebar .module span i {
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 .logo img {
-  width: 85%;
+  width: 80%;
   height: 100%;
 }
 .sidebar .menu-module li {
@@ -48,7 +48,7 @@ body {
   text-decoration: none;
   display: block;
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 .sidebar .menu-module li .module {
   text-transform: uppercase;
@@ -61,7 +61,7 @@ body {
 }
 .sidebar .menu-module li .module.active::before {
   content: "";
-  width: 2px;
+  width: 0.2rem;
   height: 100%;
   background-color: #5cb800;
   position: absolute;
@@ -73,7 +73,7 @@ body {
 }
 .sidebar .menu-module li .nav-link .module-function.active::before {
   content: "";
-  width: 2px;
+  width: 0.2rem;
   height: 100%;
   background-color: #ffffff;
   position: absolute;
@@ -94,46 +94,64 @@ body {
 .main-body {
   width: 80%;
   position: fixed;
-  top: 2px;
+  top: 0.125rem;
   left: 20%;
   padding: 0 5px;
 }
 .main-body .header {
   width: 100%;
   background-color: #ffffff;
-  height: 50px;
+  height: 3.125rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  padding-right: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 1rem;
 }
 .main-body .header .nav-item .nav-link,
 .main-body .header .header--module .nav-item .nav-link {
-  font-size: 0.75rem;
-  padding: 0 0.75rem;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0 1rem;
   color: #c4c4c4;
   text-transform: uppercase;
   font-weight: 700;
 }
-.main-body .header .header--module .nav-item .nav-link p{
-    margin: 0;
+.main-body .header .header--module .nav-item .nav-link p {
+  margin: 0;
 }
-.main-body .header .header--module .nav-item.active a{
-  color: #5cb800;
+.main-body .header .header--module .nav-item.active a {
+  color: #008000;
 }
-
-.main-body .header .header--module .nav-item .nav-link {
+.main-body .header .header--module .nav-item a:hover {
+  color: #008000;
+}
+.main-body .header .header--module .nav-item {
   border-right: 1px solid #c4c4c4;
 }
-.main-body .header .header--module .nav-item:last-child .nav-link {
+.main-body .header .header--module .nav-item:last-of-type{
   border: none;
 }
-.border-active{
-    width: 100%;
-    border-radius: 30%;
-    height: 2px;
-    background-color: #5cb800;
-    position: absolute;
-    bottom: 0px;
+.main-body .header .header--module .nav-item.active .nav-link {
+  position: relative;
+}
+.border-active {
+  width: 100%;
+  border-radius: 30%;
+  height: 0.125rem;
+  background-color: #008000;
+  position: absolute;
+  bottom: -0.9rem;
+  left: 0px;
+}
+
+
+/* footer */
+.footer{
+  position: fixed;
+  bottom: 1rem;
+  left: 22%;
+}
+.footer-left p{
+  margin: 0;
 }
