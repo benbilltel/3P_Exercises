@@ -1,0 +1,139 @@
+*,
+*::after,
+*::before {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  font-size: 16px;
+  box-sizing: border-box;
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  background-color: #edeff3;
+}
+
+/* sidebar */
+
+.sidebar {
+  width: 20%;
+  height: 99.6%;
+  position: fixed;
+  top: 2px;
+  background-color: #5a6276;
+}
+
+.logo {
+  height: 50px;
+  border-bottom: 1px solid #8b919f;
+  background-color: #ffffff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.logo:hover {
+  cursor: pointer;
+}
+.logo span i,
+.sidebar .module span i {
+  font-size: 0.75rem;
+}
+.logo img {
+  width: 85%;
+  height: 100%;
+}
+.sidebar .menu-module li {
+  list-style: none;
+}
+.sidebar .menu-module li a {
+  text-decoration: none;
+  display: block;
+  color: #ffffff;
+  font-size: 0.75rem;
+}
+.sidebar .menu-module li .module {
+  text-transform: uppercase;
+}
+.sidebar .menu-module li .module.active {
+  color: #5cb800;
+}
+.sidebar .menu-module li {
+  position: relative;
+}
+.sidebar .menu-module li .module.active::before {
+  content: "";
+  width: 2px;
+  height: 100%;
+  background-color: #5cb800;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.sidebar .menu-module li .nav-link {
+  position: relative;
+}
+.sidebar .menu-module li .nav-link .module-function.active::before {
+  content: "";
+  width: 2px;
+  height: 100%;
+  background-color: #ffffff;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.sidebar .menu-module li .module:hover {
+  color: #5cb800;
+}
+.sidebar .menu-module li .module-function {
+  color: #959db3;
+}
+.sidebar .menu-module li .module-function.active {
+  color: #ffffff;
+}
+
+/*main-body*/
+.main-body {
+  width: 80%;
+  position: fixed;
+  top: 2px;
+  left: 20%;
+  padding: 0 5px;
+}
+.main-body .header {
+  width: 100%;
+  background-color: #ffffff;
+  height: 50px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding-right: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-body .header .nav-item .nav-link,
+.main-body .header .header--module .nav-item .nav-link {
+  font-size: 0.75rem;
+  padding: 0 0.75rem;
+  color: #c4c4c4;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.main-body .header .header--module .nav-item .nav-link p{
+    margin: 0;
+}
+.main-body .header .header--module .nav-item.active a{
+  color: #5cb800;
+}
+
+.main-body .header .header--module .nav-item .nav-link {
+  border-right: 1px solid #c4c4c4;
+}
+.main-body .header .header--module .nav-item:last-child .nav-link {
+  border: none;
+}
+.border-active{
+    width: 100%;
+    border-radius: 30%;
+    height: 2px;
+    background-color: #5cb800;
+    position: absolute;
+    bottom: 0px;
+}
