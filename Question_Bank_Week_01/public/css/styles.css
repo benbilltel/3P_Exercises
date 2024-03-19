@@ -22,7 +22,7 @@ p {
 }
 /*side bar*/
 .sidebar {
-  height: 91vh;
+  height: 100vh;
   padding: 0;
   position: fixed;
   top: 0.125rem;
@@ -79,7 +79,7 @@ p {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   position: fixed;
   top: 0.125rem;
-  left: 18%;
+  left: 17.5%;
 }
 .header-left .nav-link {
   padding: 0 0.01rem;
@@ -130,11 +130,20 @@ p {
   width: 80vw;
   position: fixed;
   top: 4.5rem;
-  left: 18vw;
-  overflow-x: scroll;
-  white-space: nowrap;
+  left: 17.5%;
 }
 
+@media only screen and (max-width: 175%) {
+  .question-filter {
+    overflow-x: auto;
+  }
+}
+.question-search {
+  width: 80vw;
+  position: fixed;
+  top: 5.5rem;
+  left: 17.5%;
+}
 .question-filter .nav-link {
   padding: 0;
   display: flex;
@@ -186,4 +195,10 @@ p {
   height: 1px;
   background-color: black;
   margin: 1rem 0;
+}
+/*Question List*/
+.question-list{
+  padding-left: 17.5%;
+  max-height: 75vh;
+  overflow: auto;
 }

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <div class="question-bank row container-fluid" style="padding-right: 0px">
+    <div class="question-bank row container-fluid" style="padding-right: 0px;padding-top: 20vh;">
       <%- include("./layouts/sidebar"); -%>
 
       <div class="header row container-fluid">
@@ -69,7 +69,7 @@
         </div>
         <div class="header-right col-2"></div>
       </div>
-      <div class="question-filter px-0">
+      <div class="question-filter row px-0">
         <div class="question-filter-left col-8 px-0">
           <ul class="nav d-flex">
             <li class="nav-item active">
@@ -105,6 +105,43 @@
         </div>
         <div class="question-filter-right col-4 px-0"></div>
         <hr />
+      </div>
+      <div class="question-search"></div>
+      <div class="question-list">
+        <table class="table table-striped table-hover text-center">
+          <thead>
+            <tr>
+              <th scope="col">
+                <input type="checkbox" name="allQuestion" id="allQuestion" />
+              </th>
+              <th scope="col">Câu hỏi</th>
+              <th scope="col">Phân nhóm</th>
+              <th scope="col">Thời gian làm</th>
+              <th scope="col">Tình trạng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%questions.forEach((question)=> {%>
+            <tr
+              class="product-row"
+              data-product="<%- JSON.stringify(question) %>"
+            >
+              <th scope="row">
+                <input
+                  type="checkbox"
+                  name="allQuestion"
+                  id="<%=question.id%>"
+                />
+              </th>
+              <td><%=question.content%></td>
+
+              <td><%=question.group%></td>
+              <td><%=question.time%></td>
+              <td><%=question.status%></td>
+            </tr>
+            <% })%>
+          </tbody>
+        </table>
       </div>
     </div>
     <script src="/js/bootstrap.js"></script>
