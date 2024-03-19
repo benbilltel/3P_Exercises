@@ -54,3 +54,17 @@ navLinks.forEach((link) => {
 });
 setActiveNavItem('.sidebar .nav-link');
 setActiveNavItem('.dropdown-cs-item');
+
+
+const checkboxes = document.querySelectorAll('.question-filter-left .nav-item input[type="checkbox"]');
+
+checkboxes.forEach(checkbox => {
+  checkbox.addEventListener('change', function() {
+    const navItem = this.closest('.nav-item');
+    if (this.checked) {
+      navItem.classList.add('active');
+    } else {
+      navItem.classList.remove('active');
+    }
+  });
+});

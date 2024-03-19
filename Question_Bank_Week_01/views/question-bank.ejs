@@ -20,55 +20,91 @@
   <body>
     <div class="question-bank row container-fluid" style="padding-right: 0px">
       <%- include("./layouts/sidebar"); -%>
-      <div class="col-md-10 ms-sm-auto col-lg-10 context">
-        <div class="header row container-fluid">
-          <div class="header-left col-10">
-            <ul class="nav d-flex align-items-center">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>- - - - - - - - <span class="border-active"></span></p>
-                </a>
-                <span class="border-cs-right"></span>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>- - - - - - - - <span class="border-active"></span></p>
-                </a>
-                <span class="border-cs-right"></span>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>- - - - - - - - <span class="border-active"></span></p>
-                </a>
-                <span class="border-cs-right"></span>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>- - - - - - - - <span class="border-active"></span></p>
-                </a>
-                <span class="border-cs-right"></span>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>- - - - - - - - <span class="border-active"></span></p>
-                </a>
-                <span class="border-cs-right"></span>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <p>- - - - - - - - <span class="border-active"></span></p>
-                </a>
-                <span class="border-cs-right"></span>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <p>Nhân sự <span class="border-active active"></span></p>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="header-right col-2"></div>
+
+      <div class="header row container-fluid">
+        <div class="header-left col-10">
+          <ul class="nav d-flex align-items-center">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>- - - - - - - -<span class="border-active"></span></p>
+              </a>
+              <span class="border-cs-right"></span>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>- - - - - - - -<span class="border-active"></span></p>
+              </a>
+              <span class="border-cs-right"></span>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>- - - - - - - -<span class="border-active"></span></p>
+              </a>
+              <span class="border-cs-right"></span>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>- - - - - - - -<span class="border-active"></span></p>
+              </a>
+              <span class="border-cs-right"></span>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>- - - - - - - -<span class="border-active"></span></p>
+              </a>
+              <span class="border-cs-right"></span>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <p>- - - - - - - -<span class="border-active"></span></p>
+              </a>
+              <span class="border-cs-right"></span>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link active">
+                <p>Nhân sự <span class="border-active active"></span></p>
+              </a>
+            </li>
+          </ul>
         </div>
+        <div class="header-right col-2"></div>
+      </div>
+      <div class="question-filter px-0">
+        <div class="question-filter-left col-8 px-0">
+          <ul class="nav d-flex">
+            <li class="nav-item active">
+              <div class="nav-link">
+                <label for="dangSoanThao">Đang soạn thảo</label
+                ><input
+                  type="checkbox"
+                  name="dangSoanThao"
+                  id="dangSoanThao"
+                  checked
+                />
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <label for="guiDuyet">Gửi duyệt</label
+                ><input type="checkbox" name="guiDuyet" id="guiDuyet" />
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <label for="daDuyet">Đã duyệt</label
+                ><input type="checkbox" name="daDuyet" id="daDuyet" />
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="nav-link">
+                <label for="ngungApDung">Ngưng áp dụng</label
+                ><input type="checkbox" name="ngungApDung" id="ngungApDung" />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="question-filter-right col-4 px-0"></div>
+        <hr />
       </div>
     </div>
     <script src="/js/bootstrap.js"></script>

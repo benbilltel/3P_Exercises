@@ -14,10 +14,21 @@ body {
 p {
   margin: 0;
 }
+.question-bank {
+  height: 99vh;
+  width: 100vw;
+  background-color: #edeff3;
+  padding-right: 0px;
+}
 /*side bar*/
 .sidebar {
   height: 91vh;
   padding: 0;
+  position: fixed;
+  top: 0.125rem;
+  left: 0px;
+  width: 16.5vw;
+  bottom: 0px;
 }
 .sidebar .logo {
   width: 100%;
@@ -62,6 +73,7 @@ p {
 }
 .header {
   padding: 0 0.5rem;
+  width: 82.5vw;
   background-color: #fff;
   height: 3.125rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -70,7 +82,7 @@ p {
   left: 18%;
 }
 .header-left .nav-link {
-  padding: 0;
+  padding: 0 0.01rem;
   text-transform: uppercase;
   font-weight: 700;
   color: #5a6276;
@@ -81,11 +93,7 @@ p {
 .header-left .nav-link.active {
   color: #008000;
 }
-.context {
-  height: 99vh;
-  background-color: #edeff3;
-  padding-right: 0px;
-}
+
 .header-left .nav {
   height: 100%;
 }
@@ -105,8 +113,8 @@ p {
 .header-left .nav-item .nav-link.active {
   position: relative;
 }
-.border-active{
-    display: inline-block;
+.border-active {
+  display: inline-block;
 }
 .border-active.active {
   width: 100%;
@@ -116,4 +124,66 @@ p {
   position: absolute;
   bottom: -0.8rem;
   left: 0px;
+}
+/*question filter*/
+.question-filter {
+  width: 80vw;
+  position: fixed;
+  top: 4.5rem;
+  left: 18vw;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.question-filter .nav-link {
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.question-filter .nav-link label,
+.question-filter .nav-link input {
+  display: inline-block;
+  padding: 0 1rem;
+}
+.question-filter .nav-link label {
+  color: #5a6276;
+}
+.question-filter .nav-item {
+  background-color: #fff;
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.25rem;
+  border-radius: 3rem;
+}
+.question-filter .nav-item:hover,
+.question-filter .nav-link:hover,
+.question-filter .nav-link label:hover,
+.question-filter .nav-link input:hover {
+  cursor: pointer;
+}
+.question-filter .nav-item {
+  border: 3px solid transparent;
+}
+.question-filter .nav-item:hover,
+.question-filter .nav-item.active {
+  border-color: #008000;
+}
+
+.question-filter .nav-item input[type="checkbox"]:checked::before,
+.question-filter .nav-item input[type="checkbox"]:hover::before {
+  content: "\002714";
+  background-color: #008000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.85rem;
+  height: 0.85rem;
+}
+.question-filter hr {
+  border: none;
+  height: 1px;
+  background-color: black;
+  margin: 1rem 0;
 }
