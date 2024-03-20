@@ -4,6 +4,9 @@ const getQuestions = () => {
   const questionsDTO = [];
   questions.forEach((element) => {
     switch (element.status) {
+      case 0:
+        element.status = "Đang soạn thảo";
+        break;
       case 1:
         element.status = "Gửi duyệt";
         break;
@@ -16,10 +19,8 @@ const getQuestions = () => {
       case 4:
         element.status = "Trả về";
         break;
-      default:
-        element.status = "Đang soạn thảo";
-        break;
     }
+
     questionsDTO.push(element);
   });
   return questionsDTO;

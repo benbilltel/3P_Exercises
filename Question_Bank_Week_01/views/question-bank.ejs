@@ -14,11 +14,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <div class="question-bank row container-fluid" style="padding-right: 0px;padding-top: 20vh;">
+    <div
+      class="question-bank row container-fluid"
+      style="padding-right: 0px; padding-top: 20vh"
+    >
       <%- include("./layouts/sidebar"); -%>
 
       <div class="header row container-fluid">
@@ -78,7 +85,7 @@
                 ><input
                   type="checkbox"
                   name="dangSoanThao"
-                  id="dangSoanThao"
+                  id="filterQuestion1"
                   checked
                 />
               </div>
@@ -86,19 +93,23 @@
             <li class="nav-item">
               <div class="nav-link">
                 <label for="guiDuyet">Gửi duyệt</label
-                ><input type="checkbox" name="guiDuyet" id="guiDuyet" />
+                ><input type="checkbox" name="guiDuyet" id="filterQuestion2" />
               </div>
             </li>
             <li class="nav-item">
               <div class="nav-link">
                 <label for="daDuyet">Đã duyệt</label
-                ><input type="checkbox" name="daDuyet" id="daDuyet" />
+                ><input type="checkbox" name="daDuyet" id="filterQuestion3" />
               </div>
             </li>
             <li class="nav-item">
               <div class="nav-link">
                 <label for="ngungApDung">Ngưng áp dụng</label
-                ><input type="checkbox" name="ngungApDung" id="ngungApDung" />
+                ><input
+                  type="checkbox"
+                  name="ngungApDung"
+                  id="filterQuestion4"
+                />
               </div>
             </li>
           </ul>
@@ -118,13 +129,14 @@
               <th scope="col">Phân nhóm</th>
               <th scope="col">Thời gian làm</th>
               <th scope="col">Tình trạng</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <%questions.forEach((question)=> {%>
             <tr
-              class="product-row"
-              data-product="<%- JSON.stringify(question) %>"
+              class="question-row"
+              data-question='<%- JSON.stringify(question) %>'
             >
               <th scope="row">
                 <input
@@ -133,11 +145,17 @@
                   id="<%=question.id%>"
                 />
               </th>
-              <td><%=question.content%></td>
+              <td class="truncate-text" title="<%=question.content%>"><%=question.content%></td>
 
               <td><%=question.group%></td>
               <td><%=question.time%></td>
               <td><%=question.status%></td>
+              <td>
+                <button class="show-action-question">
+                  <i class="fa-solid fa-bars"></i>
+                </button>
+                <ul class="action-question-menu"></ul>
+              </td>
             </tr>
             <% })%>
           </tbody>
@@ -146,5 +164,6 @@
     </div>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/animation-custom.js"></script>
+    <script src="/js/question-request.js"></script>
   </body>
 </html>

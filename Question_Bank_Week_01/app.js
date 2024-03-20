@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
   const questionsDTO = getQuestions();
   res.render("question-bank", { questions: questionsDTO });
 });
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port http://localhost:${PORT}`);
 });

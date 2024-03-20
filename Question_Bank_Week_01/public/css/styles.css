@@ -20,6 +20,15 @@ p {
   background-color: #edeff3;
   padding-right: 0px;
 }
+.truncate-text{
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truncate-text:hover {
+  cursor: pointer;
+}
 /*side bar*/
 .sidebar {
   height: 100vh;
@@ -201,4 +210,13 @@ p {
   padding-left: 17.5%;
   max-height: 75vh;
   overflow: auto;
+}
+
+/*question list*/
+.action-question-menu {
+  display: none;
+}
+.show-action-question{
+  border: none;
+  background-color: transparent;
 }
