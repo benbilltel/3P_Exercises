@@ -20,7 +20,7 @@ p {
   background-color: #edeff3;
   padding-right: 0px;
 }
-.truncate-text{
+.truncate-text {
   max-width: 300px;
   white-space: nowrap;
   overflow: hidden;
@@ -28,6 +28,9 @@ p {
 }
 .truncate-text:hover {
   cursor: pointer;
+}
+.hidden {
+  display: none;
 }
 /*side bar*/
 .sidebar {
@@ -188,11 +191,20 @@ p {
   border-color: #008000;
 }
 
-.question-filter .nav-item input[type="checkbox"]:checked::before,
-.question-filter .nav-item input[type="checkbox"]:hover::before {
+.question-filter .nav-item input[type="checkbox"]:checked::before {
   content: "\002714";
   background-color: #008000;
   color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.85rem;
+  height: 0.85rem;
+}
+.question-filter .nav-item input[type="checkbox"]:hover::before {
+  content: "\002714";
+  background-color: #008000;
+  color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,7 +218,7 @@ p {
   margin: 1rem 0;
 }
 /*Question List*/
-.question-list{
+.question-list {
   padding-left: 17.5%;
   max-height: 75vh;
   overflow: auto;
@@ -215,8 +227,62 @@ p {
 /*question list*/
 .action-question-menu {
   display: none;
+  z-index: 1;
+  background-color: #edeff3;
+  width: 10vw;
+  position: absolute;
+  top: 0;
+  left: -10vw;
+  transition: 0.5s;
 }
-.show-action-question{
+.show-action-question {
+  position: relative;
+}
+.show-action-question:hover {
+  cursor: pointer;
+}
+.show-action-question {
   border: none;
   background-color: transparent;
+}
+.question-action-item {
+  background-color: #bdc2d2;
+  padding: 0.5rem 0.5rem;
+}
+
+.question-action-item:hover {
+  background-color: #fff;
+  color: #008000;
+}
+.question-list .table tbody .question-row:hover,
+.question-list .table tbody .question-row:hover td {
+  background-color: #598f6d;
+  cursor: pointer;
+}
+.question-list .table tbody .question-row .show-action-question.active {
+  background-color: #bdc2d2;
+}
+.question-row,
+.question-row td,
+.question-list tr,.question-list tr th {
+  border: none;
+}
+
+.question-list thead tr,
+.question-list thead tr th {
+  background-color: transparent;
+}
+.question-row td {
+  height: 3.875rem;
+  vertical-align: middle;
+}
+.question-row {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.table {
+  border-collapse: separate;
+  border-spacing: 0 1rem;
+}
+.show-action-question{
+  padding: 0.5rem;
 }

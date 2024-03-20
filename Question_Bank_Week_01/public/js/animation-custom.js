@@ -39,6 +39,23 @@ function setActiveNavItem(classname) {
     });
   });
 }
+document.addEventListener('DOMContentLoaded', function() {
+  const showActionQuestions = document.querySelectorAll('.show-action-question');
+
+  showActionQuestions.forEach(function(showActionQuestion) {
+    showActionQuestion.addEventListener('click', function() {
+      // Remove the "active" class from other elements
+      showActionQuestions.forEach(function(element) {
+        if (element !== showActionQuestion) {
+          element.classList.remove('active');
+        }
+      });
+
+      // Toggle the "active" class for the clicked element
+      showActionQuestion.classList.toggle('active');
+    });
+  });
+});
 const navLinks = document.querySelectorAll(".header-left .nav-link");
 
 navLinks.forEach((link) => {
@@ -87,78 +104,107 @@ for (let i = 0; i < questionRows.length; i++) {
   // Create the options based on the question status
   if (question.status.trim() === "Đang soạn thảo") {
     const option1 = document.createElement("li");
-    option1.value = "chinhSua";
-    option1.innerHTML = "&#9998; Chỉnh sửa";
-    option1.classList.add = "question-action-item";
+    option1.dataset.questionId = question.id;
+    option1.innerHTML =
+      '<i class="fa-regular fa-pen-to-square me-3"></i> Chỉnh sửa';
+    option1.classList.add("question-action-item", "nav-item", "text-start","action-chinh-sua");
     selectElement.appendChild(option1);
 
     const option2 = document.createElement("li");
-    option2.value = "guiDuyet";
-    option2.innerHTML = "&#128233; Gửi duyệt";
-    option2.classList.add = "question-action-item";
+    option2.dataset.questionId  = question.id;
+    option2.innerHTML =
+      '<i class="fa-regular fa-paper-plane me-3"></i> Gửi duyệt';
+    option2.classList.add("question-action-item", "nav-item", "text-start","action-gui-duyet");
     selectElement.appendChild(option2);
 
     const option3 = document.createElement("li");
-    option3.value = "xoa";
-    option3.innerHTML = "&#128465; Xóa";
-    option3.classList.add = "question-action-item";
+    option3.dataset.questionId  = question.id;
+    option3.innerHTML = '<i class="fa-regular fa-trash-can me-3"></i> Xóa';
+    option3.classList.add("question-action-item", "nav-item", "text-start","action-xoa");
     selectElement.appendChild(option3);
   } else if (question.status.trim() === "Gửi duyệt") {
     const option2 = document.createElement("li");
-    option2.value = "xemChiTiet";
-    option2.innerHTML = "&#128065; Xem chi tiết";
-    option2.classList.add = "question-action-item";
+    option2.dataset.questionId  = question.id;
+    option2.innerHTML =
+      '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
+    option2.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option2);
     const option1 = document.createElement("li");
-    option1.value = "pheDuyet";
-    option1.innerHTML = "&#10004; Phê duyệt";
-    option1.classList.add = "question-action-item";
+    option1.dataset.questionId  = question.id;
+    option1.innerHTML =
+      '<i class="fa-regular fa-circle-check me-3"></i>Phê duyệt';
+    option1.classList.add("question-action-item", "nav-item", "text-start","action-phe-duyet");
     selectElement.appendChild(option1);
 
     const option3 = document.createElement("li");
-    option3.value = "traVe";
-    option3.innerHTML = "&#8634; Trả về";
-    option3.classList.add = "question-action-item";
+    option3.dataset.questionId  = question.id;
+    option3.innerHTML = '<i class="fa-solid fa-rotate-left me-3"></i> Trả về';
+    option3.classList.add("question-action-item", "nav-item", "text-start","action-tra-ve");
     selectElement.appendChild(option3);
   } else if (question.status.trim() === "Đã duyệt") {
     const option2 = document.createElement("li");
-    option2.value = "xemChiTiet";
-    option2.innerHTML = "&#128065; Xem chi tiết";
-    option2.classList.add = "question-action-item";
+    option2.dataset.questionId  = question.id;
+    option2.innerHTML =
+      '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
+    option2.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option2);
     const option1 = document.createElement("li");
-    option1.value = "ngung";
-    option1.innerHTML = "&#9940; Ngưng";
-    option1.classList.add = "question-action-item";
+    option1.dataset.questionId  = question.id;
+    option1.innerHTML = '<i class="fa-solid fa-ban me-3"></i> Ngưng';
+    option1.classList.add("question-action-item", "nav-item", "text-start","action-ngung");
     selectElement.appendChild(option1);
   } else if (question.status.trim() === "Ngưng áp dụng") {
     const option3 = document.createElement("li");
-    option3.value = "xemChiTiet";
-    option3.innerHTML = "&#128065; Xem chi tiết";
-    option3.classList.add = "question-action-item";
+    option3.dataset.questionId  = question.id;
+    option3.innerHTML =
+      '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
+    option3.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option3);
     const option1 = document.createElement("li");
-    option1.value = "traVe";
-    option1.innerHTML = "&#8634; Trả về";
-    option1.classList.add = "question-action-item";
+    option1.dataset.questionId  = question.id;
+    option1.innerHTML = '<i class="fa-solid fa-rotate-left me-3"></i> Trả về';
+    option1.classList.add("question-action-item", "nav-item", "text-start","action-tra-ve");
     selectElement.appendChild(option1);
 
     const option2 = document.createElement("li");
-    option2.value = "pheDuyet";
-    option2.innerHTML = "&#10004; Phê duyệt";
-    option2.classList.add = "question-action-item";
+    option2.dataset.questionId  = question.id;
+    option2.innerHTML =
+      '<i class="fa-regular fa-circle-check me-3"></i>Phê duyệt';
+    option2.classList.add("question-action-item", "nav-item", "text-start","action-phe-duyet");
     selectElement.appendChild(option2);
   } else {
     const option1 = document.createElement("li");
-    option1.value = "chinhSua";
-    option1.innerHTML = "&#9998; Chỉnh sửa";
-    option1.classList.add = "question-action-item";
+    option1.dataset.questionId  = question.id;
+    option1.innerHTML =
+      '<i class="fa-regular fa-pen-to-square me-3"></i> Chỉnh sửa';
+    option1.classList.add("question-action-item", "nav-item", "text-start","action-chinh-sua");
     selectElement.appendChild(option1);
 
     const option2 = document.createElement("li");
-    option2.value = "guiDuyet";
-    option2.innerHTML = "&#128233; Gửi duyệt";
-    option2.classList.add = "question-action-item";
+    option2.dataset.questionId  = question.id;
+    option2.innerHTML =
+      '<i class="fa-regular fa-paper-plane me-3"></i> Gửi duyệt';
+    option2.classList.add("question-action-item", "nav-item", "text-start","action-gui-duyet");
     selectElement.appendChild(option2);
   }
 }
+/*show action question*/
+
+const showActionButtons = document.querySelectorAll(".show-action-question");
+
+showActionButtons.forEach((button) => {
+  button.addEventListener("click", function () {
+    const parentTd = this.parentNode; // Get the parent <td> element
+    const actionMenu = parentTd.querySelector(".action-question-menu");
+    const isHidden = getComputedStyle(actionMenu).display === "none";
+
+    // Hide all action-question-menu elements
+    const openMenus = document.querySelectorAll(".action-question-menu");
+    openMenus.forEach((menu) => {
+      menu.style.display = "none";
+    });
+
+    // Toggle the display of the clicked action-question-menu
+    actionMenu.style.display = isHidden ? "block" : "none";
+  });
+});
