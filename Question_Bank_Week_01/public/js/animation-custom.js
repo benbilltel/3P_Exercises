@@ -39,20 +39,22 @@ function setActiveNavItem(classname) {
     });
   });
 }
-document.addEventListener('DOMContentLoaded', function() {
-  const showActionQuestions = document.querySelectorAll('.show-action-question');
+document.addEventListener("DOMContentLoaded", function () {
+  const showActionQuestions = document.querySelectorAll(
+    ".show-action-question"
+  );
 
-  showActionQuestions.forEach(function(showActionQuestion) {
-    showActionQuestion.addEventListener('click', function() {
+  showActionQuestions.forEach(function (showActionQuestion) {
+    showActionQuestion.addEventListener("click", function () {
       // Remove the "active" class from other elements
-      showActionQuestions.forEach(function(element) {
+      showActionQuestions.forEach(function (element) {
         if (element !== showActionQuestion) {
-          element.classList.remove('active');
+          element.classList.remove("active");
         }
       });
 
       // Toggle the "active" class for the clicked element
-      showActionQuestion.classList.toggle('active');
+      showActionQuestion.classList.toggle("active");
     });
   });
 });
@@ -89,7 +91,28 @@ checkboxes.forEach((checkbox) => {
 
 //display option
 // Iterate over the question rows
+const updateStatusQuestion = (questionId, action) => {
+  const formData = new FormData();
+  formData.append("status", action);
 
+  fetch("/update/question/" + questionId, {
+    method: "PUT",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message == "Question updated successfully") {
+      
+        showToast('Success!', true,()=>{
+          window.location.href = "/";
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("An error occurred while updating the product");
+    });
+};
 const questionRows = document.getElementsByClassName("question-row");
 for (let i = 0; i < questionRows.length; i++) {
   const questionRow = questionRows[i];
@@ -107,84 +130,105 @@ for (let i = 0; i < questionRows.length; i++) {
     option1.dataset.questionId = question.id;
     option1.innerHTML =
       '<i class="fa-regular fa-pen-to-square me-3"></i> Chỉnh sửa';
-    option1.classList.add("question-action-item", "nav-item", "text-start","action-chinh-sua");
+    option1.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option1);
 
     const option2 = document.createElement("li");
-    option2.dataset.questionId  = question.id;
+    option2.dataset.questionId = question.id;
     option2.innerHTML =
       '<i class="fa-regular fa-paper-plane me-3"></i> Gửi duyệt';
-    option2.classList.add("question-action-item", "nav-item", "text-start","action-gui-duyet");
+    option2.classList.add("question-action-item", "nav-item", "text-start");
+    option2.addEventListener("click", function () {
+      updateStatusQuestion(question.id, 1);
+    });
     selectElement.appendChild(option2);
 
     const option3 = document.createElement("li");
-    option3.dataset.questionId  = question.id;
+    option3.dataset.questionId = question.id;
     option3.innerHTML = '<i class="fa-regular fa-trash-can me-3"></i> Xóa';
-    option3.classList.add("question-action-item", "nav-item", "text-start","action-xoa");
+    option3.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option3);
   } else if (question.status.trim() === "Gửi duyệt") {
     const option2 = document.createElement("li");
-    option2.dataset.questionId  = question.id;
+    option2.dataset.questionId = question.id;
     option2.innerHTML =
       '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
     option2.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option2);
     const option1 = document.createElement("li");
-    option1.dataset.questionId  = question.id;
+    option1.dataset.questionId = question.id;
     option1.innerHTML =
       '<i class="fa-regular fa-circle-check me-3"></i>Phê duyệt';
-    option1.classList.add("question-action-item", "nav-item", "text-start","action-phe-duyet");
+    option1.classList.add("question-action-item", "nav-item", "text-start");
+    option1.addEventListener("click", function () {
+      updateStatusQuestion(question.id, 2);
+    });
     selectElement.appendChild(option1);
 
     const option3 = document.createElement("li");
-    option3.dataset.questionId  = question.id;
+    option3.dataset.questionId = question.id;
     option3.innerHTML = '<i class="fa-solid fa-rotate-left me-3"></i> Trả về';
-    option3.classList.add("question-action-item", "nav-item", "text-start","action-tra-ve");
+    option3.classList.add("question-action-item", "nav-item", "text-start");
+    option3.addEventListener("click", function () {
+      updateStatusQuestion(question.id, 4);
+    });
     selectElement.appendChild(option3);
   } else if (question.status.trim() === "Đã duyệt") {
     const option2 = document.createElement("li");
-    option2.dataset.questionId  = question.id;
+    option2.dataset.questionId = question.id;
     option2.innerHTML =
       '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
     option2.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option2);
     const option1 = document.createElement("li");
-    option1.dataset.questionId  = question.id;
+    option1.dataset.questionId = question.id;
     option1.innerHTML = '<i class="fa-solid fa-ban me-3"></i> Ngưng';
-    option1.classList.add("question-action-item", "nav-item", "text-start","action-ngung");
+    option1.classList.add("question-action-item", "nav-item", "text-start");
+    option1.addEventListener("click", function () {
+      updateStatusQuestion(question.id, 3);
+    });
     selectElement.appendChild(option1);
   } else if (question.status.trim() === "Ngưng áp dụng") {
     const option3 = document.createElement("li");
-    option3.dataset.questionId  = question.id;
+    option3.dataset.questionId = question.id;
     option3.innerHTML =
       '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
     option3.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option3);
     const option1 = document.createElement("li");
-    option1.dataset.questionId  = question.id;
+    option1.dataset.questionId = question.id;
     option1.innerHTML = '<i class="fa-solid fa-rotate-left me-3"></i> Trả về';
-    option1.classList.add("question-action-item", "nav-item", "text-start","action-tra-ve");
+    option1.classList.add("question-action-item", "nav-item", "text-start");
+    option1.addEventListener("click", function () {
+      updateStatusQuestion(question.id, 4);
+    });
     selectElement.appendChild(option1);
 
     const option2 = document.createElement("li");
-    option2.dataset.questionId  = question.id;
+    option2.dataset.questionId = question.id;
     option2.innerHTML =
       '<i class="fa-regular fa-circle-check me-3"></i>Phê duyệt';
-    option2.classList.add("question-action-item", "nav-item", "text-start","action-phe-duyet");
+    option2.classList.add("question-action-item", "nav-item", "text-start");
+    option2.addEventListener("click", function () {
+      updateStatusQuestion(question.id, 1);
+    });
     selectElement.appendChild(option2);
   } else {
     const option1 = document.createElement("li");
-    option1.dataset.questionId  = question.id;
+    option1.dataset.questionId = question.id;
     option1.innerHTML =
       '<i class="fa-regular fa-pen-to-square me-3"></i> Chỉnh sửa';
-    option1.classList.add("question-action-item", "nav-item", "text-start","action-chinh-sua");
+    option1.classList.add("question-action-item", "nav-item", "text-start");
     selectElement.appendChild(option1);
 
     const option2 = document.createElement("li");
-    option2.dataset.questionId  = question.id;
+    option2.dataset.questionId = question.id;
     option2.innerHTML =
       '<i class="fa-regular fa-paper-plane me-3"></i> Gửi duyệt';
-    option2.classList.add("question-action-item", "nav-item", "text-start","action-gui-duyet");
+    option2.classList.add("question-action-item", "nav-item", "text-start");
+    option2.addEventListener("click", function () {
+      updateStatusQuestion(question.id, 1);
+    });
     selectElement.appendChild(option2);
   }
 }
@@ -208,3 +252,25 @@ showActionButtons.forEach((button) => {
     actionMenu.style.display = isHidden ? "block" : "none";
   });
 });
+
+/*toasts*/
+function showToast(message, isSuccess,callback) {
+  var toastClass = isSuccess ? 'toasts-success' : 'toasts-fail';
+  var toastElement = document.createElement('div');
+  toastElement.classList.add('toasts', toastClass);
+  toastElement.innerHTML = '<i class="fa-regular fa-circle-' + (isSuccess ? 'check' : 'xmark') + ' pe-4"></i>' +
+    '<p class="toasts-text">' + message + '</p>';
+console.log(toastElement)
+  document.body.appendChild(toastElement);
+
+  setTimeout(function () {
+    toastElement.classList.add('show');
+  }, 100);
+
+  setTimeout(function () {
+    toastElement.remove();
+    if (typeof callback === 'function') {
+      callback(); 
+    }
+  }, 3000);
+}

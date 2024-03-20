@@ -25,5 +25,14 @@ const getQuestions = () => {
   });
   return questionsDTO;
 };
+const updateStatusQuestion = (id, status) => {
+  const findIndex = questions.findIndex((question) => question.id === id);
+  if (findIndex !== -1) {
+    questions[findIndex].status = status;
+    return true;
+  } else {
+    return false;
+  }
+};
 
-module.exports = { getQuestions };
+module.exports = { getQuestions , updateStatusQuestion};

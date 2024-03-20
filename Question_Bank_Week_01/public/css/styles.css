@@ -14,8 +14,9 @@ body {
 p {
   margin: 0;
 }
+
 .question-bank {
-  height: 99vh;
+  height: 99.5vh;
   width: 100vw;
   background-color: #edeff3;
   padding-right: 0px;
@@ -59,23 +60,49 @@ p {
 }
 .sidebar .nav-link.active {
   color: #5cb800;
+  position: relative;
+}
+.sidebar .nav-link.active::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0.25rem;
+  background-color: #5cb800;
 }
 .dropdown-cs-toggle {
   cursor: pointer;
 }
 .dropdown-cs-menu {
   display: none;
+  padding: 0 var(--bs-nav-link-padding-x);
+  position: relative;
 }
 .dropdown-cs-menu li {
   list-style: none;
 }
-.dropdown-cs-item.active {
-  color: #5cb800;
+
+.dropdown-cs-item.active,
+.dropdown-cs-item:hover {
+  color: #fff;
+}
+
+.dropdown-cs-menu::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0.25rem;
+  background-color: #fff;
 }
 .dropdown-cs-menu li a {
+  color: #bdc2d2;
   font-size: 1rem;
-  color: #fff;
   text-decoration: none;
+  font-weight: 700;
+  margin: 0.5rem 0;
 }
 /*header*/
 .header,
@@ -197,6 +224,7 @@ p {
   color: #fff;
   display: flex;
   justify-content: center;
+  font-size: 0.8rem;
   align-items: center;
   width: 0.85rem;
   height: 0.85rem;
@@ -241,6 +269,13 @@ p {
 .show-action-question:hover {
   cursor: pointer;
 }
+.show-action-question i {
+  color: #bdc2d2;
+}
+.question-list .table tbody .question-row .show-action-question.active i,
+.question-list .table tbody .question-row .show-action-question.active {
+  color: #fff;
+}
 .show-action-question {
   border: none;
   background-color: transparent;
@@ -251,8 +286,8 @@ p {
 }
 
 .question-action-item:hover {
-  background-color: #fff;
-  color: #008000;
+  background-color: #008000;
+  color: #fff;
 }
 .question-list .table tbody .question-row:hover,
 .question-list .table tbody .question-row:hover td {
@@ -264,7 +299,8 @@ p {
 }
 .question-row,
 .question-row td,
-.question-list tr,.question-list tr th {
+.question-list tr,
+.question-list tr th {
   border: none;
 }
 
@@ -283,6 +319,32 @@ p {
   border-collapse: separate;
   border-spacing: 0 1rem;
 }
-.show-action-question{
+.show-action-question {
   padding: 0.5rem;
+}
+/*toasts*/
+.toasts {
+  position: fixed;
+  left: 10vw;
+  bottom: 3vh;
+  z-index: 10;
+  width: 11rem;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  display: none;
+}
+.toasts-success {
+  background-color: #1a6634;
+  color: #fff;
+}
+.toasts-fail {
+  background-color: #FD7676;
+  color: #fff;
+}
+.toasts p{
+  margin: 0;
+}
+.show{
+  display: block;
 }
