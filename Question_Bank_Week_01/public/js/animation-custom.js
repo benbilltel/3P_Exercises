@@ -255,3 +255,120 @@ toastElement.classList.add("d-flex","justify-content-start","align-items-center"
   }, 1000);
 }
 //popup
+const mapAction = new Map();
+let actions0 = [],actions1 = [],actions2 = [],actions3 = [],actions4 = []
+mapAction.set("Đang soạn thảo",actions0);
+mapAction.set("Gửi duyệt",actions1);
+mapAction.set("Đã duyệt",actions2);
+mapAction.set("Ngưng áp dụng",actions3);
+mapAction.set("Trả về",actions4);
+const trCheck = document.querySelectorAll(".question-row")
+const pushIdToMap = (id,status)=>{
+  mapAction.forEach((value,key)=>{
+    if(key == status ){
+      value.push(id);
+    }
+  })
+}
+const removeIdFromMap = (id,status)=>{
+  mapAction.forEach((value,key)=>{
+    if(key == status ){
+      const indexRemove = value.findIndex(i=>i == id);
+      if(indexRemove!== -1 ){
+        value.splice(indexRemove,1)
+      }
+    }
+  })
+}
+trCheck.forEach((row) => {
+  const checkbox = row.querySelector(".check-popup");
+  const questionData = JSON.parse(row.getAttribute("data-question"));
+  const questionId = questionData.id;
+  const status = questionData.status;
+  row.addEventListener("click", function () {
+
+    checkbox.checked = !checkbox.checked;
+    if(checkbox.checked){
+      row.classList.add("active")
+      pushIdToMap(questionId,status)
+    }else{
+      row.classList.remove("active")
+      removeIdFromMap(questionId,status)
+    }
+    let ids = 0;
+    mapAction.forEach((value)=>{
+      ids+=value.length;
+    })
+    if(ids>0){
+      let popup = document.getElementById("popup-action");
+      popup.style.display = "block"
+      const numOfQuestion = popup.querySelector("h1")
+      numOfQuestion.innerHTML = ids;
+      let actions = popup.querySelectorAll(".nav-link")
+      
+      actions.forEach((action)=>{
+       
+        switch(action.dataset.action){
+          case "guiDuyet":
+            {
+              
+if(actions0.length>0||actions4.length>0){
+action.style.display = "block"
+}else{
+  action.style.display = "none"
+}
+            }
+            break;
+            case "traVe":
+            {
+              if(actions1.length>0||actions3.length>0){
+                action.style.display = "block"
+              }else{
+                action.style.display = "none"
+              }
+            }
+            break;
+            case "duyetApDung":
+            {
+              if(actions1.length>0||actions3.length>0){
+                action.style.display = "block"
+              }else{
+                action.style.display = "none"
+              }
+            }
+            break;
+            case "ngung":
+            {
+              if(actions2.length>0){
+                action.style.display = "block"
+              }else{
+                action.style.display = "none"
+              }
+            }
+            break;
+            case "xoa":
+            {
+if(actions0.length>0){
+  action.style.display = "block"
+}else{
+  action.style.display = "none"
+}
+            }
+            break;
+        }
+      })
+    }else{
+      let popup = document.getElementById("popup-action");
+      popup.style.display = "none"
+    }
+  });
+  checkbox.addEventListener("click", function (event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up to the row
+
+    if (checkbox.checked) {
+      row.classList.add("active");
+    } else {
+      row.classList.remove("active");
+    }
+  });
+});

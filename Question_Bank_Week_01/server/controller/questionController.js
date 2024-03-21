@@ -34,5 +34,15 @@ const updateStatusQuestion = (id, status) => {
     return false;
   }
 };
-
-module.exports = { getQuestions , updateStatusQuestion};
+const updateStatusQuestions = (ids, status) => {
+  ids.forEach((id) => {
+    const findIndex = questions.findIndex((question) => question.id === id);
+    if (findIndex !== -1) {
+      questions[findIndex].status = status;
+    } else {
+      return false;
+    }
+  });
+  return true;
+};
+module.exports = { getQuestions, updateStatusQuestion,updateStatusQuestions };

@@ -82,7 +82,7 @@
             <li class="nav-item active" data-filter="filterQuestion1">
               <div class="nav-link">
                 <label for="dangSoanThao">Đang soạn thảo</label>
-                <input type="checkbox" class="hidden-element" name="dangSoanThao" id="filterQuestion1" checked />
+                <input type="checkbox" name="dangSoanThao" id="filterQuestion1" checked />
               </div>
             </li>
             <li class="nav-item" data-filter="filterQuestion2">
@@ -154,14 +154,14 @@
           </tbody>
         </table>
       </div>
-      <div class="popup-action"><ul class="nav">
-        <li class="nav-item"><a href="#" class="nav-link row"></a></li>
-        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-regular fa-paper-plane"></i><span style="display: inline-block;" class="col-12">Gửi duyệt</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-solid fa-rotate-left"></i><span style="display: inline-block;" class="col-12">Trả về</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-regular fa-circle-check"></i><span style="display: inline-block;" class="col-12">Duyệt áp dụng</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-solid fa-ban"></i><span style="display: inline-block;" class="col-12">Ngưng áp dụng</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-regular fa-trash-can"></i><span style="display: inline-block;" class="col-12">Xóa câu hỏi</span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link d-flex justify-content-center align-items-center" style="padding: 1.5rem;"><i class="fa-solid fa-x" style="border: none;"></i></a></li>
+      <div class="popup-action" id="popup-action"><ul class="nav">
+        <li class="nav-item"><a href="#" class="nav-link row text-center" data-action="countQuestion"><h1></h1><span style="display: inline-block;" class="col-12">Gửi duyệt</span></a></li>
+        <li class="nav-item"><a href="#" onclick="updateStatusQuestions(1)" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="guiDuyet"><i class=" col-12 fa-regular fa-paper-plane"></i><span style="display: inline-block;" class="col-12">Gửi duyệt</span></a></li>
+        <li class="nav-item"><a href="#" onclick="updateStatusQuestions(4)" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="traVe"><i class=" col-12 fa-solid fa-rotate-left"></i><span style="display: inline-block;" class="col-12">Trả về</span></a></li>
+        <li class="nav-item"><a href="#" onclick="updateStatusQuestions(2)" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="duyetApDung"><i class=" col-12 fa-regular fa-circle-check"></i><span style="display: inline-block;" class="col-12">Duyệt áp dụng</span></a></li>
+        <li class="nav-item"><a href="#" onclick="updateStatusQuestions(3)" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="ngung"><i class=" col-12 fa-solid fa-ban"></i><span style="display: inline-block;" class="col-12">Ngưng áp dụng</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="xoa"><i class=" col-12 fa-regular fa-trash-can"></i><span style="display: inline-block;" class="col-12">Xóa câu hỏi</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link d-flex justify-content-center align-items-center" data-action="thoat" style="padding: 1.5rem;"><i class="fa-solid fa-x" style="border: none;"></i></a></li>
       </ul></div>
     </div>
     <script src="/js/bootstrap.js"></script>

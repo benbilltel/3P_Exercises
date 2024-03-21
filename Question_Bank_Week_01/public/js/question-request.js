@@ -61,14 +61,18 @@ function filterQuestions() {
 }
 
 const navItems = document.querySelectorAll(".question-filter-left .nav-item");
-
-// Add event listeners to the nav items
 navItems.forEach((navItem) => {
   const checkbox = navItem.querySelector("input[type='checkbox']");
   checkbox.addEventListener("change", filterQuestions);
 
-  navItem.addEventListener("click", (e) => {
-    toggleActiveClass(e);
+  navItem.addEventListener("click", (event) => {
+    const target = event.target;
+    
+    if (target === checkbox) {
+      return; // Do nothing and allow the checkbox's default behavior
+    }
+
+    toggleActiveClass(event);
     checkbox.checked = !checkbox.checked;
     checkbox.dispatchEvent(new Event("change")); // Trigger the change event manually
   });
@@ -85,7 +89,6 @@ function toggleActiveClass(event) {
     navItem.classList.remove("active");
   }
 }
-
 const updateStatusQuestion = (questionId, action) => {
   const formData = new FormData();
   formData.append("status", action);
@@ -107,3 +110,57 @@ const updateStatusQuestion = (questionId, action) => {
       alert("An error occurred while updating the product");
     });
 };
+
+//popup-action request
+const updateStatusQuestions = (action)=>{
+  let ids = [];
+  if(action == 1){
+    
+    actions0.forEach((id)=>{
+      ids.push(id);
+    })
+    actions4.forEach((id)=>{
+      ids.push(id);
+    })
+  }else if (action == 2){
+    actions1.forEach((id)=>{
+      ids.push(id);
+    })
+    actions3.forEach((id)=>{
+      ids.push(id);
+    })
+  }else if(action == 3){
+    actions2.forEach((id)=>{
+      ids.push(id);
+    })
+  }else if(action == 4){
+    actions1.forEach((id)=>{
+      ids.push(id);
+    })
+    actions3.forEach((id)=>{
+      ids.push(id);
+    })
+  }
+  if(ids.length > 0){
+    const formData = new FormData();
+  formData.append("status", action);
+  formData.append("ids", ids);
+
+  fetch("/update/questions/", {
+    method: "PUT",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message == "Questions updated successfully") {
+        showToast(data.message, true, () => {
+          window.location.href = "/";
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("An error occurred while updating the product");
+    });
+  }
+}

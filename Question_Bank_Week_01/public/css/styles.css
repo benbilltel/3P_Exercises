@@ -367,7 +367,10 @@ p {
   background-color: #598f6d;
   cursor: pointer;
 }
-
+.question-row.active,.question-row.active td{
+  background-color: #598f6d;
+  cursor: pointer;
+}
 .question-list .table tbody .question-row .show-action-question.active {
   background-color: #bdc2d2;
 }
@@ -434,11 +437,11 @@ p {
 }
 
 /*popup*/
-.popup-action {
+#popup-action{
   display: none;
   position: fixed;
   bottom: 30vh;
-  right: 13vw;
+  left: 40vw;
   background-color: #fff;
   border-radius: 5px;
   border: 2px solid #edeff3;
@@ -446,4 +449,8 @@ p {
   padding: 0.5rem;
   z-index: 100;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+#popup-action .nav-item {
+  display: flex;
+  align-items: center;
 }

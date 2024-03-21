@@ -9,6 +9,7 @@ const ejs = require("ejs");
 const {
   getQuestions,
   updateStatusQuestion,
+  updateStatusQuestions,
 } = require("./server/controller/questionController");
 const questions = require("./server/model/question");
 const multer = require("multer");
@@ -29,6 +30,15 @@ app.put("/update/question/:questionId", (req, res) => {
 
   if (updateStatusQuestion(questionId, updateStatus)) {
     res.json({ message: "Question updated successfully" });
+  } else {
+    res.status(404).json({ message: "Question not found" });
+  }
+});
+app.put("/update/questions/", (req, res) => {
+  const ids = req.body.ids.split(",");
+  const updateStatus = parseInt(req.body.status);
+  if (updateStatusQuestions(ids, updateStatus)) {
+    res.json({ message: "Questions updated successfully" });
   } else {
     res.status(404).json({ message: "Question not found" });
   }
