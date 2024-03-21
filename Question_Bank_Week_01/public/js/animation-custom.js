@@ -91,28 +91,7 @@ checkboxes.forEach((checkbox) => {
 
 //display option
 // Iterate over the question rows
-const updateStatusQuestion = (questionId, action) => {
-  const formData = new FormData();
-  formData.append("status", action);
 
-  fetch("/update/question/" + questionId, {
-    method: "PUT",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.message == "Question updated successfully") {
-      
-        showToast('Success!', true,()=>{
-          window.location.href = "/";
-        });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("An error occurred while updating the product");
-    });
-};
 const questionRows = document.getElementsByClassName("question-row");
 for (let i = 0; i < questionRows.length; i++) {
   const questionRow = questionRows[i];
@@ -258,9 +237,10 @@ function showToast(message, isSuccess,callback) {
   var toastClass = isSuccess ? 'toasts-success' : 'toasts-fail';
   var toastElement = document.createElement('div');
   toastElement.classList.add('toasts', toastClass);
-  toastElement.innerHTML = '<i class="fa-regular fa-circle-' + (isSuccess ? 'check' : 'xmark') + ' pe-4"></i>' +
+  toastElement.innerHTML = '<i class="fa-regular fa-circle-' + (isSuccess ? 'check' : 'xmark') + ' pe-2"></i>' +
     '<p class="toasts-text">' + message + '</p>';
 console.log(toastElement)
+toastElement.classList.add("d-flex","justify-content-start","align-items-center")
   document.body.appendChild(toastElement);
 
   setTimeout(function () {
@@ -272,5 +252,6 @@ console.log(toastElement)
     if (typeof callback === 'function') {
       callback(); 
     }
-  }, 3000);
+  }, 1000);
 }
+//popup

@@ -59,3 +59,51 @@ function filterQuestions() {
     }
   }
 }
+
+const navItems = document.querySelectorAll(".question-filter-left .nav-item");
+
+// Add event listeners to the nav items
+navItems.forEach((navItem) => {
+  const checkbox = navItem.querySelector("input[type='checkbox']");
+  checkbox.addEventListener("change", filterQuestions);
+
+  navItem.addEventListener("click", (e) => {
+    toggleActiveClass(e);
+    checkbox.checked = !checkbox.checked;
+    checkbox.dispatchEvent(new Event("change")); // Trigger the change event manually
+  });
+});
+
+function toggleActiveClass(event) {
+  const clickedNavItem = event.currentTarget;
+  const checkbox = clickedNavItem.querySelector("input[type='checkbox']");
+  const navItem = clickedNavItem.closest(".nav-item");
+
+  if (checkbox.checked) {
+    navItem.classList.add("active");
+  } else {
+    navItem.classList.remove("active");
+  }
+}
+
+const updateStatusQuestion = (questionId, action) => {
+  const formData = new FormData();
+  formData.append("status", action);
+
+  fetch("/update/question/" + questionId, {
+    method: "PUT",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message == "Question updated successfully") {
+        showToast(data.message, true, () => {
+          window.location.href = "/";
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("An error occurred while updating the product");
+    });
+};

@@ -29,7 +29,7 @@
       <%- include("./layouts/sidebar"); -%>
 
       <div class="header row container-fluid">
-        <div class="header-left col-10">
+        <div class="header-wrapper"><div class="header-left col-10">
           <ul class="nav d-flex align-items-center">
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -74,42 +74,33 @@
             </li>
           </ul>
         </div>
-        <div class="header-right col-2"></div>
+        <div class="header-right col-2"></div></div>
       </div>
       <div class="question-filter row px-0">
         <div class="question-filter-left col-8 px-0">
           <ul class="nav d-flex">
-            <li class="nav-item active">
+            <li class="nav-item active" data-filter="filterQuestion1">
               <div class="nav-link">
-                <label for="dangSoanThao">Đang soạn thảo</label
-                ><input
-                  type="checkbox"
-                  name="dangSoanThao"
-                  id="filterQuestion1"
-                  checked
-                />
+                <label for="dangSoanThao">Đang soạn thảo</label>
+                <input type="checkbox" class="hidden-element" name="dangSoanThao" id="filterQuestion1" checked />
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-filter="filterQuestion2">
               <div class="nav-link">
-                <label for="guiDuyet">Gửi duyệt</label
-                ><input type="checkbox" name="guiDuyet" id="filterQuestion2" />
+                <label for="guiDuyet">Gửi duyệt</label>
+                <input type="checkbox" name="guiDuyet" id="filterQuestion2" />
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-filter="filterQuestion3">
               <div class="nav-link">
-                <label for="daDuyet">Đã duyệt</label
-                ><input type="checkbox" name="daDuyet" id="filterQuestion3" />
+                <label for="daDuyet">Đã duyệt</label>
+                <input type="checkbox" name="daDuyet" id="filterQuestion3" />
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" data-filter="filterQuestion4">
               <div class="nav-link">
-                <label for="ngungApDung">Ngưng áp dụng</label
-                ><input
-                  type="checkbox"
-                  name="ngungApDung"
-                  id="filterQuestion4"
-                />
+                <label for="ngungApDung">Ngưng áp dụng</label>
+                <input type="checkbox" name="ngungApDung" id="filterQuestion4" />
               </div>
             </li>
           </ul>
@@ -119,11 +110,11 @@
       </div>
       <div class="question-search"></div>
       <div class="question-list" >
-        <table class="table text-center" style="overflow-x:auto ;min-width: 900px;">
+        <table class="table text-center" style="overflow-x:scroll ;min-width: 900px;">
           <thead>
             <tr>
               <th scope="col">
-                <input type="checkbox" name="allQuestion" id="allQuestion" />
+                <input type="checkbox" class="check-popup" data-popup-id="all" name="allQuestion" id="allQuestion" />
               </th>
               <th scope="col">Câu hỏi</th>
               <th scope="col">Phân nhóm</th>
@@ -142,6 +133,7 @@
                 <input
                   type="checkbox"
                   name="allQuestion"
+                  class="check-popup" data-popup-id="<%=question.id%>"
                   data-check-box-question-id="<%=question.id%>"
                 />
               </td>
@@ -162,8 +154,15 @@
           </tbody>
         </table>
       </div>
-      <!-- <div class="toasts toasts-success "><i class="fa-regular fa-circle-check pe-4"></i><p class="toasts-text">test</p></div>
-      <div class="toasts toasts-fail "><i class="fa-regular fa-circle-xmark pe-4"></i></i><p class="toasts-text">test</p></div> -->
+      <div class="popup-action"><ul class="nav">
+        <li class="nav-item"><a href="#" class="nav-link row"></a></li>
+        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-regular fa-paper-plane"></i><span style="display: inline-block;" class="col-12">Gửi duyệt</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-solid fa-rotate-left"></i><span style="display: inline-block;" class="col-12">Trả về</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-regular fa-circle-check"></i><span style="display: inline-block;" class="col-12">Duyệt áp dụng</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-solid fa-ban"></i><span style="display: inline-block;" class="col-12">Ngưng áp dụng</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link row text-center"><i class=" col-12 fa-regular fa-trash-can"></i><span style="display: inline-block;" class="col-12">Xóa câu hỏi</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link d-flex justify-content-center align-items-center" style="padding: 1.5rem;"><i class="fa-solid fa-x" style="border: none;"></i></a></li>
+      </ul></div>
     </div>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/animation-custom.js"></script>
