@@ -63,18 +63,17 @@ function filterQuestions() {
 const navItems = document.querySelectorAll(".question-filter-left .nav-item");
 navItems.forEach((navItem) => {
   const checkbox = navItem.querySelector("input[type='checkbox']");
-  checkbox.addEventListener("change", filterQuestions);
-
+  checkbox.addEventListener("change", filterQuestions());
   navItem.addEventListener("click", (event) => {
     const target = event.target;
     
     if (target === checkbox) {
-      return; // Do nothing and allow the checkbox's default behavior
+      return; 
     }
 
     toggleActiveClass(event);
     checkbox.checked = !checkbox.checked;
-    checkbox.dispatchEvent(new Event("change")); // Trigger the change event manually
+    checkbox.dispatchEvent(new Event("change"));
   });
 });
 
@@ -89,6 +88,7 @@ function toggleActiveClass(event) {
     navItem.classList.remove("active");
   }
 }
+
 const updateStatusQuestion = (questionId, action) => {
   const formData = new FormData();
   formData.append("status", action);
@@ -100,9 +100,20 @@ const updateStatusQuestion = (questionId, action) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.message == "Question updated successfully") {
-        showToast(data.message, true, () => {
-          window.location.href = "/";
-        });
+        const updatedQuestions = data.questionDTOs;
+          updatedQuestions.forEach((question) => {
+            trCheck.forEach(e=>{
+             if(e.dataset.questionId == question.id){
+              const tagStatus = e.querySelector("td.question-status")
+              tagStatus.innerHTML = question.status;
+              e.dataset.question = JSON.stringify(question);
+             }
+            })
+          }); filterQuestions();
+          closePopup();
+          showToast(data.message, true,()=>{
+            
+          });
       }
     })
     .catch((error) => {
@@ -153,9 +164,22 @@ const updateStatusQuestions = (action)=>{
     .then((response) => response.json())
     .then((data) => {
       if (data.message == "Questions updated successfully") {
-        showToast(data.message, true, () => {
-          window.location.href = "/";
-        });
+        const updatedQuestions = data.questionDTOs;
+          updatedQuestions.forEach((question) => {
+            
+            trCheck.forEach(e=>{
+
+             if(e.dataset.questionId == question.id){
+              const tagStatus = e.querySelector("td.question-status")
+              tagStatus.innerHTML = question.status;
+              e.dataset.question = JSON.stringify(question);
+             }
+            })
+          }); filterQuestions();
+          closePopup();
+          showToast(data.message, true,()=>{
+            
+          });
       }
     })
     .catch((error) => {

@@ -314,7 +314,7 @@ p {
 /*Question List*/
 .question-list {
   padding-left: 17.5%;
-  max-height: 75vh;
+  max-height: 70vh;
   overflow: auto;
 }
 
@@ -453,4 +453,9 @@ p {
 #popup-action .nav-item {
   display: flex;
   align-items: center;
+}
+/*footer*/
+.footer {
+  padding-left: 17.5%;
+  width: 100%;
 }

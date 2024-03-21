@@ -20,16 +20,34 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+const ITEMS_PER_PAGE = 3; // Number of questions per page
+
+// ...
+
 app.get("/", (req, res) => {
-  const questionsDTO = getQuestions();
-  res.render("question-bank", { questions: questionsDTO });
+  const totalQuestions = questions.length;
+  const currentPage = req.query.page || 1;
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const questionsDTO = getQuestions().slice(startIndex, endIndex);
+
+  res.render("question-bank", {
+    questions: questionsDTO,
+    totalQuestions,
+    currentPage,
+    ITEMS_PER_PAGE
+  });
 });
+
+// ...
 app.put("/update/question/:questionId", (req, res) => {
   const questionId = req.params.questionId;
   const updateStatus = parseInt(req.body.status);
 
   if (updateStatusQuestion(questionId, updateStatus)) {
-    res.json({ message: "Question updated successfully" });
+    const questionDTO = getQuestions()
+    res.json({ questionDTOs : questionDTO,message: "Question updated successfully" });
   } else {
     res.status(404).json({ message: "Question not found" });
   }
@@ -37,8 +55,10 @@ app.put("/update/question/:questionId", (req, res) => {
 app.put("/update/questions/", (req, res) => {
   const ids = req.body.ids.split(",");
   const updateStatus = parseInt(req.body.status);
+  
   if (updateStatusQuestions(ids, updateStatus)) {
-    res.json({ message: "Questions updated successfully" });
+    const questionDTO = getQuestions()
+    res.json({ questionDTOs : questionDTO,message: "Questions updated successfully" });
   } else {
     res.status(404).json({ message: "Question not found" });
   }

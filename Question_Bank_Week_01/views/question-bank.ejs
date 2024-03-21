@@ -82,7 +82,7 @@
             <li class="nav-item active" data-filter="filterQuestion1">
               <div class="nav-link">
                 <label for="dangSoanThao">Đang soạn thảo</label>
-                <input type="checkbox" name="dangSoanThao" id="filterQuestion1" checked />
+                <input type="checkbox" name="dangSoanThao" id="filterQuestion1" checked/>
               </div>
             </li>
             <li class="nav-item" data-filter="filterQuestion2">
@@ -128,12 +128,13 @@
             <tr
               class="question-row"
               data-question='<%- JSON.stringify(question) %>'
+              data-question-id="<%=question.id%>"
             >
               <td scope="row">
                 <input
                   type="checkbox"
                   name="allQuestion"
-                  class="check-popup" data-popup-id="<%=question.id%>"
+                  class="check-popup" 
                   data-check-box-question-id="<%=question.id%>"
                 />
               </td>
@@ -143,7 +144,7 @@
 
               <td><%=question.group%></td>
               <td><%=question.time%></td>
-              <td class="text-end"><%=question.status%></td>
+              <td class="text-end question-status"><%=question.status%></td>
               <td >
 <button class="show-action-question"><i class="fa-solid fa-ellipsis"></i>
   <ul class="action-question-menu nav flex-column justify-content-start"></ul></button>
@@ -154,6 +155,57 @@
           </tbody>
         </table>
       </div>
+      <div class="footer d-flex justify-content-between align-items-center">
+        <div class="numbers-question"></div>
+        <div class="pagination-container">
+          <ul class="pagination">
+            <% const totalPages = Math.ceil(totalQuestions / ITEMS_PER_PAGE); %>
+            <% const prevPage = currentPage > 1 ? Number(currentPage) - 1 : 1; %>
+            <li class="page-item">
+              <a class="page-link" href="/?page=<%= prevPage %>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+        
+            <% const MAX_VISIBLE_PAGES = 4; %> <!-- Maximum visible page links -->
+            <% const GROUP_SIZE = 4; %> <!-- Number of pages per group -->
+            <% const groupIndex = Math.floor((currentPage - 1) / GROUP_SIZE); %>
+            <% const startPage = groupIndex * GROUP_SIZE + 1; %>
+            <% const endPage = Math.min(startPage + MAX_VISIBLE_PAGES - 1, totalPages); %>
+            <% const hasLeftEllipsis = startPage > GROUP_SIZE; %>
+            <% const hasRightEllipsis = endPage < totalPages; %>
+        
+            <% if (hasLeftEllipsis) { %>
+              <li class="page-item">
+                <a class="page-link" href="/?page=<%= startPage - GROUP_SIZE %>">&hellip;</a>
+              </li>
+            <% } %>
+        
+            <% for (let page = startPage; page <= endPage; page++) { %>
+              <li class="page-item <%= page === currentPage ? 'active' : '' %>">
+                <a class="page-link" href="/?page=<%= page %>"><%= page %></a>
+              </li>
+            <% } %>
+        
+            <% if (hasRightEllipsis) { %>
+              <li class="page-item">
+                <a class="page-link" href="/?page=<%= endPage + 1 %>">&hellip;</a>
+              </li>
+            <% } %>
+        
+            <% const nextPage = currentPage < totalPages ? Number(currentPage) + 1 : totalPages; %>
+            <li class="page-item">
+              <a class="page-link" href="/?page=<%= nextPage %>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+      
+      
+      
       <div class="popup-action" id="popup-action"><ul class="nav">
         <li class="nav-item"><a href="#" class="nav-link row text-center" data-action="countQuestion"><h1></h1><span style="display: inline-block;" class="col-12">Gửi duyệt</span></a></li>
         <li class="nav-item"><a href="#" onclick="updateStatusQuestions(1)" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="guiDuyet"><i class=" col-12 fa-regular fa-paper-plane"></i><span style="display: inline-block;" class="col-12">Gửi duyệt</span></a></li>
@@ -164,8 +216,9 @@
         <li class="nav-item"><a href="#" class="nav-link d-flex justify-content-center align-items-center" data-action="thoat" style="padding: 1.5rem;"><i class="fa-solid fa-x" style="border: none;"></i></a></li>
       </ul></div>
     </div>
+    
     <script src="/js/bootstrap.js"></script>
     <script src="/js/animation-custom.js"></script>
     <script src="/js/question-request.js"></script>
-  </body>
+  </body>   
 </html>
