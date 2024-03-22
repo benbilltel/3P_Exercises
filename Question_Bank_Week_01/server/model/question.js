@@ -264,6 +264,182 @@ let questions = [
     group: "Thương hiệu, văn hóa công ty",
     time: 30,
     status: 4,
+  },{
+    id: "Q.031",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 0,
+  },
+  {
+    id: "Q.032",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 1,
+  },
+  {
+    id: "Q.033",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 2,
+  },
+  {
+    id: "Q.034",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 3,
+  },
+  {
+    id: "Q.035",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 4,
+  },{
+    id: "Q.036",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 0,
+  },
+  {
+    id: "Q.037",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 1,
+  },
+  {
+    id: "Q.038",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 2,
+  },
+  {
+    id: "Q.039",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 3,
+  },
+  {
+    id: "Q.040",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 4,
+  },{
+    id: "Q.041",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 0,
+  },
+  {
+    id: "Q.042",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 1,
+  },
+  {
+    id: "Q.043",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 2,
+  },
+  {
+    id: "Q.044",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 3,
+  },
+  {
+    id: "Q.045",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 4,
+  },{
+    id: "Q.046",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 0,
+  },
+  {
+    id: "Q.047",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 1,
+  },
+  {
+    id: "Q.048",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 2,
+  },
+  {
+    id: "Q.049",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 3,
+  },
+  {
+    id: "Q.050",
+    type: "Dạng câu một lựa chọn",
+    content:
+      "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
+    group: "Thương hiệu, văn hóa công ty",
+    time: 30,
+    status: 4,
   }
 ];
 module.exports = questions;

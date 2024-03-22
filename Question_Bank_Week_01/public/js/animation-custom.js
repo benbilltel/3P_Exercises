@@ -213,25 +213,298 @@ for (let i = 0; i < questionRows.length; i++) {
 }
 /*show action question*/
 
-const showActionButtons = document.querySelectorAll(".show-action-question");
 
-showActionButtons.forEach((button) => {
-  button.addEventListener("click", function () {
-    const parentTd = this.parentNode; // Get the parent <td> element
-    const actionMenu = parentTd.querySelector(".action-question-menu");
+/*trCheck.forEach((tr) => {
+  tr.addEventListener("click", function (event) {
+    // Check if the click was directly on the button
+    if (event.target.tagName === "BUTTON") {
+      const showActionButtons = document.querySelectorAll(".show-action-question");
+
+      showActionButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const parentTd = this.parentNode; // Get the parent <td> element
+          const actionMenu = parentTd.querySelector(".action-question-menu");
+          const isHidden = getComputedStyle(actionMenu).display === "none";
+      
+          // Hide all action-question-menu elements
+          const openMenus = document.querySelectorAll(".action-question-menu");
+          openMenus.forEach((menu) => {
+            menu.style.display = "none";
+          });
+      
+          // Toggle the display of the clicked action-question-menu
+          actionMenu.style.display = isHidden ? "block" : "none";
+        });
+      });
+    } else {
+
+      trCheck.forEach((row) => {
+        const checkbox = row.querySelector(".check-popup");
+        const questionData = JSON.parse(row.getAttribute("data-question"));
+        const questionId = questionData.id;
+        
+      
+        row.addEventListener("click", function () {
+      
+          checkbox.checked = !checkbox.checked;
+          const tagStatus = row.querySelector("td.question-status")
+        const status = tagStatus.innerHTML;
+          if(checkbox.checked){
+            row.classList.add("active")
+      
+            pushIdToMap(questionId,status)
+          }else{
+            row.classList.remove("active")
+      
+            removeIdFromMap(questionId,status)
+          }
+          let ids = 0;
+          mapAction.forEach((value)=>{
+            ids+=value.length;
+          })
+          if(ids>0){
+            let popup = document.getElementById("popup-action");
+            popup.style.display = "block"
+            const numOfQuestion = popup.querySelector("h1")
+            numOfQuestion.innerHTML = ids;
+            let actions = popup.querySelectorAll(".nav-link")
+            
+            actions.forEach((action)=>{
+              switch(action.dataset.action){
+                case "guiDuyet":
+                  {
+                    
+      if(actions0.length>0||actions4.length>0){
+      action.style.display = "block"
+      }else{
+        action.style.display = "none"
+      }
+                  }
+                  break;
+                  case "traVe":
+                  {
+                    if(actions1.length>0||actions3.length>0){
+                      action.style.display = "block"
+                    }else{
+                      action.style.display = "none"
+                    }
+                  }
+                  break;
+                  case "duyetApDung":
+                  {
+                    if(actions1.length>0||actions3.length>0){
+                      action.style.display = "block"
+                    }else{
+                      action.style.display = "none"
+                    }
+                  }
+                  break;
+                  case "ngung":
+                  {
+                    if(actions2.length>0){
+                      action.style.display = "block"
+                    }else{
+                      action.style.display = "none"
+                    }
+                  }
+                  break;
+                  case "xoa":
+                  {
+      if(actions0.length>0){
+        action.style.display = "block"
+      }else{
+        action.style.display = "none"
+      }
+                  }
+                  break;
+              }
+            })
+          }else{
+            let popup = document.getElementById("popup-action");
+            popup.style.display = "none"
+          }
+        });
+        checkbox.addEventListener("click", function (event) {
+          event.stopPropagation(); // Prevent the click event from bubbling up to the row
+      
+          checkbox.checked = !checkbox.checked;
+          const tagStatus = row.querySelector("td.question-status")
+        const status = tagStatus.innerHTML;
+          if(checkbox.checked){
+            row.classList.add("active")
+            pushIdToMap(questionId,status)
+          }else{
+            row.classList.remove("active")
+            removeIdFromMap(questionId,status)
+          }
+          let ids = 0;
+          mapAction.forEach((value)=>{
+            ids+=value.length;
+          })
+          if(ids>0){
+            let popup = document.getElementById("popup-action");
+            popup.style.display = "block"
+            const numOfQuestion = popup.querySelector("h1")
+            numOfQuestion.innerHTML = ids;
+            let actions = popup.querySelectorAll(".nav-link")
+            
+            actions.forEach((action)=>{
+             
+              switch(action.dataset.action){
+                case "guiDuyet":
+                  {
+                    
+      if(actions0.length>0||actions4.length>0){
+      action.style.display = "block"
+      }else{
+        action.style.display = "none"
+      }
+                  }
+                  break;
+                  case "traVe":
+                  {
+                    if(actions1.length>0||actions3.length>0){
+                      action.style.display = "block"
+                    }else{
+                      action.style.display = "none"
+                    }
+                  }
+                  break;
+                  case "duyetApDung":
+                  {
+                    if(actions1.length>0||actions3.length>0){
+                      action.style.display = "block"
+                    }else{
+                      action.style.display = "none"
+                    }
+                  }
+                  break;
+                  case "ngung":
+                  {
+                    if(actions2.length>0){
+                      action.style.display = "block"
+                    }else{
+                      action.style.display = "none"
+                    }
+                  }
+                  break;
+                  case "xoa":
+                  {
+      if(actions0.length>0){
+        action.style.display = "block"
+      }else{
+        action.style.display = "none"
+      }
+                  }
+                  break;
+              }
+            })
+          }else{
+            let popup = document.getElementById("popup-action");
+            popup.style.display = "none"
+          }
+        });
+      });
+    }
+  });
+});*/
+const trCheck = document.querySelectorAll(".question-row")
+
+trCheck.forEach((tr) => {
+  const button = tr.querySelector(".show-action-question");
+  const actionMenu = tr.querySelector(".action-question-menu");
+
+  button.addEventListener("click", function (event) {
+    event.stopPropagation(); // Prevent the tr click event from firing
     const isHidden = getComputedStyle(actionMenu).display === "none";
 
-    // Hide all action-question-menu elements
     const openMenus = document.querySelectorAll(".action-question-menu");
     openMenus.forEach((menu) => {
       menu.style.display = "none";
     });
 
-    // Toggle the display of the clicked action-question-menu
     actionMenu.style.display = isHidden ? "block" : "none";
   });
-});
 
+  tr.addEventListener("click", function (event) {
+    const checkbox = tr.querySelector(".check-popup");
+    const questionData = JSON.parse(tr.getAttribute("data-question"));
+    const questionId = questionData.id;
+    const tagStatus = tr.querySelector("td.question-status");
+    const status = tagStatus.innerHTML;
+
+    checkbox.checked = !checkbox.checked;
+
+    if (checkbox.checked) {
+      tr.classList.add("active");
+      pushIdToMap(questionId, status);
+    } else {
+      tr.classList.remove("active");
+      removeIdFromMap(questionId, status);
+    }
+
+    let ids = 0;
+    mapAction.forEach((value) => {
+      ids += value.length;
+    });
+
+    const popup = document.getElementById("popup-action");
+    if (ids > 0) {
+      popup.style.display = "block";
+      const numOfQuestion = popup.querySelector("h1");
+      numOfQuestion.innerHTML = ids;
+      let actions = popup.querySelectorAll(".nav-link");
+
+      actions.forEach((action) => {
+        switch (action.dataset.action) {
+          case "guiDuyet": {
+            if (actions0.length > 0 || actions4.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "traVe": {
+            if (actions1.length > 0 || actions3.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "duyetApDung": {
+            if (actions1.length > 0 || actions3.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "ngung": {
+            if (actions2.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "xoa": {
+            if (actions0.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+        }
+      });
+    } else {
+      const popup = document.getElementById("popup-action");
+      popup.style.display = "none";
+    }
+  });
+});
 /*toasts*/
 function showToast(message, isSuccess,callback) {
   var toastClass = isSuccess ? 'toasts-success' : 'toasts-fail';
@@ -261,7 +534,7 @@ mapAction.set("Gửi duyệt",actions1);
 mapAction.set("Đã duyệt",actions2);
 mapAction.set("Ngưng áp dụng",actions3);
 mapAction.set("Trả về",actions4);
-const trCheck = document.querySelectorAll(".question-row")
+
 const pushIdToMap = (id,status)=>{
   mapAction.forEach((value,key)=>{
     if(key == status ){
@@ -279,173 +552,7 @@ const removeIdFromMap = (id,status)=>{
     }
   })
 }
-trCheck.forEach((row) => {
-  const checkbox = row.querySelector(".check-popup");
-  const questionData = JSON.parse(row.getAttribute("data-question"));
-  const questionId = questionData.id;
-  
 
-  row.addEventListener("click", function () {
-
-    checkbox.checked = !checkbox.checked;
-    const tagStatus = row.querySelector("td.question-status")
-  const status = tagStatus.innerHTML;
-    if(checkbox.checked){
-      row.classList.add("active")
-
-      pushIdToMap(questionId,status)
-    }else{
-      row.classList.remove("active")
-
-      removeIdFromMap(questionId,status)
-    }
-    let ids = 0;
-    mapAction.forEach((value)=>{
-      ids+=value.length;
-    })
-    if(ids>0){
-      let popup = document.getElementById("popup-action");
-      popup.style.display = "block"
-      const numOfQuestion = popup.querySelector("h1")
-      numOfQuestion.innerHTML = ids;
-      let actions = popup.querySelectorAll(".nav-link")
-      
-      actions.forEach((action)=>{
-        switch(action.dataset.action){
-          case "guiDuyet":
-            {
-              
-if(actions0.length>0||actions4.length>0){
-action.style.display = "block"
-}else{
-  action.style.display = "none"
-}
-            }
-            break;
-            case "traVe":
-            {
-              if(actions1.length>0||actions3.length>0){
-                action.style.display = "block"
-              }else{
-                action.style.display = "none"
-              }
-            }
-            break;
-            case "duyetApDung":
-            {
-              if(actions1.length>0||actions3.length>0){
-                action.style.display = "block"
-              }else{
-                action.style.display = "none"
-              }
-            }
-            break;
-            case "ngung":
-            {
-              if(actions2.length>0){
-                action.style.display = "block"
-              }else{
-                action.style.display = "none"
-              }
-            }
-            break;
-            case "xoa":
-            {
-if(actions0.length>0){
-  action.style.display = "block"
-}else{
-  action.style.display = "none"
-}
-            }
-            break;
-        }
-      })
-    }else{
-      let popup = document.getElementById("popup-action");
-      popup.style.display = "none"
-    }
-  });
-  checkbox.addEventListener("click", function (event) {
-    event.stopPropagation(); // Prevent the click event from bubbling up to the row
-
-    checkbox.checked = !checkbox.checked;
-    const tagStatus = row.querySelector("td.question-status")
-  const status = tagStatus.innerHTML;
-    if(checkbox.checked){
-      row.classList.add("active")
-      pushIdToMap(questionId,status)
-    }else{
-      row.classList.remove("active")
-      removeIdFromMap(questionId,status)
-    }
-    let ids = 0;
-    mapAction.forEach((value)=>{
-      ids+=value.length;
-    })
-    if(ids>0){
-      let popup = document.getElementById("popup-action");
-      popup.style.display = "block"
-      const numOfQuestion = popup.querySelector("h1")
-      numOfQuestion.innerHTML = ids;
-      let actions = popup.querySelectorAll(".nav-link")
-      
-      actions.forEach((action)=>{
-       
-        switch(action.dataset.action){
-          case "guiDuyet":
-            {
-              
-if(actions0.length>0||actions4.length>0){
-action.style.display = "block"
-}else{
-  action.style.display = "none"
-}
-            }
-            break;
-            case "traVe":
-            {
-              if(actions1.length>0||actions3.length>0){
-                action.style.display = "block"
-              }else{
-                action.style.display = "none"
-              }
-            }
-            break;
-            case "duyetApDung":
-            {
-              if(actions1.length>0||actions3.length>0){
-                action.style.display = "block"
-              }else{
-                action.style.display = "none"
-              }
-            }
-            break;
-            case "ngung":
-            {
-              if(actions2.length>0){
-                action.style.display = "block"
-              }else{
-                action.style.display = "none"
-              }
-            }
-            break;
-            case "xoa":
-            {
-if(actions0.length>0){
-  action.style.display = "block"
-}else{
-  action.style.display = "none"
-}
-            }
-            break;
-        }
-      })
-    }else{
-      let popup = document.getElementById("popup-action");
-      popup.style.display = "none"
-    }
-  });
-});
 
 const closePopup = ()=>{
   actions0 = [];actions1 = [];actions2 = [];actions3 = [];actions4 = []

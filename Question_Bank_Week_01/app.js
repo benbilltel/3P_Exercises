@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-const ITEMS_PER_PAGE = 3; // Number of questions per page
+const ITEMS_PER_PAGE = 10; // Number of questions per page
 
 // ...
 
