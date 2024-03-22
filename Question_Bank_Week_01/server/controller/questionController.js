@@ -11,7 +11,7 @@ const getQuestions = () => {
         element.status = "Gửi duyệt";
         break;
       case 2:
-        element.status = "Đã duyệt";
+        element.status = "Áp dụng";
         break;
       case 3:
         element.status = "Ngưng áp dụng";

@@ -50,7 +50,7 @@ function filterQuestions() {
         (question.status === "Đang soạn thảo" ||
           question.status === "Trả về")) ||
       (filterQuestion2.checked && question.status === "Gửi duyệt") ||
-      (filterQuestion3.checked && question.status === "Đã duyệt") ||
+      (filterQuestion3.checked && question.status === "Áp dụng") ||
       (filterQuestion4.checked && question.status === "Ngưng áp dụng")
     ) {
       questionRow.style.display = "table-row";
@@ -168,7 +168,6 @@ const updateStatusQuestions = (action)=>{
           updatedQuestions.forEach((question) => {
             
             trCheck.forEach(e=>{
-
              if(e.dataset.questionId == question.id){
               const tagStatus = e.querySelector("td.question-status")
               tagStatus.innerHTML = question.status;

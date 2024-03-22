@@ -1,3 +1,45 @@
+// Function to handle checkbox change event
+function handleCheckboxChange(event) {
+  const checkbox = event.target;
+  const checkboxName = checkbox.name;
+  const isChecked = checkbox.checked;
+
+  // Save the checked status to localStorage
+  localStorage.setItem(checkboxName, isChecked);
+}
+// Function to restore checkbox states from localStorage
+// Function to restore checkbox states from localStorage
+function restoreCheckboxStates() {
+  const filterStatus = document.querySelectorAll('.question-filter input[type="checkbox"]');
+
+  filterStatus.forEach((checkbox) => {
+    const checkboxName = checkbox.name;
+    let isChecked = localStorage.getItem(checkboxName) === 'true';
+
+    if (checkboxName === 'dangSoanThao') {
+      isChecked = isChecked || localStorage.getItem(checkboxName) === null;
+    }
+
+    checkbox.checked = isChecked;
+
+    const navItem = checkbox.closest(".nav-item");
+    if (checkbox.checked) {
+      navItem.classList.add("active");
+    } else {
+      navItem.classList.remove("active");
+    }
+  });
+  filterQuestions();
+}
+
+// Add event listeners to checkboxes
+const filterCheckBoxex = document.querySelectorAll('.question-filter input[type="checkbox"]');
+filterCheckBoxex.forEach((checkbox) => {
+  checkbox.addEventListener('change', handleCheckboxChange);
+});
+
+// Restore checkbox states on page load
+document.addEventListener('DOMContentLoaded', restoreCheckboxStates);
 const customDropDown = (classname) => {
   const toggle = document.querySelectorAll(classname);
   toggle.forEach((element) => {
@@ -9,7 +51,6 @@ const customDropDown = (classname) => {
       }
     });
   });
-
   // Add event listener to each nav link
   const navLinks = document.querySelectorAll(".nav-link");
   navLinks.forEach((link) => {
@@ -93,321 +134,66 @@ checkboxes.forEach((checkbox) => {
 // Iterate over the question rows
 
 const questionRows = document.getElementsByClassName("question-row");
-for (let i = 0; i < questionRows.length; i++) {
-  const questionRow = questionRows[i];
-  const question = JSON.parse(questionRow.dataset.question);
 
-  // Get the select element within the row
+Array.from(questionRows).forEach((questionRow) => {
+  const question = JSON.parse(questionRow.dataset.question);
   const selectElement = questionRow.querySelector("ul.action-question-menu");
 
-  // Clear any existing options
-  selectElement.innerHTML = "";
+  selectElement.innerHTML = ""; // Clear any existing options
 
-  // Create the options based on the question status
-  if (question.status.trim() === "Đang soạn thảo") {
-    const option1 = document.createElement("li");
-    option1.dataset.questionId = question.id;
-    option1.innerHTML =
-      '<i class="fa-regular fa-pen-to-square me-3"></i> Chỉnh sửa';
-    option1.classList.add("question-action-item", "nav-item", "text-start");
-    selectElement.appendChild(option1);
-
-    const option2 = document.createElement("li");
-    option2.dataset.questionId = question.id;
-    option2.innerHTML =
-      '<i class="fa-regular fa-paper-plane me-3"></i> Gửi duyệt';
-    option2.classList.add("question-action-item", "nav-item", "text-start");
-    option2.addEventListener("click", function () {
-      updateStatusQuestion(question.id, 1);
+  const createOption = (questionId, iconClass, label, statusId) => {
+    const option = document.createElement("li");
+    option.dataset.questionId = questionId;
+    option.innerHTML = `<i class="${iconClass} me-3"></i> ${label}`;
+    option.classList.add("question-action-item", "nav-item", "text-start");
+    option.addEventListener("click", () => {
+      updateStatusQuestion(questionId, statusId);
     });
-    selectElement.appendChild(option2);
+    selectElement.appendChild(option);
+  };
 
-    const option3 = document.createElement("li");
-    option3.dataset.questionId = question.id;
-    option3.innerHTML = '<i class="fa-regular fa-trash-can me-3"></i> Xóa';
-    option3.classList.add("question-action-item", "nav-item", "text-start");
-    selectElement.appendChild(option3);
-  } else if (question.status.trim() === "Gửi duyệt") {
-    const option2 = document.createElement("li");
-    option2.dataset.questionId = question.id;
-    option2.innerHTML =
-      '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
-    option2.classList.add("question-action-item", "nav-item", "text-start");
-    selectElement.appendChild(option2);
-    const option1 = document.createElement("li");
-    option1.dataset.questionId = question.id;
-    option1.innerHTML =
-      '<i class="fa-regular fa-circle-check me-3"></i>Phê duyệt';
-    option1.classList.add("question-action-item", "nav-item", "text-start");
-    option1.addEventListener("click", function () {
-      updateStatusQuestion(question.id, 2);
-    });
-    selectElement.appendChild(option1);
-
-    const option3 = document.createElement("li");
-    option3.dataset.questionId = question.id;
-    option3.innerHTML = '<i class="fa-solid fa-rotate-left me-3"></i> Trả về';
-    option3.classList.add("question-action-item", "nav-item", "text-start");
-    option3.addEventListener("click", function () {
-      updateStatusQuestion(question.id, 4);
-    });
-    selectElement.appendChild(option3);
-  } else if (question.status.trim() === "Đã duyệt") {
-    const option2 = document.createElement("li");
-    option2.dataset.questionId = question.id;
-    option2.innerHTML =
-      '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
-    option2.classList.add("question-action-item", "nav-item", "text-start");
-    selectElement.appendChild(option2);
-    const option1 = document.createElement("li");
-    option1.dataset.questionId = question.id;
-    option1.innerHTML = '<i class="fa-solid fa-ban me-3"></i> Ngưng';
-    option1.classList.add("question-action-item", "nav-item", "text-start");
-    option1.addEventListener("click", function () {
-      updateStatusQuestion(question.id, 3);
-    });
-    selectElement.appendChild(option1);
-  } else if (question.status.trim() === "Ngưng áp dụng") {
-    const option3 = document.createElement("li");
-    option3.dataset.questionId = question.id;
-    option3.innerHTML =
-      '<i class="fa-regular fa-folder-open me-3"></i> Xem chi tiết';
-    option3.classList.add("question-action-item", "nav-item", "text-start");
-    selectElement.appendChild(option3);
-    const option1 = document.createElement("li");
-    option1.dataset.questionId = question.id;
-    option1.innerHTML = '<i class="fa-solid fa-rotate-left me-3"></i> Trả về';
-    option1.classList.add("question-action-item", "nav-item", "text-start");
-    option1.addEventListener("click", function () {
-      updateStatusQuestion(question.id, 4);
-    });
-    selectElement.appendChild(option1);
-
-    const option2 = document.createElement("li");
-    option2.dataset.questionId = question.id;
-    option2.innerHTML =
-      '<i class="fa-regular fa-circle-check me-3"></i>Phê duyệt';
-    option2.classList.add("question-action-item", "nav-item", "text-start");
-    option2.addEventListener("click", function () {
-      updateStatusQuestion(question.id, 1);
-    });
-    selectElement.appendChild(option2);
-  } else {
-    const option1 = document.createElement("li");
-    option1.dataset.questionId = question.id;
-    option1.innerHTML =
-      '<i class="fa-regular fa-pen-to-square me-3"></i> Chỉnh sửa';
-    option1.classList.add("question-action-item", "nav-item", "text-start");
-    selectElement.appendChild(option1);
-
-    const option2 = document.createElement("li");
-    option2.dataset.questionId = question.id;
-    option2.innerHTML =
-      '<i class="fa-regular fa-paper-plane me-3"></i> Gửi duyệt';
-    option2.classList.add("question-action-item", "nav-item", "text-start");
-    option2.addEventListener("click", function () {
-      updateStatusQuestion(question.id, 1);
-    });
-    selectElement.appendChild(option2);
-  }
-}
-/*show action question*/
-
-
-/*trCheck.forEach((tr) => {
-  tr.addEventListener("click", function (event) {
-    // Check if the click was directly on the button
-    if (event.target.tagName === "BUTTON") {
-      const showActionButtons = document.querySelectorAll(".show-action-question");
-
-      showActionButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-          const parentTd = this.parentNode; // Get the parent <td> element
-          const actionMenu = parentTd.querySelector(".action-question-menu");
-          const isHidden = getComputedStyle(actionMenu).display === "none";
+  switch (question.status.trim()) {
+    case "Đang soạn thảo":
       
-          // Hide all action-question-menu elements
-          const openMenus = document.querySelectorAll(".action-question-menu");
-          openMenus.forEach((menu) => {
-            menu.style.display = "none";
-          });
-      
-          // Toggle the display of the clicked action-question-menu
-          actionMenu.style.display = isHidden ? "block" : "none";
-        });
-      });
-    } else {
-
-      trCheck.forEach((row) => {
-        const checkbox = row.querySelector(".check-popup");
-        const questionData = JSON.parse(row.getAttribute("data-question"));
-        const questionId = questionData.id;
+      if(!question.id || !question.content || !question.type || !question.group || !question.time){
+        createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
+        createOption(question.id, "fa-regular fa-trash-can", "Xóa", 1);
+      }else{
+        createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
+        createOption(question.id, "fa-regular fa-trash-can", "Xóa", 1);
+        createOption(question.id, "fa-regular fa-paper-plane", "Gửi duyệt", 1);
+      }
+      if(!question.id || !question.type){
+        const questionBorders = questionRow.querySelectorAll(".question-border")
         
-      
-        row.addEventListener("click", function () {
-      
-          checkbox.checked = !checkbox.checked;
-          const tagStatus = row.querySelector("td.question-status")
-        const status = tagStatus.innerHTML;
-          if(checkbox.checked){
-            row.classList.add("active")
-      
-            pushIdToMap(questionId,status)
-          }else{
-            row.classList.remove("active")
-      
-            removeIdFromMap(questionId,status)
-          }
-          let ids = 0;
-          mapAction.forEach((value)=>{
-            ids+=value.length;
-          })
-          if(ids>0){
-            let popup = document.getElementById("popup-action");
-            popup.style.display = "block"
-            const numOfQuestion = popup.querySelector("h1")
-            numOfQuestion.innerHTML = ids;
-            let actions = popup.querySelectorAll(".nav-link")
-            
-            actions.forEach((action)=>{
-              switch(action.dataset.action){
-                case "guiDuyet":
-                  {
-                    
-      if(actions0.length>0||actions4.length>0){
-      action.style.display = "block"
-      }else{
-        action.style.display = "none"
+        questionBorders.forEach(b=>{
+          b.style.display = "none"
+        })
       }
-                  }
-                  break;
-                  case "traVe":
-                  {
-                    if(actions1.length>0||actions3.length>0){
-                      action.style.display = "block"
-                    }else{
-                      action.style.display = "none"
-                    }
-                  }
-                  break;
-                  case "duyetApDung":
-                  {
-                    if(actions1.length>0||actions3.length>0){
-                      action.style.display = "block"
-                    }else{
-                      action.style.display = "none"
-                    }
-                  }
-                  break;
-                  case "ngung":
-                  {
-                    if(actions2.length>0){
-                      action.style.display = "block"
-                    }else{
-                      action.style.display = "none"
-                    }
-                  }
-                  break;
-                  case "xoa":
-                  {
-      if(actions0.length>0){
-        action.style.display = "block"
-      }else{
-        action.style.display = "none"
-      }
-                  }
-                  break;
-              }
-            })
-          }else{
-            let popup = document.getElementById("popup-action");
-            popup.style.display = "none"
-          }
-        });
-        checkbox.addEventListener("click", function (event) {
-          event.stopPropagation(); // Prevent the click event from bubbling up to the row
+    
       
-          checkbox.checked = !checkbox.checked;
-          const tagStatus = row.querySelector("td.question-status")
-        const status = tagStatus.innerHTML;
-          if(checkbox.checked){
-            row.classList.add("active")
-            pushIdToMap(questionId,status)
-          }else{
-            row.classList.remove("active")
-            removeIdFromMap(questionId,status)
-          }
-          let ids = 0;
-          mapAction.forEach((value)=>{
-            ids+=value.length;
-          })
-          if(ids>0){
-            let popup = document.getElementById("popup-action");
-            popup.style.display = "block"
-            const numOfQuestion = popup.querySelector("h1")
-            numOfQuestion.innerHTML = ids;
-            let actions = popup.querySelectorAll(".nav-link")
-            
-            actions.forEach((action)=>{
-             
-              switch(action.dataset.action){
-                case "guiDuyet":
-                  {
-                    
-      if(actions0.length>0||actions4.length>0){
-      action.style.display = "block"
-      }else{
-        action.style.display = "none"
-      }
-                  }
-                  break;
-                  case "traVe":
-                  {
-                    if(actions1.length>0||actions3.length>0){
-                      action.style.display = "block"
-                    }else{
-                      action.style.display = "none"
-                    }
-                  }
-                  break;
-                  case "duyetApDung":
-                  {
-                    if(actions1.length>0||actions3.length>0){
-                      action.style.display = "block"
-                    }else{
-                      action.style.display = "none"
-                    }
-                  }
-                  break;
-                  case "ngung":
-                  {
-                    if(actions2.length>0){
-                      action.style.display = "block"
-                    }else{
-                      action.style.display = "none"
-                    }
-                  }
-                  break;
-                  case "xoa":
-                  {
-      if(actions0.length>0){
-        action.style.display = "block"
-      }else{
-        action.style.display = "none"
-      }
-                  }
-                  break;
-              }
-            })
-          }else{
-            let popup = document.getElementById("popup-action");
-            popup.style.display = "none"
-          }
-        });
-      });
-    }
-  });
-});*/
+      break;
+    case "Gửi duyệt":
+      createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
+      createOption(question.id, "fa-regular fa-circle-check", "Phê duyệt", 2);
+      createOption(question.id, "fa-solid fa-rotate-left", "Trả về", 4);
+      break;
+    case "Áp dụng":
+      createOption(question.id, "fa-regular fa-folder-open", "Xem chi tiết", 3);
+      createOption(question.id, "fa-solid fa-ban", "Ngưng hiển thị", 3);
+      break;
+    case "Ngưng áp dụng":
+      createOption(question.id, "fa-regular fa-folder-open", "Xem chi tiết", 4);
+      createOption(question.id, "fa-solid fa-rotate-left", "Trả về", 4);
+      createOption(question.id, "fa-regular fa-circle-check", "Phê duyệt", 1);
+      break;
+    default:
+      createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
+      createOption(question.id, "fa-regular fa-paper-plane", "Gửi duyệt", 1);
+      break;
+  }
+});
+
 const trCheck = document.querySelectorAll(".question-row")
 
 trCheck.forEach((tr) => {
@@ -425,7 +211,84 @@ trCheck.forEach((tr) => {
 
     actionMenu.style.display = isHidden ? "block" : "none";
   });
+  const checkAction = tr.querySelector(".check-popup");
+  checkAction.addEventListener("click", function (event) {
+    event.stopPropagation(); // Prevent the tr click event from firing
+    const questionData = JSON.parse(tr.getAttribute("data-question"));
+    const questionId = questionData.id;
+    const tagStatus = tr.querySelector("td.question-status");
+    const status = tagStatus.innerHTML;
 
+
+    if (checkAction.checked) {
+      tr.classList.add("active");
+      pushIdToMap(questionId, status);
+    } else {
+      tr.classList.remove("active");
+      removeIdFromMap(questionId, status);
+    }
+
+    let ids = 0;
+    mapAction.forEach((value) => {
+      ids += value.length;
+    });
+
+    const popup = document.getElementById("popup-action");
+    if (ids > 0) {
+      popup.style.display = "block";
+      const numOfQuestion = popup.querySelector("h1");
+      numOfQuestion.innerHTML = ids;
+      let actions = popup.querySelectorAll(".nav-link");
+
+      actions.forEach((action) => {
+        switch (action.dataset.action) {
+          case "guiDuyet": {
+            if (actions0.length > 0 || actions4.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "traVe": {
+            if (actions1.length > 0 || actions3.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "duyetApDung": {
+            if (actions1.length > 0 || actions3.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "ngung": {
+            if (actions2.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "xoa": {
+            if (actions0.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+        }
+      });
+    } else {
+      const popup = document.getElementById("popup-action");
+      popup.style.display = "none";
+    }
+  });
   tr.addEventListener("click", function (event) {
     const checkbox = tr.querySelector(".check-popup");
     const questionData = JSON.parse(tr.getAttribute("data-question"));
@@ -531,7 +394,7 @@ const mapAction = new Map();
 let actions0 = [],actions1 = [],actions2 = [],actions3 = [],actions4 = []
 mapAction.set("Đang soạn thảo",actions0);
 mapAction.set("Gửi duyệt",actions1);
-mapAction.set("Đã duyệt",actions2);
+mapAction.set("Áp dụng",actions2);
 mapAction.set("Ngưng áp dụng",actions3);
 mapAction.set("Trả về",actions4);
 
@@ -558,7 +421,7 @@ const closePopup = ()=>{
   actions0 = [];actions1 = [];actions2 = [];actions3 = [];actions4 = []
   mapAction.set("Đang soạn thảo",actions0);
 mapAction.set("Gửi duyệt",actions1);
-mapAction.set("Đã duyệt",actions2);
+mapAction.set("Áp dụng",actions2);
 mapAction.set("Ngưng áp dụng",actions3);
 mapAction.set("Trả về",actions4);
   trCheck.forEach((row) => {
@@ -570,5 +433,127 @@ mapAction.set("Trả về",actions4);
     
   })
 }
+
+
+/*take all question*/
+const allQuestions = document.getElementById("allQuestions")
+allQuestions.addEventListener("click",()=>{
+  if(allQuestions.checked){
+    trCheck.forEach((tr)=>{
+      let subCheckBoxs = tr.querySelectorAll(".check-popup")
+      subCheckBoxs.forEach((c)=>{
+        const questionData = JSON.parse(tr.getAttribute("data-question"));
+    const questionId = questionData.id;
+    const tagStatus = tr.querySelector("td.question-status");
+    const status = tagStatus.innerHTML;
+c.checked = true;
+
+    if (c.checked) {
+      tr.classList.add("active");
+      pushIdToMap(questionId, status);
+    } else {
+      tr.classList.remove("active");
+      removeIdFromMap(questionId, status);
+    }
+
+    let ids = 0;
+    mapAction.forEach((value) => {
+      ids += value.length;
+    });
+
+    const popup = document.getElementById("popup-action");
+    if (ids > 0) {
+      popup.style.display = "block";
+      const numOfQuestion = popup.querySelector("h1");
+      numOfQuestion.innerHTML = ids;
+      let actions = popup.querySelectorAll(".nav-link");
+
+      actions.forEach((action) => {
+        switch (action.dataset.action) {
+          case "guiDuyet": {
+            if (actions0.length > 0 || actions4.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "traVe": {
+            if (actions1.length > 0 || actions3.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "duyetApDung": {
+            if (actions1.length > 0 || actions3.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "ngung": {
+            if (actions2.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+          case "xoa": {
+            if (actions0.length > 0) {
+              action.style.display = "block";
+            } else {
+              action.style.display = "none";
+            }
+            break;
+          }
+        }
+      });
+    } else {
+      const popup = document.getElementById("popup-action");
+      popup.style.display = "none";
+    }
+      })
+    })
+  }else{
+    trCheck.forEach((tr)=>{
+      let subCheckBoxs = tr.querySelectorAll(".check-popup")
+      subCheckBoxs.forEach((c)=>{
+
+c.checked = false;
+
+    if (c.checked) {
+      tr.classList.add("active");
+    } else {
+      tr.classList.remove("active");
+    }})
+closePopup();
+  })
+}
+})
+
+
+  const select = document.getElementById('numbers-select');
+  let options = select.querySelectorAll("option")
+    options.forEach(op=>{
+      if(op.value == select.value){
+        op.style.display = "none"
+      }else{
+        op.style.display = "block"
+      }
+    })
+  select.addEventListener('click', function() {
+    let options = select.querySelectorAll("option")
+    options.forEach(op=>{
+      if(op.value == select.value){
+        op.style.display = "none"
+      }else{
+        op.style.display = "block"
+      }
+    })
+  });
 
 

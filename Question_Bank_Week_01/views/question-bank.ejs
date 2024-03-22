@@ -28,61 +28,14 @@
     >
       <%- include("./layouts/sidebar"); -%>
 
-      <div class="header row container-fluid">
-        <div class="header-wrapper"><div class="header-left col-10">
-          <ul class="nav d-flex align-items-center">
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>- - - - - - - -<span class="border-active"></span></p>
-              </a>
-              <span class="border-cs-right"></span>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>- - - - - - - -<span class="border-active"></span></p>
-              </a>
-              <span class="border-cs-right"></span>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>- - - - - - - -<span class="border-active"></span></p>
-              </a>
-              <span class="border-cs-right"></span>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>- - - - - - - -<span class="border-active"></span></p>
-              </a>
-              <span class="border-cs-right"></span>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>- - - - - - - -<span class="border-active"></span></p>
-              </a>
-              <span class="border-cs-right"></span>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>- - - - - - - -<span class="border-active"></span></p>
-              </a>
-              <span class="border-cs-right"></span>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link active">
-                <p>Nhân sự <span class="border-active active"></span></p>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="header-right col-2"></div></div>
-      </div>
+      <%- include("./layouts/header"); -%>
       <div class="question-filter row px-0">
         <div class="question-filter-left col-8 px-0">
           <ul class="nav d-flex">
-            <li class="nav-item active" data-filter="filterQuestion1">
+            <li class="nav-item" data-filter="filterQuestion1">
               <div class="nav-link">
                 <label for="dangSoanThao">Đang soạn thảo</label>
-                <input type="checkbox" name="dangSoanThao" id="filterQuestion1" checked/>
+                <input type="checkbox" name="dangSoanThao" id="filterQuestion1"/>
               </div>
             </li>
             <li class="nav-item" data-filter="filterQuestion2">
@@ -114,7 +67,7 @@
           <thead>
             <tr>
               <th scope="col">
-                <input type="checkbox" class="check-popup" data-popup-id="all" name="allQuestion" id="allQuestion" />
+                <input type="checkbox" class="check-popup" data-popup-id="all" name="allQuestion" id="allQuestions" />
               </th>
               <th scope="col">Câu hỏi</th>
               <th scope="col">Phân nhóm</th>
@@ -138,12 +91,17 @@
                   data-check-box-question-id="<%=question.id%>"
                 />
               </td>
-              <td class="truncate-text" title="<%=question.content%>">
-                <%=question.content%>
+              <td class="truncate-text question-content" title="<%=question.content%>">
+                <p><%=question.content%></p>
+                <div class="question-info"><span class="question-id"><%=question.id%></span>
+                  <span class="question-border"></span>
+                  <span class="question-type"><%=question.type%></span></div>
+                
+                
               </td>
 
               <td><%=question.group%></td>
-              <td><%=question.time%></td>
+              <td><%=question.time%>s</td>
               <td class="text-end question-status"><%=question.status%></td>
               <td >
 <button class="show-action-question"><i class="fa-solid fa-ellipsis"></i>
@@ -156,11 +114,21 @@
         </table>
       </div>
       <div class="footer d-flex justify-content-between align-items-center">
-        <div class="numbers-question"></div>
+        <div class="numbers-question"><select id="numbers-select" class="form-select" aria-label="Default select example">
+          <option value="100" >100</option>
+          <option value="75" >75</option>
+          <option value="50" >50</option>
+          <option value="25" selected>25</option>
+        </select></div>
         <div class="pagination-container">
           <ul class="pagination">
             <% const totalPages = Math.ceil(totalQuestions / ITEMS_PER_PAGE); %>
             <% const prevPage = currentPage > 1 ? Number(currentPage) - 1 : 1; %>
+            <li class="page-item">
+              <a class="page-link" href="/?page=1" aria-label="Previous">
+                <span aria-hidden="true">Đầu</span>
+              </a>
+            </li>
             <li class="page-item">
               <a class="page-link" href="/?page=<%= prevPage %>" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
@@ -199,6 +167,11 @@
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
+            <li class="page-item">
+              <a class="page-link" href="/?page=<%= totalPages %>" aria-label="Previous">
+                <span aria-hidden="true">Cuối</span>
+              </a>
+            </li>
           </ul>
         </div>
         
@@ -207,7 +180,7 @@
       
       
       <div class="popup-action" id="popup-action"><ul class="nav">
-        <li class="nav-item"><a href="#" class="nav-link row text-center" data-action="countQuestion"><h1></h1><span style="display: inline-block;" class="col-12">Gửi duyệt</span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link row text-center" data-action="countQuestion"><h1></h1><span style="display: inline-block;" class="col-12">Đã chọn</span></a></li>
         <li class="nav-item"><a href="#" onclick="updateStatusQuestions(1)" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="guiDuyet"><i class=" col-12 fa-regular fa-paper-plane"></i><span style="display: inline-block;" class="col-12">Gửi duyệt</span></a></li>
         <li class="nav-item"><a href="#" onclick="updateStatusQuestions(4)" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="traVe"><i class=" col-12 fa-solid fa-rotate-left"></i><span style="display: inline-block;" class="col-12">Trả về</span></a></li>
         <li class="nav-item"><a href="#" onclick="updateStatusQuestions(2)" class="nav-link row text-center" style="display: none; transition: .5s;"  data-action="duyetApDung"><i class=" col-12 fa-regular fa-circle-check"></i><span style="display: inline-block;" class="col-12">Duyệt áp dụng</span></a></li>

@@ -1,6 +1,5 @@
 let questions = [
   {
-    id: "Q.001",
     type: "Dạng câu một lựa chọn",
     content:
       "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
@@ -45,7 +44,6 @@ let questions = [
     status: 4,
   },{
     id: "Q.006",
-    type: "Dạng câu một lựa chọn",
     content:
       "Cửa hàng HaChi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Chuyên buôn bán những mặt hàng nào?",
     group: "Thương hiệu, văn hóa công ty",
