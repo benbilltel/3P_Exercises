@@ -7,8 +7,6 @@ function handleCheckboxChange(event) {
   // Save the checked status to localStorage
   localStorage.setItem(checkboxName, isChecked);
 }
-// Function to restore checkbox states from localStorage
-// Function to restore checkbox states from localStorage
 function restoreCheckboxStates() {
   const filterStatus = document.querySelectorAll('.question-filter input[type="checkbox"]');
 
@@ -135,64 +133,67 @@ checkboxes.forEach((checkbox) => {
 
 const questionRows = document.getElementsByClassName("question-row");
 
-Array.from(questionRows).forEach((questionRow) => {
-  const question = JSON.parse(questionRow.dataset.question);
-  const selectElement = questionRow.querySelector("ul.action-question-menu");
-
-  selectElement.innerHTML = ""; // Clear any existing options
-
-  const createOption = (questionId, iconClass, label, statusId) => {
-    const option = document.createElement("li");
-    option.dataset.questionId = questionId;
-    option.innerHTML = `<i class="${iconClass} me-3"></i> ${label}`;
-    option.classList.add("question-action-item", "nav-item", "text-start");
-    option.addEventListener("click", () => {
-      updateStatusQuestion(questionId, statusId);
-    });
-    selectElement.appendChild(option);
-  };
-
-  switch (question.status.trim()) {
-    case "Đang soạn thảo":
-      
-      if(!question.id || !question.content || !question.type || !question.group || !question.time){
-        createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
-        createOption(question.id, "fa-regular fa-trash-can", "Xóa", 1);
-      }else{
-        createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
-        createOption(question.id, "fa-regular fa-trash-can", "Xóa", 1);
-        createOption(question.id, "fa-regular fa-paper-plane", "Gửi duyệt", 1);
-      }
-      if(!question.id || !question.type){
-        const questionBorders = questionRow.querySelectorAll(".question-border")
+const renderMenuAction = ()=>{
+  Array.from(questionRows).forEach((questionRow) => {
+    const question = JSON.parse(questionRow.dataset.question);
+    const selectElement = questionRow.querySelector("ul.action-question-menu");
+  
+    selectElement.innerHTML = ""; // Clear any existing options
+  
+    const createOption = (questionId, iconClass, label, statusId) => {
+      const option = document.createElement("li");
+      option.dataset.questionId = questionId;
+      option.innerHTML = `<i class="${iconClass} me-3"></i> ${label}`;
+      option.classList.add("question-action-item", "nav-item", "text-start");
+      option.addEventListener("click", () => {
+        updateStatusQuestion(questionId, statusId);
+      });
+      selectElement.appendChild(option);
+    };
+  
+    switch (question.status.trim()) {
+      case "Đang soạn thảo":
         
-        questionBorders.forEach(b=>{
-          b.style.display = "none"
-        })
-      }
-    
+        if(!question.id || !question.content || !question.type || !question.group || !question.time){
+          createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
+          createOption(question.id, "fa-regular fa-trash-can", "Xóa", 1);
+        }else{
+          createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
+          createOption(question.id, "fa-regular fa-trash-can", "Xóa", 1);
+          createOption(question.id, "fa-regular fa-paper-plane", "Gửi duyệt", 1);
+        }
+        if(!question.id || !question.type){
+          const questionBorders = questionRow.querySelectorAll(".question-border")
+          
+          questionBorders.forEach(b=>{
+            b.style.display = "none"
+          })
+        }
       
-      break;
-    case "Gửi duyệt":
-      createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
-      createOption(question.id, "fa-regular fa-circle-check", "Phê duyệt", 2);
-      createOption(question.id, "fa-solid fa-rotate-left", "Trả về", 4);
-      break;
-    case "Áp dụng":
-      createOption(question.id, "fa-regular fa-folder-open", "Xem chi tiết", 3);
-      createOption(question.id, "fa-solid fa-ban", "Ngưng hiển thị", 3);
-      break;
-    case "Ngưng áp dụng":
-      createOption(question.id, "fa-regular fa-folder-open", "Xem chi tiết", 4);
-      createOption(question.id, "fa-solid fa-rotate-left", "Trả về", 4);
-      createOption(question.id, "fa-regular fa-circle-check", "Phê duyệt", 1);
-      break;
-    default:
-      createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
-      createOption(question.id, "fa-regular fa-paper-plane", "Gửi duyệt", 1);
-      break;
-  }
-});
+        
+        break;
+      case "Gửi duyệt":
+        createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
+        createOption(question.id, "fa-regular fa-circle-check", "Phê duyệt", 2);
+        createOption(question.id, "fa-solid fa-rotate-left", "Trả về", 4);
+        break;
+      case "Áp dụng":
+        createOption(question.id, "fa-regular fa-folder-open", "Xem chi tiết", 3);
+        createOption(question.id, "fa-solid fa-ban", "Ngưng hiển thị", 3);
+        break;
+      case "Ngưng áp dụng":
+        createOption(question.id, "fa-regular fa-folder-open", "Xem chi tiết", 4);
+        createOption(question.id, "fa-solid fa-rotate-left", "Trả về", 4);
+        createOption(question.id, "fa-regular fa-circle-check", "Phê duyệt", 1);
+        break;
+      default:
+        createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
+        createOption(question.id, "fa-regular fa-paper-plane", "Gửi duyệt", 1);
+        break;
+    }
+  });
+}
+
 
 const trCheck = document.querySelectorAll(".question-row")
 
@@ -439,6 +440,7 @@ mapAction.set("Trả về",actions4);
 const allQuestions = document.getElementById("allQuestions")
 allQuestions.addEventListener("click",()=>{
   if(allQuestions.checked){
+    closePopup()
     trCheck.forEach((tr)=>{
       let subCheckBoxs = tr.querySelectorAll(".check-popup")
       subCheckBoxs.forEach((c)=>{
@@ -535,6 +537,10 @@ closePopup();
 }
 })
 
+const closePopupCustom =()=>{
+  closePopup()
+  allQuestions.checked = false
+};
 
   const select = document.getElementById('numbers-select');
   let options = select.querySelectorAll("option")
@@ -550,10 +556,16 @@ closePopup();
     options.forEach(op=>{
       if(op.value == select.value){
         op.style.display = "none"
+        
       }else{
         op.style.display = "block"
       }
     })
-  });
 
+  });
+  select.addEventListener('change', function() {
+    
+    itemPerPage = Number(select.value);
+    filterQuestions()
+  });
 

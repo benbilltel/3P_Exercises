@@ -21,22 +21,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-const ITEMS_PER_PAGE = 10; // Number of questions per page
 
 // ...
 
 app.get("/", (req, res) => {
-  const totalQuestions = questions.length;
-  const currentPage = req.query.page || 1;
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const questionsDTO = getQuestions().slice(startIndex, endIndex);
+  const questionsDTO = getQuestions();
 
   res.render("question-bank", {
     questions: questionsDTO,
-    totalQuestions,
-    currentPage,
-    ITEMS_PER_PAGE
   });
 });
 
