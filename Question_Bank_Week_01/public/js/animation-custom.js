@@ -566,6 +566,7 @@ const closePopupCustom =()=>{
   select.addEventListener('change', function() {
     
     itemPerPage = Number(select.value);
+    currentPage =1;
     filterQuestions()
   });
 

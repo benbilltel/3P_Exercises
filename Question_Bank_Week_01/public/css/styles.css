@@ -16,9 +16,11 @@ body {
 p {
   margin: 0;
 }
+
 .hidden-element {
   pointer-events: visiblePainted;
 }
+
 .question-bank {
   height: 99.5vh;
   width: 100vw;
@@ -75,6 +77,10 @@ p {
   position: relative;
 }
 
+.sidebar li a {
+  font-size: 14px;
+}
+
 .sidebar .nav-link.active::before {
   position: absolute;
   content: "";
@@ -90,13 +96,14 @@ p {
 }
 
 .dropdown-cs-menu {
-  display: none;
+  display: block;
   padding: 0 var(--bs-nav-link-padding-x);
   position: relative;
 }
 
 .dropdown-cs-menu li {
   list-style: none;
+  padding: 0.5rem 0;
 }
 
 .dropdown-cs-item.active,
@@ -116,10 +123,173 @@ p {
 
 .dropdown-cs-menu li a {
   color: #bdc2d2;
-  font-size: 1rem;
+  font-size: 14px;
   text-decoration: none;
   font-weight: 700;
   margin: 0.5rem 0;
+}
+
+@media screen and (min-width: 2716px) {
+  .sidebar li a {
+    font-size: 30px;
+  }
+
+  .dropdown-cs-menu li {
+
+    padding: 1rem 0;
+  }
+
+  .dropdown-cs-menu::before {
+    width: 0.3rem;
+  }
+
+  .sidebar .nav-link.active::before {
+    width: 0.3rem;
+  }
+
+  .sidebar .logo {
+    height: 4.5rem;
+  }
+}
+
+@media screen and (max-width: 2715.9px) and (min-width: 1810px) {
+  .sidebar li a {
+    font-size: 20px;
+  }
+
+  .dropdown-cs-menu li {
+
+    padding: 1rem 0;
+  }
+
+  .dropdown-cs-menu::before {
+    width: 0.3rem;
+  }
+
+  .sidebar .nav-link.active::before {
+    width: 0.3rem;
+  }
+
+  .sidebar .logo {
+    height: 3.5rem;
+  }
+}
+
+
+@media screen and (max-width: 1809.9px) and (min-width: 1697px) {
+  .sidebar li a {
+    font-size: 18px;
+  }
+
+  .dropdown-cs-menu li {
+
+    padding: 1rem 0;
+  }
+
+  .dropdown-cs-menu::before {
+    width: 0.3rem;
+  }
+
+  .sidebar .nav-link.active::before {
+    width: 0.3rem;
+  }
+
+  .sidebar .logo {
+    height: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 1696.9px) and (min-width: 1508px) {
+  .sidebar li a {
+    font-size: 16px;
+  }
+
+  .dropdown-cs-menu li {
+
+    padding: 1rem 0;
+  }
+
+  .dropdown-cs-menu::before {
+    width: 0.3rem;
+  }
+
+  .sidebar .nav-link.active::before {
+    width: 0.3rem;
+  }
+
+  .sidebar .logo {
+    height: 3rem;
+  }
+}
+
+@media screen and (max-width: 1235px) {
+  .sidebar li a {
+    font-size: 12px;
+  }
+
+  .dropdown-cs-menu li {
+
+    padding: 0.25rem 0;
+  }
+
+  .sidebar .logo {
+
+    height: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 1087px) {
+  .sidebar li a {
+    font-size: 10px;
+  }
+
+  .dropdown-cs-menu li {
+
+    padding: 0.25rem 0;
+  }
+}
+
+@media screen and (max-width: 905.9px) and (min-width:777px) {
+  .sidebar li a {
+    font-size: 8px;
+  }
+
+  .dropdown-cs-menu li {
+    padding: 0.2rem 0;
+  }
+
+  .dropdown-cs-menu::before {
+
+    width: 0.2rem;
+  }
+
+  .sidebar .nav-link.active::before {
+    width: 0.2rem;
+  }
+}
+
+@media screen and (max-width: 776.9px) {
+  .sidebar li a {
+    font-size: 6.625px;
+  }
+
+  .dropdown-cs-menu li {
+    padding: 0.1rem 0;
+  }
+
+  .dropdown-cs-menu::before {
+
+    width: 0.1rem;
+  }
+
+  .sidebar .nav-link.active::before {
+    width: 0.1rem;
+  }
+
+  .sidebar .logo {
+
+    height: 2rem;
+  }
 }
 
 /*header*/
@@ -192,33 +362,203 @@ p {
 
 .border-active.active {
   width: 100%;
-  border-radius: 30%;
-  height: 0.125rem;
+  border-radius: 3px;
+  height: 0.2rem;
   background-color: #008000;
   position: absolute;
   bottom: -0.8rem;
   left: 0px;
 }
 
-@media screen and (max-width: 1250px) {
+.header-right i {
+  color: #5A6276;
+}
+
+@media screen and (min-width: 2716px) {
+  .header {
+    width: 82.5%;
+    height: 4.5rem;
+    top: 0.125rem;
+    
+    font-size: 30px;
+  }
+
+  .border-cs-right {
+    height: 2.5rem;
+    width: 0.2rem;
+  }
+
+  .border-active.active {
+    height: 0.3rem;
+    bottom: -0.8rem;
+  }
+}
+
+@media screen and (max-width: 2715.9px) and (min-width: 2037px) {
+  .header {
+    width: 82.5%;
+    height: 3.5rem;
+    top: 0.125rem;
+
+    font-size: 24px;
+  }
+
+  .border-cs-right {
+    height: 2rem;
+    width: 0.2rem;
+  }
+
+  .border-active.active {
+    height: 0.3rem;
+    bottom: -0.75rem;
+  }
+}
+
+@media screen and (max-width: 2036.9px) and (min-width: 1810px) {
+  .header {
+    width: 82.5%;
+    height: 3.5rem;
+    top: 0.125rem;
+    left: 17.5%;
+    font-size: 22px;
+  }
+
+  .border-cs-right {
+    height: 2rem;
+    width: 0.2rem;
+  }
+
+  .border-active.active {
+    bottom: -0.75rem;
+  }
+}
+
+@media screen and (max-width: 1809.9px) and (min-width: 1697px) {
+  .header {
+    width: 82.5%;
+    height: 3.5rem;
+    top: 0.125rem;
+    left: 17.5%;
+    font-size: 20px;
+  }
+
+  .border-cs-right {
+    height: 2rem;
+    width: 0.2rem;
+  }
+
+  .border-active.active {
+    bottom: -0.75rem;
+  }
+}
+
+@media screen and (max-width: 1696.9px) and (min-width: 1508px) {
+  .header {
+    width: 82.5%;
+    height: 3rem;
+    top: 0.125rem;
+    left: 17.5%;
+    font-size: 18px;
+  }
+
+  .border-cs-right {
+    height: 2rem;
+    width: 0.175rem;
+  }
+
+  .border-active.active {
+    bottom: -0.65rem;
+  }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 906px) {
   .header {
     padding: 0 0.25rem;
     width: 82.5%;
     height: 2.5rem;
     top: 0.125rem;
     left: 18%;
-    font-size: 12px;
+    font-size: 14px;
   }
+
   .border-cs-right {
     height: 1.5rem;
     margin: 0 0.75rem;
   }
+
   .border-active.active {
-    bottom: -0.75rem;
+    bottom: -0.70rem;
   }
 }
 
-@media screen and (max-width: 992px) {}
+@media screen and (max-width: 905.9px) and (min-width:777px) {
+  .header {
+    padding: 0 0.125rem;
+    height: 2.5rem;
+    top: 0.125rem;
+    left: 18.5%;
+    font-size: 11px;
+
+  }
+
+  .header-wrapper {
+    height: 100%;
+  }
+
+  .header-right,
+  .header-right ul.nav {
+    height: 100%;
+  }
+
+  .header-right .nav-link {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .border-cs-right {
+    height: 1.25rem;
+    margin: 0 0.75rem;
+  }
+
+  .border-active.active {
+    bottom: -0.8rem;
+    height: 0.125rem;
+  }
+}
+
+@media screen and (max-width: 776.9px) {
+  .header {
+    padding: 0 0.125rem;
+    height: 2rem;
+    top: 0.125rem;
+    left: 18.5%;
+    font-size: 9px;
+
+  }
+
+  .header-wrapper {
+    height: 100%;
+  }
+
+  .header-right,
+  .header-right ul.nav {
+    height: 100%;
+  }
+
+  .header-right .nav-link {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .border-cs-right {
+    height: 1.5rem;
+    width: 0.08rem;
+    margin: 0 0.75rem;
+  }
+
+  .border-active.active {
+    bottom: -0.65rem;
+    height: 0.1rem;
+  }
+}
 
 /*question filter*/
 .question-filter {
@@ -228,7 +568,7 @@ p {
   left: 18.5%;
 }
 
-.question-border{
+.question-border {
   height: 1.5rem;
   width: 2px;
   background-color: #8BA89F;
@@ -236,17 +576,21 @@ p {
   border-radius: 3px;
   margin: 0 0.75rem;
 }
+
 .question-content {
   text-align: left;
 }
-.question-info span{
+
+.question-info span {
   display: inline-block;
 }
-.question-info{
+
+.question-info {
   display: flex;
   justify-content: start;
   align-items: center;
 }
+
 .question-search {
   width: 80vw;
   position: fixed;
@@ -308,7 +652,8 @@ p {
   height: 0.85rem;
 }
 
-.question-filter .nav-item input[type="checkbox"]:hover::before, .question-filter .nav-item:hover input[type="checkbox"]::before,
+.question-filter .nav-item input[type="checkbox"]:hover::before,
+.question-filter .nav-item:hover input[type="checkbox"]::before,
 .check-popup:hover::before {
   content: "\002714";
   background-color: #008000;
@@ -346,9 +691,11 @@ p {
   right: 2.2vw;
   transition: 0.5s;
 }
-.action-question-menu  li {
+
+.action-question-menu li {
   text-wrap: nowrap;
 }
+
 .show-action-question {
   position: relative;
 }
@@ -386,10 +733,13 @@ p {
   background-color: #598f6d;
   cursor: pointer;
 }
-.question-row.active,.question-row.active td{
+
+.question-row.active,
+.question-row.active td {
   background-color: #598f6d;
   cursor: pointer;
 }
+
 .question-list .table tbody .question-row .show-action-question.active {
   background-color: #bdc2d2;
 }
@@ -456,7 +806,7 @@ p {
 }
 
 /*popup*/
-#popup-action{
+#popup-action {
   display: none;
   position: fixed;
   bottom: 30vh;
@@ -468,10 +818,12 @@ p {
   z-index: 100;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
+
 #popup-action .nav-item {
   display: flex;
   align-items: center;
 }
+
 /*footer*/
 .footer {
   padding-left: 17.5%;
