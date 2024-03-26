@@ -235,6 +235,7 @@ trCheck.forEach((tr) => {
     });
 
     const popup = document.getElementById("popup-action");
+  
     if (ids > 0) {
       popup.style.display = "block";
       const numOfQuestion = popup.querySelector("h1");
@@ -299,9 +300,12 @@ trCheck.forEach((tr) => {
 
     checkbox.checked = !checkbox.checked;
 
+ 
+
     if (checkbox.checked) {
       tr.classList.add("active");
       pushIdToMap(questionId, status);
+      console.log(questionId,status)
     } else {
       tr.classList.remove("active");
       removeIdFromMap(questionId, status);
@@ -401,14 +405,14 @@ mapAction.set("Trả về",actions4);
 
 const pushIdToMap = (id,status)=>{
   mapAction.forEach((value,key)=>{
-    if(key == status ){
+    if(key == status.replace("\n","").trim() ){
       value.push(id);
     }
   })
 }
 const removeIdFromMap = (id,status)=>{
   mapAction.forEach((value,key)=>{
-    if(key == status ){
+    if(key == status.replace("\n","").trim() ){
       const indexRemove = value.findIndex(i=>i == id);
       if(indexRemove!== -1 ){
         value.splice(indexRemove,1)

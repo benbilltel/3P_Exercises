@@ -78,7 +78,7 @@ const movePage = (num,action)=>{
       currentPage = Math.ceil(questionTemp.length / itemPerPage);
     }
   } else if (Number(action) == 1) {
-    if((currentPage == 1 && Number(num)==-1)||(currentPage == 10 && Number(num)==1)){
+    if((currentPage == 1 && Number(num)==-1)||(currentPage == Math.ceil(questionTemp.length / itemPerPage) && Number(num)==1)){
       return;
     }else{
       currentPage += Number(num);
@@ -125,7 +125,18 @@ function filterQuestions() {
     const questionRow = questionRows[i];
     const question = JSON.parse(questionRow.dataset.question);
     const index = questionRow.dataset.index
-
+    const questionStatus = questionRow.querySelector(".question-status")
+    if(question.status.replace("\n","").trim() == "Đang soạn thảo"){
+      questionStatus.style.color = "black"
+    }else if(question.status.replace("\n","").trim() == "Gửi duyệt"){
+      questionStatus.style.color = "#31ADFF"
+    }else if(question.status.replace("\n","").trim() == "Áp dụng"){
+      questionStatus.style.color = "#008000"
+    }else if(question.status.replace("\n","").trim() == "Trả về"){
+      questionStatus.style.color = "#B7B92F"
+    }else{
+      questionStatus.style.color = "#FB311C"
+    }
     // Check the status of the question and show/hide the row accordingly
     if (
       noFilterChecked ||
