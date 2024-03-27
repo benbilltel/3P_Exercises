@@ -153,10 +153,10 @@ const renderMenuAction = ()=>{
         
         if(!question.id || !question.content || !question.type || !question.group || !question.time){
           createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
-          createOption(question.id, "fa-regular fa-trash-can", "Xóa", 1);
+          createOption(question.id, "fa-regular fa-trash-can", "Xóa", -1);
         }else{
           createOption(question.id, "fa-regular fa-pen-to-square", "Chỉnh sửa", 1);
-          createOption(question.id, "fa-regular fa-trash-can", "Xóa", 1);
+          createOption(question.id, "fa-regular fa-trash-can", "Xóa", -1);
           createOption(question.id, "fa-regular fa-paper-plane", "Gửi duyệt", 1);
         }
         if(!question.id || !question.type){
@@ -310,7 +310,6 @@ trCheck.forEach((tr) => {
     if (checkbox.checked) {
       tr.classList.add("active");
       pushIdToMap(questionId, status);
-      console.log(questionId,status)
     } else {
       tr.classList.remove("active");
       removeIdFromMap(questionId, status);

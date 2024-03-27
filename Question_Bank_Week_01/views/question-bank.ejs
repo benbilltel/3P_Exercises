@@ -20,7 +20,7 @@
     <%- include("./layouts/sidebar"); -%>
       <div class="context">
         <%- include("./layouts/header"); -%>
-          <div class="question-filter">
+          <div class="context-body"><div class="question-filter">
             <div style="min-width: 1100px;" class="ps-0 m-0 d-flex justify-content-between align-items-center">
               <div class="question-filter-left px-0">
                 <ul class="nav d-flex">
@@ -183,7 +183,7 @@
                     style="display: none; transition: .5s;" data-action="ngung"><i
                       class=" col-12 fa-solid fa-ban"></i><span style="display: inline-block;" class="col-12">Ngưng áp
                       dụng</span></a></li>
-                <li class="nav-item action-delete"><a href="#" class="nav-link row text-center"
+                <li class="nav-item action-delete"><a href="#" onclick="updateStatusQuestions(-1)" class="nav-link row text-center"
                     style="display: none; transition: .5s;" data-action="xoa"><i
                       class=" col-12 fa-regular fa-trash-can"></i><span style="display: inline-block;"
                       class="col-12">Xóa câu hỏi</span></a></li>
@@ -210,6 +210,24 @@
             </div>
 
           </div>
+          <div class="modal-delete">
+            <div class="modal-content">
+              <div class="modal-header d-flex justify-content-center align-items-center p-4"><i style="color: #FD7676;font-weight: 700;" class="fa-solid fa-triangle-exclamation pe-3"></i><span style="display: inline-block;text-transform: uppercase; color: #FD7676; font-weight: 700;">Xóa câu hỏi</span></div>
+              <div class="modal-body row m-0">
+                <div class="col-12  d-flex align-items-center justify-content-center" ><span style="display: inline-block;">Bạn chắc chắn muốn xóa</span></div>
+                <div class="col-12  ids-delete d-flex align-items-center justify-content-center"  data-ids-delete=""><span style="display: inline-block; white-space: nowrap; width: 120px;
+                  overflow: hidden;
+                  text-overflow: ellipsis;">ids delted</span></div>
+                <div class="col-12  d-flex align-items-center justify-content-center" ><span style="display: inline-block;">Đơn vị bị xóa sẽ <span style="color: #FD7676;text-transform: uppercase;">không</span> thể khôi phục lại</span></div>
+              </div>
+              <div class="modal-footer row m-0">
+                <button onclick="closeModalDelete()" type="button" style="text-transform: uppercase; color: #959DB3;" class="cancel-modal col-6 p-3">không xóa</button>
+                <button  type="button" style="background-color: #FD7676;" class="comfirm-modal  col-6 p-3"><i style="color: white;font-style: 600;" class="fa-solid fa-trash pe-2"></i><span style="color: white;text-transform: uppercase;font-style: 600;">Xóa</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+          
       </div>
       
   </div>

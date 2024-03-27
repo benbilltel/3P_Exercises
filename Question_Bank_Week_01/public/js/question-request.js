@@ -244,101 +244,115 @@ function toggleActiveClass(event) {
 }
 
 const updateStatusQuestion = (questionId, action) => {
-  const formData = new FormData();
-  formData.append("status", action);
-
-  fetch("/update/question/" + questionId, {
-    method: "PUT",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.message == "Question updated successfully") {
-        const updatedQuestions = data.questionDTOs;
-          updatedQuestions.forEach((question) => {
-            trCheck.forEach(e=>{
-             if(e.dataset.questionId == question.id){
-              const tagStatus = e.querySelector("td.question-status")
-              tagStatus.innerHTML = question.status;
-              e.dataset.question = JSON.stringify(question);
-             }
-            })
-          }); filterQuestions();
-          closePopup();
-          showToast(data.message, true,()=>{
-            
-          });
-      }
+  if(action!==-1){
+    const formData = new FormData();
+    formData.append("status", action);
+  
+    fetch("/update/question/" + questionId, {
+      method: "PUT",
+      body: formData,
     })
-    .catch((error) => {
-      console.error(error);
-      alert("An error occurred while updating the product");
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message == "Question updated successfully") {
+          const updatedQuestions = data.questionDTOs;
+            updatedQuestions.forEach((question) => {
+              trCheck.forEach(e=>{
+               if(e.dataset.questionId == question.id){
+                const tagStatus = e.querySelector("td.question-status")
+                tagStatus.innerHTML = question.status;
+                e.dataset.question = JSON.stringify(question);
+               }
+              })
+            }); filterQuestions();
+            closePopup();
+            showToast(data.message, true,()=>{
+              
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("An error occurred while updating the product");
+      });
+  }else{
+  showModalDelete(questionId);
+  }
+ 
 };
 
 //popup-action request
 const updateStatusQuestions = (action)=>{
   let ids = [];
-  if(action == 1){
+  if(action!==-1){
+    if(action == 1){
     
+      actions0.forEach((id)=>{
+        ids.push(id);
+      })
+      actions4.forEach((id)=>{
+        ids.push(id);
+      })
+    }else if (action == 2){
+      actions1.forEach((id)=>{
+        ids.push(id);
+      })
+      actions3.forEach((id)=>{
+        ids.push(id);
+      })
+    }else if(action == 3){
+      actions2.forEach((id)=>{
+        ids.push(id);
+      })
+    }else if(action == 4){
+      actions1.forEach((id)=>{
+        ids.push(id);
+      })
+      actions3.forEach((id)=>{
+        ids.push(id);
+      })
+    }
+    if(ids.length > 0){
+      const formData = new FormData();
+    formData.append("status", action);
+    formData.append("ids", ids);
+  
+    fetch("/update/questions/", {
+      method: "PUT",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message == "Questions updated successfully") {
+          const updatedQuestions = data.questionDTOs;
+            updatedQuestions.forEach((question) => {
+              
+              trCheck.forEach(e=>{
+               if(e.dataset.questionId == question.id){
+                const tagStatus = e.querySelector("td.question-status")
+                tagStatus.innerHTML = question.status;
+                e.dataset.question = JSON.stringify(question);
+               }
+              })
+            }); filterQuestions();
+            closePopupCustom();
+            showToast(data.message, true,()=>{
+              
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("An error occurred while updating the product");
+      });
+    }
+  }else{
     actions0.forEach((id)=>{
       ids.push(id);
     })
-    actions4.forEach((id)=>{
-      ids.push(id);
-    })
-  }else if (action == 2){
-    actions1.forEach((id)=>{
-      ids.push(id);
-    })
-    actions3.forEach((id)=>{
-      ids.push(id);
-    })
-  }else if(action == 3){
-    actions2.forEach((id)=>{
-      ids.push(id);
-    })
-  }else if(action == 4){
-    actions1.forEach((id)=>{
-      ids.push(id);
-    })
-    actions3.forEach((id)=>{
-      ids.push(id);
-    })
-  }
-  if(ids.length > 0){
-    const formData = new FormData();
-  formData.append("status", action);
-  formData.append("ids", ids);
-
-  fetch("/update/questions/", {
-    method: "PUT",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.message == "Questions updated successfully") {
-        const updatedQuestions = data.questionDTOs;
-          updatedQuestions.forEach((question) => {
-            
-            trCheck.forEach(e=>{
-             if(e.dataset.questionId == question.id){
-              const tagStatus = e.querySelector("td.question-status")
-              tagStatus.innerHTML = question.status;
-              e.dataset.question = JSON.stringify(question);
-             }
-            })
-          }); filterQuestions();
-          closePopupCustom();
-          showToast(data.message, true,()=>{
-            
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      alert("An error occurred while updating the product");
-    });
+    if(ids.length > 0){
+      showModalDelete(ids)
+    }
   }
 }
 //search
@@ -418,3 +432,67 @@ resetAll.addEventListener("click",()=>{
   searchInput.dispatchEvent(new Event("input"));
   filterQuestions();
 })
+
+/*delete*/
+const showModalDelete = (ids)=>{
+  const modal = document.querySelector(".modal-delete")
+  modal.style.display = "block"
+  const idsTag = modal.querySelector(".ids-delete")
+  const idsShow = idsTag.querySelector("span")
+  idsShow.style.color = "#36C8CF"
+  idsShow.title = ids
+  idsShow.innerHTML = ids
+  const btnConfirm = modal.querySelector(".comfirm-modal")
+  btnConfirm.addEventListener("click",()=>{
+    deleteQuestions(ids)
+  })
+}
+const closeModalDelete = ()=>{
+  
+  const modal = document.querySelector(".modal-delete")
+  modal.style.display = "none"
+}
+const deleteQuestions = (ids)=>{
+  const formData = new FormData();
+  formData.append("ids", ids);
+  fetch("/delete/questions/", {
+    method: "PUT",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message == "Questions deleted successfully") {
+        const updatedQuestions = data.questionDTOs;
+        let existedQuetion = []
+          updatedQuestions.forEach((question) => {
+            trCheck.forEach(e=>{
+             if(e.dataset.questionId == question.id){
+              existedQuetion.push(question.id)
+             }
+            })
+          }
+          )
+          trCheck.forEach(e=>{
+            let isExisted = false;
+            existedQuetion.forEach(q=>{
+              if(q == e.dataset.questionId){
+                isExisted = true;
+              }
+            })
+            if(!isExisted){
+              e.remove()
+            }
+          })
+          filterQuestions();
+          closeModalDelete();
+          closePopupCustom();
+          showToast(data.message, true,()=>{
+            
+          });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("An error occurred while updating the product");
+    });
+}

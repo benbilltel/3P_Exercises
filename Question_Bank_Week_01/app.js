@@ -10,6 +10,7 @@ const {
   getQuestions,
   updateStatusQuestion,
   updateStatusQuestions,
+  deleteQuestions
 } = require("./server/controller/questionController");
 const questions = require("./server/model/question");
 const multer = require("multer");
@@ -55,6 +56,15 @@ app.put("/update/questions/", (req, res) => {
     res.status(404).json({ message: "Question not found" });
   }
 });
+app.put("/delete/questions/",(req,res)=>{
+  const ids = req.body.ids.split(",");
+  if(deleteQuestions(ids)){
+    const questionDTO = getQuestions()
+    res.json({ questionDTOs : questionDTO,message: "Questions deleted successfully" });
+  }else{
+    res.status(404).json({ message: "Question not found" });
+  }
+})
 app.listen(PORT, () => {
   console.log(`Server is listening on port http://localhost:${PORT}`);
 });

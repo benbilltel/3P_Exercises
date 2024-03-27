@@ -45,4 +45,16 @@ const updateStatusQuestions = (ids, status) => {
   });
   return true;
 };
-module.exports = { getQuestions, updateStatusQuestion,updateStatusQuestions };
+const deleteQuestions=(ids)=>{
+  ids.forEach((id)=>{
+    const findIndex = questions.findIndex((q)=>q.id == id);
+    if(findIndex!==-1){
+      questions.splice(findIndex,1)
+
+    }else{
+      return false
+    }
+  })
+  return true;
+}
+module.exports = { getQuestions, updateStatusQuestion,updateStatusQuestions,deleteQuestions };
