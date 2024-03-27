@@ -21,7 +21,7 @@
       <div class="context">
         <%- include("./layouts/header"); -%>
           <div class="context-body"><div class="question-filter">
-            <div style="min-width: 1100px;" class="ps-0 m-0 d-flex justify-content-between align-items-center">
+            <div style="min-width: 850px;" class="ps-0 m-0 d-flex justify-content-between align-items-center">
               <div class="question-filter-left px-0">
                 <ul class="nav d-flex">
                   <li class="nav-item" data-filter="filterQuestion1">
@@ -63,12 +63,11 @@
                 </ul>
               </div>
             </div>
-            <hr />
           </div>
 
           <div class="question-search">
             <div class="row" style="margin: 0px;">
-              <div class="col-6">
+              <div class="col-10">
                 <div class="question-search--top">
                   <div class="search-item--icon" style="display: inline-block;"><i class="fa-solid fa-filter"></i></div>
                   <div class="search-item--action" style="text-transform: uppercase;display: inline-block;">Lọc dữ liệu
@@ -87,7 +86,6 @@
                   </div>
                 </div>
               </div>
-              <hr class="col-12">
             </div>
           </div>
           <div class="question-list">
@@ -163,7 +161,7 @@
               </tbody>
             </table>
             <div class="popup-action" id="popup-action">
-              <ul class="nav">
+              <ul class="nav d-flex align-items-center">
                 <li class="nav-item count-question"><a href="#" class="nav-link row text-center" data-action="countQuestion">
                     <h1></h1><span style="display: inline-block;" class="col-12">Đã chọn</span>
                   </a></li>
@@ -184,9 +182,10 @@
                       class=" col-12 fa-solid fa-ban"></i><span style="display: inline-block;" class="col-12">Ngưng áp
                       dụng</span></a></li>
                 <li class="nav-item action-delete"><a href="#" onclick="updateStatusQuestions(-1)" class="nav-link row text-center"
-                    style="display: none; transition: .5s;" data-action="xoa"><i
-                      class=" col-12 fa-regular fa-trash-can"></i><span style="display: inline-block;"
+                    style="display: none; transition: .5s;" data-action="xoa"><i style="color: #FD7676;"
+                      class=" col-12 fa-regular fa-trash-can"></i><span style="display: inline-block; color: #FD7676;"
                       class="col-12">Xóa câu hỏi</span></a></li>
+                <span class="border-popup" style="display: inline-block;"></span>
                 <li class="nav-item action-delete"><a href="#" onclick="closePopupCustom()"
                     class="nav-link d-flex justify-content-center align-items-center" data-action="thoat"
                     style="padding: 1.5rem;"><i class="fa-solid fa-x" style="border: none;"></i></a></li>
@@ -212,7 +211,7 @@
           </div>
           <div class="modal-delete">
             <div class="modal-content">
-              <div class="modal-header d-flex justify-content-center align-items-center p-4"><i style="color: #FD7676;font-weight: 700;" class="fa-solid fa-triangle-exclamation pe-3"></i><span style="display: inline-block;text-transform: uppercase; color: #FD7676; font-weight: 700;">Xóa câu hỏi</span></div>
+              <div class="modal-header d-flex justify-content-center align-items-center"><i style="color: #FD7676;font-weight: 700;" class="fa-solid fa-triangle-exclamation pe-3"></i><span style="display: inline-block;text-transform: uppercase; color: #FD7676; font-weight: 700;">Xóa câu hỏi</span></div>
               <div class="modal-body row m-0">
                 <div class="col-12  d-flex align-items-center justify-content-center" ><span style="display: inline-block;">Bạn chắc chắn muốn xóa</span></div>
                 <div class="col-12  ids-delete d-flex align-items-center justify-content-center"  data-ids-delete=""><span style="display: inline-block; white-space: nowrap; width: 120px;
@@ -221,8 +220,8 @@
                 <div class="col-12  d-flex align-items-center justify-content-center" ><span style="display: inline-block;">Đơn vị bị xóa sẽ <span style="color: #FD7676;text-transform: uppercase;">không</span> thể khôi phục lại</span></div>
               </div>
               <div class="modal-footer row m-0">
-                <button onclick="closeModalDelete()" type="button" style="text-transform: uppercase; color: #959DB3;" class="cancel-modal col-6 p-3">không xóa</button>
-                <button  type="button" style="background-color: #FD7676;" class="comfirm-modal  col-6 p-3"><i style="color: white;font-style: 600;" class="fa-solid fa-trash pe-2"></i><span style="color: white;text-transform: uppercase;font-style: 600;">Xóa</span></button>
+                <button onclick="closeModalDelete()" type="button" style="text-transform: uppercase; color: #959DB3;" class="cancel-modal col-6 ">không xóa</button>
+                <button  type="button" style="background-color: #FD7676;" class="comfirm-modal  col-6 "><i style="color: white;font-style: 600;" class="fa-solid fa-trash pe-2"></i><span style="color: white;text-transform: uppercase;font-style: 600;">Xóa</span></button>
               </div>
             </div>
           </div>

@@ -6,11 +6,11 @@
 }
 
 body {
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Mulish", sans-serif;
   font-style: normal;
   box-sizing: border-box;
-  padding-top: 0.125rem;
+
 }
 
 p {
@@ -91,7 +91,7 @@ p {
   position: relative;
 }
 
-.sidebar li a {}
+
 
 .sidebar .nav-link.active::before {
   position: absolute;
@@ -135,7 +135,6 @@ p {
 
 .dropdown-cs-menu li a {
   color: #bdc2d2;
-  font-size: 14px;
   text-decoration: none;
   font-weight: 700;
   margin: 0.5rem 0;
@@ -160,6 +159,7 @@ p {
 
 .header-wrapper {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -191,7 +191,7 @@ p {
 }
 
 .border-cs-right {
-  height: 2rem;
+  height: 1.5rem;
   width: 0.125rem;
   background-color: #5a6276;
   border-radius: 3px;
@@ -213,7 +213,7 @@ p {
   height: 0.2rem;
   background-color: #008000;
   position: absolute;
-  bottom: -0.8rem;
+  bottom: -0.9rem;
   left: 0px;
 }
 
@@ -223,19 +223,21 @@ p {
 
 /*question filter*/
 .question-filter {
-  width: 100%;
+  width: 97%;
   margin-left: 0px !important;
   padding-top: 1rem;
   overflow-x: auto;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #BDC2D2;
 }
 
 .question-border {
-  height: 1.5rem;
+  height: 1rem;
   width: 2px;
   background-color: #BDC2D2;
   display: inline-block;
   border-radius: 3px;
-  margin: 0 0.75rem;
+  margin: 0 5px;
 }
 
 .question-content {
@@ -252,14 +254,8 @@ p {
   align-items: center;
 }
 
-.question-search {
-  padding-right: 2rem;
-}
 
-.question-filter {
-  padding-right: 2rem;
 
-}
 
 .question-filter .nav-link {
   padding: 0;
@@ -361,24 +357,12 @@ p {
   border-radius: 5px;
 }
 
-.question-filter hr {
-  border: none;
-  height: 1px;
-  background-color: #BDC2D2;
-  margin-top: 1rem;
-}
 
-.question-search hr {
-  border: none;
-  height: 1px;
-  background-color: #BDC2D2;
-  margin-top: 1rem;
-  margin-bottom: 0 !important;
-}
+
 
 /*Question List*/
 .question-list {
-  max-height: 55vh;
+  max-height: 50vh;
   overflow: auto;
   padding-right: 1rem;
   position: relative;
@@ -418,6 +402,8 @@ p {
 .question-list .table tbody .question-row .show-action-question.active {
   color: #fff;
 }
+
+
 
 .show-action-question {
   border: none;
@@ -555,7 +541,7 @@ p {
 #popup-action .count-question h1 {
   color: white;
   font-size: 30px;
-
+  margin-bottom: 0;
 }
 
 #popup-action .count-question {
@@ -566,7 +552,7 @@ p {
 
 #popup-action .nav-item .nav-link span {
   color: black;
-  font-size: 14px;
+
   white-space: nowrap;
 }
 
@@ -587,7 +573,11 @@ p {
 #popup-action .count-question .nav-link span {
   color: white;
 }
-
+.border-popup{
+  height: 8vh;
+  background-color: #EDEFF3;
+  width: 3px;
+}
 .context {
   position: relative;
 }
@@ -614,6 +604,7 @@ p {
   background-color: transparent;
   border: none;
   padding-right: 1.7rem;
+  font-size: 14px;
 }
 
 .numbers-question select:hover {
@@ -627,6 +618,10 @@ p {
 }
 
 /*pagiantion*/
+.pagination-container ul {
+  margin-bottom: 0;
+}
+
 .pagination .page-item .page-link {
   background-color: #F4F5F7;
   color: #959DB3;
@@ -635,6 +630,7 @@ p {
   padding-right: 6px;
   border-radius: 3px;
   border: none;
+  font-size: 14px;
 }
 
 .pagination .page-item.active .page-link {
@@ -644,6 +640,14 @@ p {
 }
 
 /*question-search*/
+.question-search {
+  border-bottom: 1px solid #BDC2D2;
+  padding-top: 1rem;
+  width: 97%;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
 .question-search .question-search--top {
   padding-bottom: 0.5rem;
 
@@ -717,58 +721,1089 @@ p {
   transform: translateY(-5%);
 }
 
-.question-search--bot .search-item--label i,
+.question-search--bot .search-item--label button i,
 .question-search--bot .search-item--label button span {
   color: white;
 }
 
 /*modal*/
-.context-body{
+.context-body {
   width: 100%;
   position: relative;
-  height: 92vh;
+  height: 91vh;
 }
-.modal-delete{
-  display: none; 
-  position: absolute; 
-  z-index: 100; 
+
+.modal-delete {
+  display: none;
+  position: absolute;
+  z-index: 100;
   left: 0;
   top: 0;
-  width: 100%; 
+  width: 100%;
   height: 100%;
-  overflow: auto; 
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 
 }
-.modal-content{
+
+.modal-header {
+  padding: 1rem;
+}
+
+.modal-content {
   background-color: white;
   width: 350px;
-  height: 300px;
+  height: 220px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
-.modal-content .modal-header{
+
+.modal-content .modal-header {
   border-bottom: 1px solid #DBDEE7;
 }
-.modal-footer button{
+
+.modal-footer button {
   border: none;
   border: 1px solid #C3C3C3;
-  
+  padding: 1rem;
 }
-.modal-footer button:first-of-type{
+
+.modal-footer button:first-of-type {
   border-left: none;
   border-right: none;
   border-bottom: none;
   border-bottom-left-radius: 5px;
 }
-.modal-footer button:last-of-type{
+
+.modal-footer button:last-of-type {
 
   border-right: none;
   border-bottom: none;
   border-bottom-right-radius: 5px;
+}
+
+.sidebar ul li a {
+  font-size: 15px;
+}
+
+/*responsive*/
+@media screen and (max-width:1235px) {
+
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 12px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 3rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 14px;
+  }
+
+  .question-search {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .border-active.active {
+    bottom: -1rem;
+  }
+
+  .border-cs-right {
+    height: 1.25rem;
+    margin: 0 10px;
+  }
+
+  .question-search .question-search--top {
+    padding: 0;
+  }
+
+  .question-search .search-item--action {
+    min-width: 90px;
+  }
+
+  .question-list td {
+    height: 3rem;
+  }
+
+  .question-border {
+    height: 1rem;
+    width: 0.1rem;
+    margin: 0 4px;
+  }
+
+  .footer {
+    bottom: 0.75rem;
+  }
+
+  .modal-content {
+    width: 280px;
+    height: 200px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 0.75rem;
+  }
+
+  .question-filter .nav-item label{
+    padding: 0 0.5rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 12px;
+  }
+  #popup-action .count-question h1{
+    font-size: 22px;
+  }
+  #popup-action .nav .nav-item {
+    height: 3.25rem;
+  }
+  .question-filter .nav-item{
+    margin-right: 14px;
+  }
+}
+
+
+
+@media screen and (max-width:1087px) {
+
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 10px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 2rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 12px;
+  }
+
+  .context-body {
+    height: 93vh;
+  }
+
+  .border-active.active {
+    bottom: -.65rem;
+    height: 0.125rem;
+  }
+
+  .border-cs-right {
+    height: 1rem;
+    margin: 0 10px;
+  }
+
+  .question-filter {
+    padding: 12px 0;
+  }
+
+  .question-search {
+    padding-top: .45rem;
+    padding-bottom: 0.45rem;
+  }
+
+  .question-search .question-search--top {
+    padding: 0;
+  }
+
+  .question-search .search-item--action {
+    min-width: 70px;
+  }
+
+  .question-list td {
+    height: 2rem;
+  }
+
+  .question-border {
+    height: 0.75rem;
+    width: 0.1rem;
+    margin: 0 3px;
+  }
+
+  .footer {
+    bottom: 0.5rem;
+    width: 99%;
+  }
+
+  .modal-content {
+    width: 240px;
+    height: 170px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 0.75rem;
+  }
+
+  .numbers-question span {
+    padding-right: 0px;
+  }
+
+  .numbers-question select {
+    padding-left: 0.5rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:checked::before,
+  .check-popup:checked::before {
+
+    width: 0.7rem;
+    height: 0.7rem;
+    font-size: 10px;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:hover::before,
+  .question-filter .nav-item:hover input[type="checkbox"]::before,
+  .check-popup:hover::before {
+
+    width: 0.7rem;
+    height: 0.7rem;
+
+  }
+
+  .question-filter .nav-item input[type="checkbox"],.table input[type="checkbox"]  {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+  .question-filter .nav-item label{
+    padding: 0 0.4rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 12px;
+  }
+  #popup-action .count-question h1{
+    font-size: 22px;
+  }
+  #popup-action .nav .nav-item {
+    height: 3.25rem;
+  }
+  .question-filter .nav-item{
+    margin-right: 12px;
+  }
+}
+
+@media screen and (max-width:906px) {
+
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 8px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 1.75rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 9px;
+  }
+
+  .border-active.active {
+    bottom: -.55rem;
+    height: 0.125rem;
+  }
+
+  .border-cs-right {
+    height: 1rem;
+    margin: 0 8px;
+  }
+
+  .question-filter {
+    padding: 8px 0;
+  }
+
+  .question-search {
+    padding-top: .45rem;
+    padding-bottom: 0.45rem;
+    margin-bottom: 8px;
+  }
+
+  .question-search .question-search--top {
+    padding: 0;
+  }
+
+  .question-search .search-item--action {
+    min-width: 50px;
+  }
+
+  .question-list td {
+    height: 1.75rem;
+  }
+
+  .question-border {
+    height: 0.75rem;
+    width: 0.1rem;
+    margin: 0 3px;
+  }
+
+  .footer {
+    bottom: 0.5rem;
+    width: 99%;
+  }
+
+  .modal-content {
+    width: 240px;
+    height: 170px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 0.75rem;
+  }
+
+  .numbers-question span {
+    padding-right: 0px;
+  }
+
+  .numbers-question select {
+    padding-left: 0.5rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:checked::before,
+  .check-popup:checked::before {
+
+    width: 0.5rem;
+    height: 0.5rem;
+    font-size: 8px;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:hover::before,
+  .question-filter .nav-item:hover input[type="checkbox"]::before,
+  .check-popup:hover::before {
+
+    width: 0.5rem;
+    height: 0.5rem;
+
+  }
+
+  .question-filter .nav-item input[type="checkbox"],.table input[type="checkbox"]  {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .question-filter .nav-item label{
+    padding: 0 0.3rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 10px;
+  }
+  #popup-action .count-question h1{
+    font-size: 20px;
+  }
+  #popup-action .nav .nav-item {
+    height: 3rem;
+  }
+  .question-filter .nav-item{
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width:777px) {
+
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 7px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 1.5rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 7.25px;
+  }
+
+  .border-active.active {
+    bottom: -.45rem;
+    height: 0.1rem;
+  }
+
+  .border-cs-right {
+    height: 0.75rem;
+    width: 0.075rem;
+    margin: 0 8px;
+  }
+
+  .question-filter {
+    padding: 8px 0;
+  }
+
+  .question-search {
+    padding-top: .45rem;
+    padding-bottom: 0.45rem;
+    margin-bottom: 8px;
+  }
+
+  .question-search .question-search--top {
+    padding: 0;
+  }
+
+  .question-search .search-item--action {
+    min-width: 50px;
+  }
+
+  .question-list td {
+    height: 1.75rem;
+  }
+
+  .question-border {
+    height: 0.75rem;
+    width: 0.1rem;
+    margin: 0 3px;
+  }
+
+  .footer {
+    bottom: 0.5rem;
+    width: 99%;
+  }
+
+  .modal-content {
+    width: 240px;
+    height: 170px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 0.75rem;
+  }
+
+  .numbers-question span {
+    padding-right: 0px;
+  }
+
+  .numbers-question select {
+    padding-left: 0.5rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:checked::before,
+  .check-popup:checked::before {
+
+    width: 0.5rem;
+    height: 0.5rem;
+    font-size: 8px;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:hover::before,
+  .question-filter .nav-item:hover input[type="checkbox"]::before,
+  .check-popup:hover::before {
+
+    width: 0.5rem;
+    height: 0.5rem;
+
+  }
+
+  .question-filter .nav-item input[type="checkbox"],.table input[type="checkbox"]  {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .question-filter .nav-item label{
+    padding: 0 0.2rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 8px;
+  }
+  #popup-action .count-question h1{
+    font-size: 16px;
+  }
+  #popup-action .nav .nav-item {
+    height: 2.5rem;
+  }
+  .question-filter .nav-item{
+    margin-right: 8px;
+  }
+}
+
+
+
+@media screen and (max-width:1508.99px) and (min-width:1359px) {
+
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 16px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 3.5rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 18px;
+  }
+
+  .border-active.active {
+    bottom: -1rem;
+    height: 0.2rem;
+  }
+
+  .border-cs-right {
+    height: 1.5rem;
+    width: 0.15rem;
+    margin: 0 12px;
+  }
+
+  .question-filter {
+    padding: 18px 0;
+  }
+
+  .question-search {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .question-search .question-search--top {
+    padding: 8px;
+  }
+
+  .question-search .search-item--action {
+    min-width: 130px;
+  }
+
+  .question-list td {
+    height: 2rem;
+  }
+
+  .question-border {
+    height: 1.25rem;
+    width: 0.15rem;
+    margin: 0 6px;
+  }
+
+  .footer {
+    bottom: 0.5rem;
+    width: 99.5%;
+  }
+
+  .modal-content {
+    width: 340px;
+    height: 280px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 1.25rem;
+  }
+
+  .numbers-question span {
+    padding-right: 16px;
+  }
+
+  .numbers-question select {
+    padding-left: 0.5rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:checked::before,
+  .check-popup:checked::before {
+
+    width: 0.85rem;
+    height: 0.85rem;
+    font-size: .75rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:hover::before,
+  .question-filter .nav-item:hover input[type="checkbox"]::before,
+  .check-popup:hover::before {
+
+    width: 0.85rem;
+    height: 0.85rem;
+
+  }
+
+  .question-filter .nav-item input[type="checkbox"],.table input[type="checkbox"]  {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+  .question-filter .nav-item label{
+    padding: 0 0.5rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 16px;
+  }
+  #popup-action .count-question h1{
+    font-size: 32px;
+  }
+  #popup-action .nav .nav-item {
+    height: 4.5rem;
+  }
+}
+
+@media screen and (max-width:1697.9px) and (min-width:1509px) {
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 18px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 4rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 20px;
+  }
+
+  .border-active.active {
+    bottom: -1.25rem;
+    height: 0.25rem;
+  }
+
+  .border-cs-right {
+    height: 1.75rem;
+    width: 0.2rem;
+    margin: 0 14px;
+  }
+
+  .question-filter {
+    padding: 20px 0;
+  }
+
+  .question-search {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .question-search .question-search--top {
+    padding: 12px;
+  }
+
+  .question-search .search-item--action {
+    min-width: 150px;
+  }
+
+  .question-list td {
+    height: 2.5rem;
+  }
+
+  .question-border {
+    height: 1.25rem;
+    width: 0.15rem;
+    margin: 0 6px;
+  }
+
+  .footer {
+    bottom: 0.5rem;
+    width: 99.5%;
+  }
+
+  .modal-content {
+    width: 380px;
+    height: 320px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 1.25rem;
+  }
+
+  .numbers-question span {
+    padding-right: 16px;
+  }
+
+  .numbers-question select {
+    padding-left: 0.5rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:checked::before,
+  .check-popup:checked::before {
+
+    width: 1rem;
+    height: 1rem;
+    font-size: .85rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:hover::before,
+  .question-filter .nav-item:hover input[type="checkbox"]::before,
+  .check-popup:hover::before {
+
+    width: 1rem;
+    height: 1rem;
+
+  }
+
+  .question-filter .nav-item input[type="checkbox"],.table input[type="checkbox"]  {
+    width: 1rem;
+    height: 1rem;
+  }
+  .question-filter .nav-item label{
+    padding: 0 0.75rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 18px;
+  }
+  #popup-action .count-question h1{
+    font-size: 34px;
+  }
+  #popup-action .nav .nav-item {
+    height: 5.5rem;
+  }
+  #search-question{
+    width: 300px;
+    padding: 6px;
+    padding-left: 26px;
+  }
+
+}
+@media screen and (max-width:1810.9px) and (min-width:1698px) {
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 20px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 4.5rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 22px;
+  }
+
+  .border-active.active {
+    bottom: -1.35rem;
+    height: 0.25rem;
+  }
+
+  .border-cs-right {
+    height: 2rem;
+    width: 0.225rem;
+    margin: 0 14px;
+  }
+
+  .question-filter {
+    padding: 22px 0;
+  }
+
+  .question-search {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .question-search .question-search--top {
+    padding: 12px;
+  }
+
+  .question-search .search-item--action {
+    min-width: 150px;
+  }
+
+
+  .question-border {
+    height: 1.5rem;
+    width: 0.175rem;
+    margin: 0 10px;
+  }
+
+  .footer {
+    bottom: 0.5rem;
+    width: 99.5%;
+  }
+
+  .modal-content {
+    width: 420px;
+    height: 360px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 1.25rem;
+  }
+
+  .numbers-question span {
+    padding-right: 16px;
+  }
+
+  .numbers-question select {
+    padding-left: 0.5rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:checked::before,
+  .check-popup:checked::before {
+
+    width: 1rem;
+    height: 1rem;
+    font-size: .85rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:hover::before,
+  .question-filter .nav-item:hover input[type="checkbox"]::before,
+  .check-popup:hover::before {
+
+    width: 1rem;
+    height: 1rem;
+
+  }
+
+  .question-filter .nav-item input[type="checkbox"],.table input[type="checkbox"]  {
+    width: 1rem;
+    height: 1rem;
+  }
+  .question-filter .nav-item label{
+    padding: 0 0.75rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 20px;
+  }
+  #popup-action .count-question h1{
+    font-size: 36px;
+  }
+  #popup-action .nav .nav-item {
+    height: 6.5rem;
+  }
+  #search-question{
+    width: 350px;
+    padding: 7px;
+    padding-left: 28px;
+  }
+}
+
+
+@media screen and (max-width:2037.9px) and (min-width:1811px) {
+
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 22px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 5rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 24px;
+  }
+
+  .border-active.active {
+    bottom: -1.45rem;
+    height: 0.25rem;
+  }
+
+  .border-cs-right {
+    height: 2.25rem;
+    width: 0.225rem;
+    margin: 0 16px;
+  }
+
+  .question-filter {
+    padding: 24px 0;
+  }
+
+  .question-search {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .question-search .question-search--top {
+    padding: 14px;
+  }
+
+  .question-search .search-item--action {
+    min-width: 180px;
+  }
+
+
+  .question-border {
+    height: 1.5rem;
+    width: 0.175rem;
+    margin: 0 10px;
+  }
+
+  .footer {
+    bottom: 0.5rem;
+    width: 99.5%;
+  }
+
+  .modal-content {
+    width: 460px;
+    height: 400px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 1.25rem;
+  }
+
+  .numbers-question span {
+    padding-right: 16px;
+  }
+
+  .numbers-question select {
+    padding-left: 0.5rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:checked::before,
+  .check-popup:checked::before {
+
+    width: 1rem;
+    height: 1rem;
+    font-size: .85rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:hover::before,
+  .question-filter .nav-item:hover input[type="checkbox"]::before,
+  .check-popup:hover::before {
+
+    width: 1rem;
+    height: 1rem;
+
+  }
+
+  .question-filter .nav-item input[type="checkbox"],.table input[type="checkbox"]  {
+    width: 1rem;
+    height: 1rem;
+  }
+  .question-filter .nav-item label{
+    padding: 0 0.75rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 22px;
+  }
+  #popup-action .count-question h1{
+    font-size: 38px;
+  }
+  #popup-action .nav .nav-item {
+    height: 7.5rem;
+  }
+  #search-question{
+    width: 400px;
+    padding: 8px;
+    padding-left: 30px;
+  }
+}
+
+@media screen and (max-width:2716.9px) and (min-width:2038px) {
+
+  body,
+  .pagination .page-item .page-link,
+  .numbers-question select {
+    font-size: 28px;
+  }
+
+  .header,
+  .sidebar .logo {
+    height: 6.5rem;
+  }
+
+  .sidebar ul li a {
+    font-size: 30px;
+  }
+
+  .border-active.active {
+    bottom: -1.95rem;
+    height: 0.3rem;
+  }
+
+  .border-cs-right {
+    height: 2.75rem;
+    width: 0.225rem;
+    margin: 0 20px;
+  }
+
+  .question-filter {
+    padding: 24px 0;
+  }
+
+  .question-search {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .question-search .question-search--top {
+    padding: 14px;
+  }
+
+  .question-search .search-item--action {
+    min-width: 200px;
+  }
+
+
+  .question-border {
+    height: 1.5rem;
+    width: 0.175rem;
+    margin: 0 10px;
+  }
+
+  .footer {
+    bottom: 0.75rem;
+    width: 99.5%;
+  }
+
+  .modal-content {
+    width: 560px;
+    height: 500px;
+  }
+
+  .modal-header,
+  .modal-footer button {
+    padding: 1.25rem;
+  }
+
+  .numbers-question span {
+    padding-right: 24px;
+  }
+
+  .numbers-question select {
+    padding-left: 0.5rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:checked::before,
+  .check-popup:checked::before {
+
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 1rem;
+  }
+
+  .question-filter .nav-item input[type="checkbox"]:hover::before,
+  .question-filter .nav-item:hover input[type="checkbox"]::before,
+  .check-popup:hover::before {
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+  }
+
+  .question-filter .nav-item input[type="checkbox"],.table input[type="checkbox"]  {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .question-filter .nav-item label{
+    padding: 0 1rem;
+  }
+  #popup-action .nav-item .nav-link i{
+    font-size: 26px;
+  }
+  #popup-action .count-question h1{
+    font-size: 42px;
+  }
+  #popup-action .nav .nav-item {
+    height: 8.5rem;
+  }
+  #search-question{
+    width: 600px;
+    padding: 10px;
+    padding-left: 34px;
+  }
 }
