@@ -17,8 +17,8 @@ p {
   margin: 0;
 }
 
-.hidden-element {
-  pointer-events: visiblePainted;
+.disable-element {
+  pointer-events: none;
 }
 
 .question-bank {

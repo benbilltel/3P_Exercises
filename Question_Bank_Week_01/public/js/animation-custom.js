@@ -3,9 +3,15 @@ function handleCheckboxChange(event) {
   const checkbox = event.target;
   const checkboxName = checkbox.name;
   const isChecked = checkbox.checked;
-
+  const navItem = this.closest(".nav-item");
+  if (this.checked) {
+    navItem.classList.add("active");
+  } else {
+    navItem.classList.remove("active");
+  }
   // Save the checked status to localStorage
   localStorage.setItem(checkboxName, isChecked);
+  filterQuestions()
 }
 function restoreCheckboxStates() {
   const filterStatus = document.querySelectorAll('.question-filter input[type="checkbox"]');
@@ -117,16 +123,7 @@ const checkboxes = document.querySelectorAll(
   '.question-filter-left .nav-item input[type="checkbox"]'
 );
 
-checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener("change", function () {
-    const navItem = this.closest(".nav-item");
-    if (this.checked) {
-      navItem.classList.add("active");
-    } else {
-      navItem.classList.remove("active");
-    }
-  });
-});
+
 
 //display option
 // Iterate over the question rows
@@ -237,6 +234,10 @@ trCheck.forEach((tr) => {
     const popup = document.getElementById("popup-action");
   
     if (ids > 0) {
+      const questionFilterToDisable = document.querySelector(".question-filter")
+      questionFilterToDisable.classList.add("disable-element")
+      const questionSearchToDisable = document.querySelector(".question-search")
+      questionSearchToDisable.classList.add("disable-element")
       popup.style.display = "block";
       const numOfQuestion = popup.querySelector("h1");
       numOfQuestion.innerHTML = ids;
@@ -287,6 +288,10 @@ trCheck.forEach((tr) => {
         }
       });
     } else {
+      const questionFilterToDisable = document.querySelector(".question-filter")
+      questionFilterToDisable.classList.remove("disable-element")
+      const questionSearchToDisable = document.querySelector(".question-search")
+      questionSearchToDisable.classList.remove("disable-element")
       const popup = document.getElementById("popup-action");
       popup.style.display = "none";
     }
@@ -318,6 +323,10 @@ trCheck.forEach((tr) => {
 
     const popup = document.getElementById("popup-action");
     if (ids > 0) {
+      const questionFilterToDisable = document.querySelector(".question-filter")
+      questionFilterToDisable.classList.add("disable-element")
+      const questionSearchToDisable = document.querySelector(".question-search")
+      questionSearchToDisable.classList.add("disable-element")
       popup.style.display = "block";
       const numOfQuestion = popup.querySelector("h1");
       numOfQuestion.innerHTML = ids;
@@ -368,6 +377,10 @@ trCheck.forEach((tr) => {
         }
       });
     } else {
+      const questionFilterToDisable = document.querySelector(".question-filter")
+      questionFilterToDisable.classList.remove("disable-element")
+      const questionSearchToDisable = document.querySelector(".question-search")
+      questionSearchToDisable.classList.remove("disable-element")
       const popup = document.getElementById("popup-action");
       popup.style.display = "none";
     }
@@ -423,6 +436,10 @@ const removeIdFromMap = (id,status)=>{
 
 
 const closePopup = ()=>{
+  const questionFilterToDisable = document.querySelector(".question-filter")
+      questionFilterToDisable.classList.remove("disable-element")
+      const questionSearchToDisable = document.querySelector(".question-search")
+      questionSearchToDisable.classList.remove("disable-element")
   actions0 = [];actions1 = [];actions2 = [];actions3 = [];actions4 = []
   mapAction.set("Đang soạn thảo",actions0);
 mapAction.set("Gửi duyệt",actions1);
@@ -469,6 +486,10 @@ c.checked = true;
 
     const popup = document.getElementById("popup-action");
     if (ids > 0) {
+      const questionFilterToDisable = document.querySelector(".question-filter")
+      questionFilterToDisable.classList.add("disable-element")
+      const questionSearchToDisable = document.querySelector(".question-search")
+      questionSearchToDisable.classList.add("disable-element")
       popup.style.display = "block";
       const numOfQuestion = popup.querySelector("h1");
       numOfQuestion.innerHTML = ids;
@@ -519,6 +540,10 @@ c.checked = true;
         }
       });
     } else {
+      const questionFilterToDisable = document.querySelector(".question-filter")
+      questionFilterToDisable.classList.remove("disable-element")
+      const questionSearchToDisable = document.querySelector(".question-search")
+      questionSearchToDisable.classList.remove("disable-element")
       const popup = document.getElementById("popup-action");
       popup.style.display = "none";
     }

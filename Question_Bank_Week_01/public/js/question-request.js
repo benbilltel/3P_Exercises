@@ -7,6 +7,8 @@ const filterQuestion4 = document.getElementById("filterQuestion4");
 // Get the question rows
 let questionsDisplayed = [];
 let questionTemp = []
+let questionTracked = []
+let isSearch = false;
 let itemPerPage = 25;
 let currentPage = 1;
 
@@ -14,7 +16,7 @@ let startIndex = (currentPage - 1) * itemPerPage;
 let endIndex = startIndex + itemPerPage;
 
 const paginateQuestions = () => {
-  let totalPages = Math.ceil(questionsDisplayed.length / itemPerPage);
+  let totalPages = Math.ceil(questionTracked.length / itemPerPage);
   let prevPage = Number(currentPage) > 1 ? Number(currentPage) - 1 : 1;
   let html = `<li class="page-item">
     <button class="page-link page-move" data-move="-1,0"  aria-label="Previous" onclick="movePage(-1,0)">
@@ -75,10 +77,10 @@ const movePage = (num,action)=>{
     if (Number(num) == -1) {
       currentPage = 1;
     } else {
-      currentPage = Math.ceil(questionTemp.length / itemPerPage);
+      currentPage = Math.ceil(questionTracked.length / itemPerPage);
     }
   } else if (Number(action) == 1) {
-    if((currentPage == 1 && Number(num)==-1)||(currentPage == Math.ceil(questionTemp.length / itemPerPage) && Number(num)==1)){
+    if((currentPage == 1 && Number(num)==-1)||(currentPage == Math.ceil(questionTracked.length / itemPerPage) && Number(num)==1)){
       return;
     }else{
       currentPage += Number(num);
@@ -87,7 +89,7 @@ const movePage = (num,action)=>{
   } else if (Number(action) == 2) {
     currentPage = Number(num);
   } else {
-    let totalPages = Math.ceil(questionTemp.length / itemPerPage);
+    let totalPages = Math.ceil(questionTracked.length / itemPerPage);
     const MAX_VISIBLE_PAGES = 4;
     const GROUP_SIZE = 4;
     const groupIndex = Math.floor((currentPage - 1) / GROUP_SIZE);
@@ -98,7 +100,7 @@ const movePage = (num,action)=>{
     if (Number(num) == 1) {
       currentPage = endPage + 1;
     } else {
-      currentPage = prevPage;
+      currentPage = startPage - 1;
     }
   }
   startIndex = (currentPage - 1) * itemPerPage;
@@ -106,15 +108,14 @@ const movePage = (num,action)=>{
   filterQuestions();
 }
 
-filterQuestion1.addEventListener("change", filterQuestions);
-filterQuestion2.addEventListener("change", filterQuestions);
-filterQuestion3.addEventListener("change", filterQuestions);
-filterQuestion4.addEventListener("change", filterQuestions);
+
 
 function filterQuestions() {
   
   questionsDisplayed = [];
-  const noFilterChecked =
+  if(!isSearch){
+    questionTemp = []
+    const noFilterChecked =
     !filterQuestion1.checked &&
     !filterQuestion2.checked &&
     !filterQuestion3.checked &&
@@ -147,16 +148,16 @@ function filterQuestions() {
       (filterQuestion3.checked && question.status === "Áp dụng") ||
       (filterQuestion4.checked && question.status === "Ngưng áp dụng")
     ) {
-      questionsDisplayed.push(index);
+      questionTemp.push(index)
     }
   }
   startIndex = (currentPage - 1) * itemPerPage;
   endIndex = startIndex + itemPerPage;
   
-questionTemp = questionsDisplayed;
+questionTracked = questionTemp;
   paginateQuestions();
   
- questionsDisplayed = questionsDisplayed.slice(startIndex,endIndex)
+ questionsDisplayed = questionTracked.slice(startIndex,endIndex)
 
   // Iterate over the question rows again to set the display property
   for (let i = 0; i < questionRows.length; i++) {
@@ -169,6 +170,47 @@ questionTemp = questionsDisplayed;
       questionRow.style.display = "none";
     }
   }
+  }else{
+    
+
+  // Iterate over the question rows
+  for (let i = 0; i < questionRows.length; i++) {
+    const questionRow = questionRows[i];
+    const question = JSON.parse(questionRow.dataset.question);
+    const index = questionRow.dataset.index
+    const questionStatus = questionRow.querySelector(".question-status")
+    if(question.status.replace("\n","").trim() == "Đang soạn thảo"){
+      questionStatus.style.color = "black"
+    }else if(question.status.replace("\n","").trim() == "Gửi duyệt"){
+      questionStatus.style.color = "#31ADFF"
+    }else if(question.status.replace("\n","").trim() == "Áp dụng"){
+      questionStatus.style.color = "#008000"
+    }else if(question.status.replace("\n","").trim() == "Trả về"){
+      questionStatus.style.color = "#B7B92F"
+    }else{
+      questionStatus.style.color = "#FB311C"
+    }
+    // Check the status of the question and show/hide the row accordingly
+    
+  }
+  startIndex = (currentPage - 1) * itemPerPage;
+  endIndex = startIndex + itemPerPage;
+  paginateQuestions();
+  questionsDisplayed = questionTracked.slice(startIndex,endIndex)
+
+  // Iterate over the question rows again to set the display property
+  for (let i = 0; i < questionRows.length; i++) {
+    const questionRow = questionRows[i];
+    const question = JSON.parse(questionRow.dataset.question);
+    const index = questionRow.dataset.index
+    if (questionsDisplayed.includes(index)) {
+      questionRow.style.display = "table-row";
+    } else {
+      questionRow.style.display = "none";
+    }
+  }
+  }
+  
   renderMenuAction()
 }
 
@@ -299,3 +341,80 @@ const updateStatusQuestions = (action)=>{
     });
   }
 }
+//search
+const searchInput = document.getElementById("search-question")
+searchInput.addEventListener("input",()=>{
+ 
+  setTimeout(()=>{
+    let querryQuestion = String(searchInput.value).trim().toLowerCase();
+    
+    if(querryQuestion ==""){
+      isSearch = false;
+      filterQuestions();
+      return;
+    }
+    isSearch = true;
+    questionsDisplayed = []
+    questionTracked = []
+    for (let i = 0; i < questionRows.length; i++) {
+      const questionRow = questionRows[i];
+      const question = JSON.parse(questionRow.dataset.question);
+      const index = questionRow.dataset.index
+      const questionContent = String(question.content).toLowerCase().trim();
+      const questionId = String(question.id).toLowerCase().trim();
+      const questionStatus = questionRow.querySelector(".question-status")
+      if(question.status.replace("\n","").trim() == "Đang soạn thảo"){
+        questionStatus.style.color = "black"
+      }else if(question.status.replace("\n","").trim() == "Gửi duyệt"){
+        questionStatus.style.color = "#31ADFF"
+      }else if(question.status.replace("\n","").trim() == "Áp dụng"){
+        questionStatus.style.color = "#008000"
+      }else if(question.status.replace("\n","").trim() == "Trả về"){
+        questionStatus.style.color = "#B7B92F"
+      }else{
+        questionStatus.style.color = "#FB311C"
+      }
+      // Check the status of the question and show/hide the row accordingly
+      if ((questionContent.includes(querryQuestion)||questionId.includes(querryQuestion))&&(questionTemp.findIndex(i=>i==index)!==-1)) {
+        questionTracked.push(index);
+      }
+    }
+    currentPage = 1;
+    startIndex = (currentPage - 1) * itemPerPage;
+    endIndex = startIndex + itemPerPage;   
+    paginateQuestions();
+    
+   questionsDisplayed = questionTracked.slice(startIndex,endIndex)
+  
+    // Iterate over the question rows again to set the display property
+    for (let i = 0; i < questionRows.length; i++) {
+      const questionRow = questionRows[i];
+      const question = JSON.parse(questionRow.dataset.question);
+      const index = questionRow.dataset.index
+      if (questionsDisplayed.includes(index)) {
+        questionRow.style.display = "table-row";
+      } else {
+        questionRow.style.display = "none";
+      }
+    }
+    renderMenuAction()
+  },1250)
+})
+const btnSearch = document.getElementById("btn-search")
+btnSearch.addEventListener("click",()=>{
+  searchInput.dispatchEvent(new Event("input"));
+})
+const resetAll = document.getElementById("reset-all")
+resetAll.addEventListener("click",()=>{
+  filterQuestion1.checked = true;
+  filterQuestion1.dispatchEvent(new Event("change"));
+  filterQuestion2.checked = false;
+  filterQuestion2.dispatchEvent(new Event("change"));
+  filterQuestion3.checked = false;
+  filterQuestion3.dispatchEvent(new Event("change"));
+  filterQuestion4.checked = false;
+  filterQuestion4.dispatchEvent(new Event("change"));
+  searchInput.value == ""
+  searchInput.dispatchEvent(new Event("input"));
+  filterQuestions();
+})
