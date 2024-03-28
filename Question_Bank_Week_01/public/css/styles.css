@@ -854,7 +854,9 @@ p {
   .modal-footer button {
     padding: 0.75rem;
   }
-
+.question-filter>div{
+  min-width: 850px;
+}
   .question-filter .nav-item label{
     padding: 0 0.5rem;
   }
@@ -869,6 +871,10 @@ p {
   }
   .question-filter .nav-item{
     margin-right: 14px;
+  }
+  .question-filter-right .nav-item {
+    margin-right: 0px;
+    margin-left: 14px
   }
 }
 
@@ -991,10 +997,17 @@ p {
   .question-filter .nav-item{
     margin-right: 12px;
   }
+  .question-filter-right .nav-item {
+    margin-right: 0px;
+    margin-left: 12px
+  }
 }
 
 @media screen and (max-width:906px) {
 
+  .question-filter>div{
+    min-width: 750px;
+  }
   body,
   .pagination .page-item .page-link,
   .numbers-question select {
@@ -1107,9 +1120,16 @@ p {
   .question-filter .nav-item{
     margin-right: 10px;
   }
+  .question-filter-right .nav-item {
+    margin-right: 0px;
+    margin-left: 10px
+  }
 }
 
 @media screen and (max-width:777px) {
+  .question-filter>div{
+    min-width: 650px;
+  }
 
   body,
   .pagination .page-item .page-link,
@@ -1166,7 +1186,7 @@ p {
   }
 
   .footer {
-    bottom: 0.5rem;
+    bottom: 0.25rem;
     width: 99%;
   }
 
@@ -1223,6 +1243,13 @@ p {
   }
   .question-filter .nav-item{
     margin-right: 8px;
+  }
+  .pagination .page-item .page-link{
+    padding: 2px;
+  }
+  .question-filter-right .nav-item {
+    margin-right: 0px;
+    margin-left: 8px
   }
 }
 

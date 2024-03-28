@@ -225,7 +225,7 @@ trCheck.forEach((tr) => {
       tr.classList.remove("active");
       removeIdFromMap(questionId, status);
     }
-
+    
     let ids = 0;
     mapAction.forEach((value) => {
       ids += value.length;
@@ -305,7 +305,7 @@ trCheck.forEach((tr) => {
 
     checkbox.checked = !checkbox.checked;
 
- 
+    
 
     if (checkbox.checked) {
       tr.classList.add("active");
@@ -314,7 +314,21 @@ trCheck.forEach((tr) => {
       tr.classList.remove("active");
       removeIdFromMap(questionId, status);
     }
-
+    let count = 0;
+    trCheck.forEach(t=>{
+      questionsDisplayed.forEach(q=>{
+        if(t.dataset.index == q){
+          if(t.classList.contains("active")){
+            count++
+          }
+        }
+      })
+    })
+    if(count == itemPerPage){
+      allQuestions.checked = true
+    }else{
+      allQuestions.checked = false
+    }
     let ids = 0;
     mapAction.forEach((value) => {
       ids += value.length;
@@ -418,7 +432,11 @@ mapAction.set("Trả về",actions4);
 const pushIdToMap = (id,status)=>{
   mapAction.forEach((value,key)=>{
     if(key == status.replace("\n","").trim() ){
-      value.push(id);
+      const indexExisted = value.findIndex(i=>i == id);
+      if(indexExisted=== -1 ){
+        value.push(id);
+      }
+     
     }
   })
 }
@@ -460,16 +478,16 @@ mapAction.set("Trả về",actions4);
 const allQuestions = document.getElementById("allQuestions")
 allQuestions.addEventListener("click",()=>{
   if(allQuestions.checked){
-    closePopup()
     trCheck.forEach((tr)=>{
       let subCheckBoxs = tr.querySelectorAll(".check-popup")
       subCheckBoxs.forEach((c)=>{
-        const questionData = JSON.parse(tr.getAttribute("data-question"));
-    const questionId = questionData.id;
+   questionsDisplayed.forEach(q=>{
+    if(tr.dataset.index== q){
+      const questionData = JSON.parse(tr.getAttribute("data-question"));
+      const questionId = questionData.id;
     const tagStatus = tr.querySelector("td.question-status");
     const status = tagStatus.innerHTML;
-c.checked = true;
-
+    c.checked = true;
     if (c.checked) {
       tr.classList.add("active");
       pushIdToMap(questionId, status);
@@ -546,22 +564,99 @@ c.checked = true;
       const popup = document.getElementById("popup-action");
       popup.style.display = "none";
     }
+    }
+   })
+     
       })
     })
   }else{
-    trCheck.forEach((tr)=>{
-      let subCheckBoxs = tr.querySelectorAll(".check-popup")
-      subCheckBoxs.forEach((c)=>{
+    let count = 0;
 
-c.checked = false;
+    trCheck.forEach(tr=>{
+      questionsDisplayed.forEach(q=>{
+        if(tr.dataset.index == q){
+          tr.classList.remove("active");
+          tr.querySelector("input").checked = false;
+          const questionData = JSON.parse(tr.getAttribute("data-question"));
+      const questionId = questionData.id;
+    const tagStatus = tr.querySelector("td.question-status");
+    const status = tagStatus.innerHTML;
+    removeIdFromMap(questionId, status);
+        }
+      })
+    })
 
-    if (c.checked) {
-      tr.classList.add("active");
-    } else {
-      tr.classList.remove("active");
-    }})
-closePopup();
-  })
+    mapAction.forEach(value=>{
+      count+=value.length;
+    })
+    if(count==0){
+      closePopupCustom()
+      return;
+    }else{
+      console.log(mapAction)
+      const popup = document.getElementById("popup-action");
+      if (count > 0) {
+        const questionFilterToDisable = document.querySelector(".question-filter")
+        questionFilterToDisable.classList.add("disable-element")
+        const questionSearchToDisable = document.querySelector(".question-search")
+        questionSearchToDisable.classList.add("disable-element")
+        popup.style.display = "block";
+        const numOfQuestion = popup.querySelector("h1");
+        numOfQuestion.innerHTML = count;
+        let actions = popup.querySelectorAll(".nav-link");
+        actions.forEach((action) => {
+          switch (action.dataset.action) {
+            case "guiDuyet": {
+              if (actions0.length > 0 || actions4.length > 0) {
+                action.style.display = "block";
+              } else {
+                action.style.display = "none";
+              }
+              break;
+            }
+            case "traVe": {
+              if (actions1.length > 0 || actions3.length > 0) {
+                action.style.display = "block";
+              } else {
+                action.style.display = "none";
+              }
+              break;
+            }
+            case "duyetApDung": {
+              if (actions1.length > 0 || actions3.length > 0) {
+                action.style.display = "block";
+              } else {
+                action.style.display = "none";
+              }
+              break;
+            }
+            case "ngung": {
+              if (actions2.length > 0) {
+                action.style.display = "block";
+              } else {
+                action.style.display = "none";
+              }
+              break;
+            }
+            case "xoa": {
+              if (actions0.length > 0) {
+                action.style.display = "block";
+              } else {
+                action.style.display = "none";
+              }
+              break;
+            }
+          }
+        });
+      } else {
+        const questionFilterToDisable = document.querySelector(".question-filter")
+        questionFilterToDisable.classList.remove("disable-element")
+        const questionSearchToDisable = document.querySelector(".question-search")
+        questionSearchToDisable.classList.remove("disable-element")
+        const popup = document.getElementById("popup-action");
+        popup.style.display = "none";
+      }
+    }
 }
 })
 

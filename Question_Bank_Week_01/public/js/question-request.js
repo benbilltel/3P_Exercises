@@ -17,7 +17,6 @@ let endIndex = startIndex + itemPerPage;
 
 const paginateQuestions = () => {
   let totalPages = Math.ceil(questionTracked.length / itemPerPage);
-  let prevPage = Number(currentPage) > 1 ? Number(currentPage) - 1 : 1;
   let html = `<li class="page-item">
     <button class="page-link page-move" data-move="-1,0"  aria-label="Previous" onclick="movePage(-1,0)">
       <span aria-hidden="true">Đầu</span>
@@ -210,7 +209,22 @@ questionTracked = questionTemp;
     }
   }
   }
-  
+  let count = questionsDisplayed.length;
+  let countCheckAll = 0;
+  trCheck.forEach(tr=>{
+    questionsDisplayed.forEach(q=>{
+      if(tr.dataset.index == q){
+        if(tr.classList.contains("active")){
+          countCheckAll++;
+        }
+      }
+    })
+  })
+  if(count==countCheckAll){
+    allQuestions.checked = true;
+  }else{
+    allQuestions.checked = false;
+  }
   renderMenuAction()
 }
 
@@ -489,6 +503,7 @@ const deleteQuestions = (ids)=>{
           showToast(data.message, true,()=>{
             
           });
+          console.log(mapAction)
       }
     })
     .catch((error) => {
