@@ -21,6 +21,8 @@ p {
   pointer-events: none;
 }
 
+
+
 .question-bank {
   height: 99.5vh;
   width: 100vw;
@@ -73,11 +75,21 @@ p {
   width: 100%;
   height: 3.25rem;
   background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
-
+.sidebar .logo img {
+  width: 60%;
+  height: 100%;
+}
+.sidebar .logo i{
+  color: black;
+}
 .sidebar .sub-module {
   width: 100%;
-
+  background-color: #474F62;
 }
 
 .sidebar .nav-link {
@@ -89,6 +101,10 @@ p {
 .sidebar .nav-link.active {
   color: #5cb800;
   position: relative;
+}
+.sidebar .nav-link.active span{
+  text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+            0px -4px 10px rgba(255,255,255,0.3); color: black;
 }
 
 
@@ -288,13 +304,9 @@ p {
   border-radius: 0px;
   margin-right: 0;
   margin-left: 1rem;
-  transition: .5s;
 
 }
 
-.question-filter-right .nav-item:hover {
-  transform: translateY(-5%);
-}
 
 .question-filter-right .nav-item .nav-link i,
 .question-filter-right .nav-item .nav-link {
@@ -333,10 +345,11 @@ p {
   color: #fff;
   display: flex;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   align-items: center;
   width: 0.85rem;
   height: 0.85rem;
+  border-radius: 2px;
 }
 
 .question-filter .nav-item input[type="checkbox"]:hover::before,
@@ -351,12 +364,15 @@ p {
   width: 0.85rem;
   height: 0.85rem;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .question-filter-right .nav-item {
   border-radius: 5px;
 }
-
+.question-filter>div{
+  justify-content: space-between;
+}
 
 
 
@@ -434,6 +450,8 @@ p {
 
 .question-list .table tbody .question-row .show-action-question.active {
   background-color: #bdc2d2;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .question-row,
@@ -576,7 +594,7 @@ p {
 .border-popup{
   height: 8vh;
   background-color: #EDEFF3;
-  width: 3px;
+  width: 1.5px;
 }
 .context {
   position: relative;
@@ -626,13 +644,16 @@ p {
   background-color: #F4F5F7;
   color: #959DB3;
   margin: 0 1.5px;
-  padding-left: 6px;
-  padding-right: 6px;
+  padding-left: 7px;
+  padding-right: 7px;
   border-radius: 3px;
   border: none;
   font-size: 14px;
+  margin-left: 4px;
 }
-
+.pagination .page-item .page-link.page-move--number{
+  background-color: transparent;
+}
 .pagination .page-item.active .page-link {
   border: none;
   background-color: #959DB3;
@@ -713,13 +734,9 @@ p {
   background-color: #008000;
   padding: 0.3rem;
   border-radius: 3px;
-  transition: .5s;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.question-search--bot .search-item--label button:hover {
-  transform: translateY(-5%);
-}
 
 .question-search--bot .search-item--label button i,
 .question-search--bot .search-item--label button span {
@@ -798,6 +815,10 @@ p {
   .pagination .page-item .page-link,
   .numbers-question select {
     font-size: 12px;
+  }
+  .question-filter>div{
+    justify-content: start;
+    gap: 200px;
   }
 
   .header,
@@ -887,7 +908,11 @@ p {
   .numbers-question select {
     font-size: 10px;
   }
-
+  .question-filter>div{
+    justify-content: start;
+    gap: 120px;
+    font-size: 12px;
+  }
   .header,
   .sidebar .logo {
     height: 2rem;
@@ -1006,7 +1031,12 @@ p {
 @media screen and (max-width:906px) {
 
   .question-filter>div{
-    min-width: 750px;
+    width: 500px;
+  }
+  .question-filter>div{
+    justify-content: start;
+    gap: 0px;
+    font-size: 10px;
   }
   body,
   .pagination .page-item .page-link,
@@ -1041,12 +1071,24 @@ p {
     padding-top: .45rem;
     padding-bottom: 0.45rem;
     margin-bottom: 8px;
+    height: 50px;
   }
 
   .question-search .question-search--top {
     padding: 0;
+    height: 16px;
   }
-
+  .question-search .question-search--bot {
+    padding: 0;
+    height: 16px;
+  }
+  .question-search .question-search--bot input{
+    padding: 2px;
+    padding-left: 20px;
+  }
+  .question-search .question-search--bot button{
+    padding: 2px;
+  }
   .question-search .search-item--action {
     min-width: 50px;
   }
@@ -1128,15 +1170,39 @@ p {
 
 @media screen and (max-width:777px) {
   .question-filter>div{
-    min-width: 650px;
+    min-width: 750px;
+  }
+  #popup-action .nav-item .nav-link {
+    padding: 10px;
+  }
+  .border-popup{
+    width: 1px;
+  }
+  .question-search {
+    padding-top: .45rem;
+    padding-bottom: 0.45rem;
+    margin-bottom: 8px;
+    height: 50px;
   }
 
+  .question-search .question-search--top {
+    padding: 0;
+    height: 16px;
+  }
+  .question-search .question-search--bot {
+    padding: 0;
+    height: 16px;
+  }
   body,
   .pagination .page-item .page-link,
   .numbers-question select {
     font-size: 7px;
   }
-
+  .question-filter>div{
+    justify-content: start;
+    gap: 0px;
+    font-size: 9px;
+  }
   .header,
   .sidebar .logo {
     height: 1.5rem;
@@ -1245,7 +1311,7 @@ p {
     margin-right: 8px;
   }
   .pagination .page-item .page-link{
-    padding: 2px;
+    padding: 4px;
   }
   .question-filter-right .nav-item {
     margin-right: 0px;
@@ -1773,7 +1839,7 @@ p {
   }
 
   .footer {
-    bottom: 0.75rem;
+    bottom: 1rem;
     width: 99.5%;
   }
 
@@ -1822,15 +1888,29 @@ p {
   #popup-action .nav-item .nav-link i{
     font-size: 26px;
   }
+
   #popup-action .count-question h1{
     font-size: 42px;
   }
   #popup-action .nav .nav-item {
     height: 8.5rem;
   }
+  .pagination .page-link{
+    padding: 12px;
+  }
+  .pagination .page-item{
+    padding: 5px;
+  }
+  #popup-action .nav-item .nav-link {
+    padding: 35px;
+  }
+
   #search-question{
     width: 600px;
     padding: 10px;
     padding-left: 34px;
+  }
+  .question-list{
+    height: 60vh;
   }
 }

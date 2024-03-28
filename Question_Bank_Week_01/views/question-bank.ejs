@@ -21,7 +21,7 @@
       <div class="context">
         <%- include("./layouts/header"); -%>
           <div class="context-body"><div class="question-filter">
-            <div  class="ps-0 m-0 d-flex justify-content-between align-items-center">
+            <div  class="ps-0 m-0 d-flex align-items-center">
               <div class="question-filter-left px-0">
                 <ul class="nav d-flex">
                   <li class="nav-item" data-filter="filterQuestion1">
@@ -72,18 +72,20 @@
                   <div class="search-item--icon" style="display: inline-block;"><i class="fa-solid fa-filter"></i></div>
                   <div class="search-item--action" style="text-transform: uppercase;display: inline-block;">Lọc dữ liệu
                   </div>
-                  <div class="search-item--label" style="display: inline-block;">Tìm kiếm</div>
+                  <div class="search-item--label" style="display: inline-block;text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+                  0px -4px 10px rgba(255,255,255,0.3); color: black;">Tìm kiếm</div>
                 </div>
-                <div class="question-search--bot">
+                <div class="question-search--bot d-flex align-items-center">
                   <div class="search-item--icon" style="display: inline-block;"></div>
                   <div class="search-item--action" id="reset-all" style="display: inline-block;">Reset bộ lọc</div>
                   <div class="search-item--label" style="display: inline-block;">
                     <div style="display: inline-block;"><input type="search" name="search" id="search-question" placeholder="Tìm theo mã và câu hỏi">
                       <i class="fa-solid fa-magnifying-glass"></i></div>
                     
-                    <button id="btn-search" type="button"><i class="fa-solid fa-magnifying-glass"></i><span
-                        style="display: inline-block;">Tìm</span></button>
+                    <button id="btn-search" style="padding-right: 10px;" type="button"><i class="fa-solid fa-magnifying-glass"></i><span
+                        style="display: inline-block; padding-left: 3px;">Tìm</span></button>
                   </div>
+               
                 </div>
               </div>
             </div>
@@ -132,7 +134,7 @@
                     <td class="text-start ps-5">
                       <%=question.group%>
                     </td>
-                    <td>
+                    <td style="font-weight: 700;">
                       <%=question.time%>s
                     </td>
                     <td class="text-end question-status pe-3" style="color:
@@ -188,7 +190,7 @@
                 <span class="border-popup" style="display: inline-block;"></span>
                 <li class="nav-item action-delete"><a href="#" onclick="closePopupCustom()"
                     class="nav-link d-flex justify-content-center align-items-center" data-action="thoat"
-                    style="padding: 1.5rem;"><i class="fa-solid fa-x" style="border: none;"></i></a></li>
+                  ><i class="fa-solid fa-x" style="border: none;"></i></a></li>
               </ul>
             </div>
           </div>

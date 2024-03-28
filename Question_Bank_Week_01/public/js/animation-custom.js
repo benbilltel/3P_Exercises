@@ -35,7 +35,24 @@ function restoreCheckboxStates() {
   });
   filterQuestions();
 }
-
+const activeSidebar = document.querySelector(".sidebar")
+const checkBoxActive = activeSidebar.querySelectorAll(".nav-link")
+checkBoxActive.forEach(c=>{
+  c.addEventListener("click",()=>{
+    checkBoxActive.forEach(rm=>{
+      rm.classList.remove("active")
+      const dropdownMenu = rm.nextElementSibling
+      if(dropdownMenu&&dropdownMenu.classList.contains("dropdown-cs-menu")){
+        dropdownMenu.style.display = "none"
+      }
+    })
+    c.classList.add("active")
+    const dropdownMenu = c.nextElementSibling
+    if(dropdownMenu&&dropdownMenu.classList.contains("dropdown-cs-menu")){
+      dropdownMenu.style.display = dropdownMenu.style.display === "block"?"none":"block"
+    }
+  })
+})
 // Add event listeners to checkboxes
 const filterCheckBoxex = document.querySelectorAll('.question-filter input[type="checkbox"]');
 filterCheckBoxex.forEach((checkbox) => {
@@ -70,7 +87,7 @@ const customDropDown = (classname) => {
   });
 };
 
-customDropDown(".dropdown-cs-toggle");
+//customDropDown(".dropdown-cs-toggle");
 
 function setActiveNavItem(classname) {
   const navItems = document.querySelectorAll(classname);
@@ -116,8 +133,8 @@ navLinks.forEach((link) => {
     link.querySelector(".border-active")?.classList.add("active");
   });
 });
-setActiveNavItem(".sidebar .nav-link");
-setActiveNavItem(".dropdown-cs-item");
+//setActiveNavItem(".sidebar .nav-link");
+//setActiveNavItem(".dropdown-cs-item");
 
 const checkboxes = document.querySelectorAll(
   '.question-filter-left .nav-item input[type="checkbox"]'
@@ -189,6 +206,21 @@ const renderMenuAction = ()=>{
         break;
     }
   });
+  let countCheckAll = 0;
+  trCheck.forEach(tr=>{
+    questionsDisplayed.forEach(q=>{
+      if(tr.dataset.index == q){
+        if(tr.classList.contains("active")){
+          countCheckAll++;
+        }
+      }
+    })
+  })
+  if(questionsDisplayed.length==countCheckAll&& countCheckAll!=0){
+    allQuestions.checked = true;
+  }else{
+    allQuestions.checked = false;
+  }
 }
 
 
@@ -295,109 +327,23 @@ trCheck.forEach((tr) => {
       const popup = document.getElementById("popup-action");
       popup.style.display = "none";
     }
-  });
-  tr.addEventListener("click", function (event) {
-    const checkbox = tr.querySelector(".check-popup");
-    const questionData = JSON.parse(tr.getAttribute("data-question"));
-    const questionId = questionData.id;
-    const tagStatus = tr.querySelector("td.question-status");
-    const status = tagStatus.innerHTML;
-
-    checkbox.checked = !checkbox.checked;
-
-    
-
-    if (checkbox.checked) {
-      tr.classList.add("active");
-      pushIdToMap(questionId, status);
-    } else {
-      tr.classList.remove("active");
-      removeIdFromMap(questionId, status);
-    }
-    let count = 0;
-    trCheck.forEach(t=>{
+    let countCheckAll = 0;
+    trCheck.forEach(tr=>{
       questionsDisplayed.forEach(q=>{
-        if(t.dataset.index == q){
-          if(t.classList.contains("active")){
-            count++
+        if(tr.dataset.index == q){
+          if(tr.classList.contains("active")){
+            countCheckAll++;
           }
         }
       })
     })
-    if(count == itemPerPage){
-      allQuestions.checked = true
+    if(questionsDisplayed.length==countCheckAll&& countCheckAll!=0){
+      allQuestions.checked = true;
     }else{
-      allQuestions.checked = false
-    }
-    let ids = 0;
-    mapAction.forEach((value) => {
-      ids += value.length;
-    });
-
-    const popup = document.getElementById("popup-action");
-    if (ids > 0) {
-      const questionFilterToDisable = document.querySelector(".question-filter")
-      questionFilterToDisable.classList.add("disable-element")
-      const questionSearchToDisable = document.querySelector(".question-search")
-      questionSearchToDisable.classList.add("disable-element")
-      popup.style.display = "block";
-      const numOfQuestion = popup.querySelector("h1");
-      numOfQuestion.innerHTML = ids;
-      let actions = popup.querySelectorAll(".nav-link");
-
-      actions.forEach((action) => {
-        switch (action.dataset.action) {
-          case "guiDuyet": {
-            if (actions0.length > 0 || actions4.length > 0) {
-              action.style.display = "block";
-            } else {
-              action.style.display = "none";
-            }
-            break;
-          }
-          case "traVe": {
-            if (actions1.length > 0 || actions3.length > 0) {
-              action.style.display = "block";
-            } else {
-              action.style.display = "none";
-            }
-            break;
-          }
-          case "duyetApDung": {
-            if (actions1.length > 0 || actions3.length > 0) {
-              action.style.display = "block";
-            } else {
-              action.style.display = "none";
-            }
-            break;
-          }
-          case "ngung": {
-            if (actions2.length > 0) {
-              action.style.display = "block";
-            } else {
-              action.style.display = "none";
-            }
-            break;
-          }
-          case "xoa": {
-            if (actions0.length > 0) {
-              action.style.display = "block";
-            } else {
-              action.style.display = "none";
-            }
-            break;
-          }
-        }
-      });
-    } else {
-      const questionFilterToDisable = document.querySelector(".question-filter")
-      questionFilterToDisable.classList.remove("disable-element")
-      const questionSearchToDisable = document.querySelector(".question-search")
-      questionSearchToDisable.classList.remove("disable-element")
-      const popup = document.getElementById("popup-action");
-      popup.style.display = "none";
+      allQuestions.checked = false;
     }
   });
+  
 });
 /*toasts*/
 function showToast(message, isSuccess,callback) {
