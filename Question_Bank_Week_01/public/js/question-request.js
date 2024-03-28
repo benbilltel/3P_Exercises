@@ -104,15 +104,15 @@ const movePage = (num,action)=>{
   }
   startIndex = (currentPage - 1) * itemPerPage;
   endIndex = startIndex + itemPerPage;
-  filterQuestions();
+  filterQuestions(currentPage);
 }
 
 
 
-function filterQuestions() {
+function filterQuestions(crrpage = 1) {
   
   questionsDisplayed = [];
-  if(!isSearch){
+
     questionTemp = []
     const noFilterChecked =
     !filterQuestion1.checked &&
@@ -150,82 +150,30 @@ function filterQuestions() {
       questionTemp.push(index)
     }
   }
+  currentPage = crrpage
   startIndex = (currentPage - 1) * itemPerPage;
   endIndex = startIndex + itemPerPage;
   
 questionTracked = questionTemp;
-  paginateQuestions();
-  
- questionsDisplayed = questionTracked.slice(startIndex,endIndex)
-
-  // Iterate over the question rows again to set the display property
-  for (let i = 0; i < questionRows.length; i++) {
-    const questionRow = questionRows[i];
-    const question = JSON.parse(questionRow.dataset.question);
-    const index = questionRow.dataset.index
-    if (questionsDisplayed.includes(index)) {
-      questionRow.style.display = "table-row";
-    } else {
-      questionRow.style.display = "none";
-    }
-  }
-  }else{
-    
-
-  // Iterate over the question rows
-  for (let i = 0; i < questionRows.length; i++) {
-    const questionRow = questionRows[i];
-    const question = JSON.parse(questionRow.dataset.question);
-    const index = questionRow.dataset.index
-    const questionStatus = questionRow.querySelector(".question-status")
-    if(question.status.replace("\n","").trim() == "Đang soạn thảo"){
-      questionStatus.style.color = "black"
-    }else if(question.status.replace("\n","").trim() == "Gửi duyệt"){
-      questionStatus.style.color = "#31ADFF"
-    }else if(question.status.replace("\n","").trim() == "Áp dụng"){
-      questionStatus.style.color = "#008000"
-    }else if(question.status.replace("\n","").trim() == "Trả về"){
-      questionStatus.style.color = "#B7B92F"
-    }else{
-      questionStatus.style.color = "#FB311C"
-    }
-    // Check the status of the question and show/hide the row accordingly
-    
-  }
-  startIndex = (currentPage - 1) * itemPerPage;
-  endIndex = startIndex + itemPerPage;
+if(!isSearch){
   paginateQuestions();
   questionsDisplayed = questionTracked.slice(startIndex,endIndex)
+   for (let i = 0; i < questionRows.length; i++) {
+     const questionRow = questionRows[i];
+     const question = JSON.parse(questionRow.dataset.question);
+     const index = questionRow.dataset.index
+     if (questionsDisplayed.includes(index)) {
+       questionRow.style.display = "table-row";
+     } else {
+       questionRow.style.display = "none";
+     }
+   }
 
-  // Iterate over the question rows again to set the display property
-  for (let i = 0; i < questionRows.length; i++) {
-    const questionRow = questionRows[i];
-    const question = JSON.parse(questionRow.dataset.question);
-    const index = questionRow.dataset.index
-    if (questionsDisplayed.includes(index)) {
-      questionRow.style.display = "table-row";
-    } else {
-      questionRow.style.display = "none";
-    }
-  }
-  }
-  let count = questionsDisplayed.length;
-  let countCheckAll = 0;
-  trCheck.forEach(tr=>{
-    questionsDisplayed.forEach(q=>{
-      if(tr.dataset.index == q){
-        if(tr.classList.contains("active")){
-          countCheckAll++;
-        }
-      }
-    })
-  })
-  if(count==countCheckAll){
-    allQuestions.checked = true;
-  }else{
-    allQuestions.checked = false;
-  }
   renderMenuAction()
+}else{
+   searchInput.dispatchEvent(new Event("input"))
+}
+  
 }
 
 const navItems = document.querySelectorAll(".question-filter-left .nav-item");
@@ -407,17 +355,14 @@ searchInput.addEventListener("input",()=>{
         questionTracked.push(index);
       }
     }
-    currentPage = 1;
     startIndex = (currentPage - 1) * itemPerPage;
     endIndex = startIndex + itemPerPage;   
     paginateQuestions();
-    
-   questionsDisplayed = questionTracked.slice(startIndex,endIndex)
+    questionsDisplayed = questionTracked.slice(startIndex,endIndex)
   
     // Iterate over the question rows again to set the display property
     for (let i = 0; i < questionRows.length; i++) {
       const questionRow = questionRows[i];
-      const question = JSON.parse(questionRow.dataset.question);
       const index = questionRow.dataset.index
       if (questionsDisplayed.includes(index)) {
         questionRow.style.display = "table-row";
@@ -425,7 +370,8 @@ searchInput.addEventListener("input",()=>{
         questionRow.style.display = "none";
       }
     }
-    renderMenuAction()
+    
+  renderMenuAction()
   },1250)
 })
 const btnSearch = document.getElementById("btn-search")

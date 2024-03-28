@@ -70,7 +70,7 @@ const customDropDown = (classname) => {
   });
 };
 
-customDropDown(".dropdown-cs-toggle");
+//customDropDown(".dropdown-cs-toggle");
 
 function setActiveNavItem(classname) {
   const navItems = document.querySelectorAll(classname);
@@ -116,8 +116,8 @@ navLinks.forEach((link) => {
     link.querySelector(".border-active")?.classList.add("active");
   });
 });
-setActiveNavItem(".sidebar .nav-link");
-setActiveNavItem(".dropdown-cs-item");
+//setActiveNavItem(".sidebar .nav-link");
+//setActiveNavItem(".dropdown-cs-item");
 
 const checkboxes = document.querySelectorAll(
   '.question-filter-left .nav-item input[type="checkbox"]'
@@ -189,6 +189,21 @@ const renderMenuAction = ()=>{
         break;
     }
   });
+  let countCheckAll = 0;
+  trCheck.forEach(tr=>{
+    questionsDisplayed.forEach(q=>{
+      if(tr.dataset.index == q){
+        if(tr.classList.contains("active")){
+          countCheckAll++;
+        }
+      }
+    })
+  })
+  if(questionsDisplayed.length==countCheckAll){
+    allQuestions.checked = true;
+  }else{
+    allQuestions.checked = false;
+  }
 }
 
 
