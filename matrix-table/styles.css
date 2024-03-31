@@ -1,0 +1,182 @@
+.body {
+    box-sizing: border-box;
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.matrix-table {
+    width: 90%;
+    margin: 0px auto;
+    height: 90vh;
+}
+
+.cell {
+    width: 205px;
+    height: 40px;
+    display: inline-block;
+    padding: 5px 15px 5px 15px;
+}
+
+.cell-header {
+    width: 140px;
+    min-height: 40px;
+    display: inline-block;
+    padding: 5px 15px 5px 15px;
+}
+
+.table-label {
+    position: relative;
+    border-right: 1px solid #78A48A;
+    background-color: #ACC8B6;
+}
+
+.column-label {
+    width: 100%;
+    text-align: end;
+    color: #5A6276;
+    font-weight: 700;
+
+}
+
+.row-label {
+    width: 100%;
+    color: #5A6276;
+    font-weight: 700;
+}
+
+.table-label::after {
+    position: absolute;
+    top: 2px;
+    left: 0px;
+    content: "";
+    height: 238px;
+    border-left: 2px dashed black;
+    transform: rotate(-78.75deg);
+    transform-origin: 0% 0%;
+}
+
+
+
+.table-header-competence {
+    width: 100%;
+    background-color: #D1E0D6;
+    border: 1px solid #78A48A;
+    border-right: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-header-position {
+    height: 100%;
+    width: 235px;
+    background-color: #D1E0D6;
+    border: 1px solid #78A48A;
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-insert {
+    background-color: transparent;
+    display: flex;
+    border: none;
+    color: #266E3E;
+    padding: 10px;
+    gap: 5px 10px;
+    align-items: center;
+}
+
+.btn-insert:hover {
+    cursor: pointer;
+}
+
+.btn-insert span {
+    display: inline-block;
+    text-wrap: nowrap;
+}
+
+.btn-insert i {
+    border: 1px solid #266E3E;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.table-body {
+    display: flex;
+    height: 100%;
+}
+
+.table-data {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.data-row {
+    height: 50px;
+}
+
+.competence--left {
+    display: flex;
+}
+
+.competence-item div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    color: #5A6276;
+    font-weight: 700;
+}
+
+.competence-item div:last-of-type {
+    gap: 10px;
+    padding-top: 5px;
+    text-transform: capitalize;
+    font-weight: normal;
+}
+
+.data-cell {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.data-cell input {
+    display: inline-block;
+    text-align: end;
+    background-color: transparent;
+    border: none;
+    width: 50%;
+}
+
+.data-cell input:focus-visible {
+    outline: none;
+}
+
+.data-cell input:last-of-type {
+    text-align: start;
+}
+
+.position-item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+}
+
+.position-item span {
+    display: inline-block;
+    color: #26282E;
+}
+
+.border-position {
+    width: 2px;
+    height: 16px;
+    background-color: #B7C8C4;
+}
