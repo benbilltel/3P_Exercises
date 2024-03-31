@@ -267,7 +267,7 @@ let datas = [
 let competenceArr = []
 let positionArr = []
 const renderMaxtrixTable = () => {
-
+    //loop to take header
     datas.forEach(data => {
         if (competenceArr.findIndex(c => c["CompetenceID"] == data["CompetenceID"]) == -1) {
             competenceArr.push(data)
@@ -279,6 +279,7 @@ const renderMaxtrixTable = () => {
     renderPositionHeader()
     renderCompetenceHeader()
     let htmlResponse = ``
+    //render data in table using 2-dimensional array
     for (let i = 0; i < positionArr.length; i++) {
         let htmlResponseTemp = ``
         for (let j = 0; j < competenceArr.length; j++) {
@@ -286,7 +287,7 @@ const renderMaxtrixTable = () => {
                 if (data["PositionID"] == positionArr[i]["PositionID"] && data["CompetenceID"] == competenceArr[j]["CompetenceID"]) {
                     const min = data["CompetenceLevel"] == null ? "" : data["CompetenceLevel"]
                     const max = data["CompetenceLevelMax"] == null ? "" : data["CompetenceLevelMax"]
-                    htmlResponseTemp += `<div data-info = ${data["Code"]} class="cell-header data-cell"><input class="data-min" min="0" type="number" id="min-${data["Code"]}" value="${min}"><input class="data-max" min="0" type="number" id="max-${data["Code"]}" value="${max}"></div>`
+                    htmlResponseTemp += `<div data-code = ${data["Code"]} class="cell-header data-cell"><input onblur="applyTable(${data["Code"]})" class="data-min" min="0" type="number" id="min-${data["Code"]}" value="${min}"><input onblur="applyTable(${data["Code"]})" class="data-max" min="0" type="number" id="max-${data["Code"]}" value="${max}"></div>`
                 }
             })
         }
@@ -295,6 +296,7 @@ const renderMaxtrixTable = () => {
     const tableData = document.querySelector(".table-data")
     tableData.innerHTML = htmlResponse
 }
+//loop to take competenceArr
 const renderCompetenceHeader = () => {
     const headerContainer = document.querySelector(".competence-items")
     let htmlResponse = ``
@@ -303,6 +305,7 @@ const renderCompetenceHeader = () => {
     })
     headerContainer.innerHTML = htmlResponse
 }
+//loop to take positionArr
 const renderPositionHeader = () => {
     const headerPosition = document.querySelector(".position--top")
     let htmlResponse = ``
@@ -311,5 +314,61 @@ const renderPositionHeader = () => {
     })
     headerPosition.innerHTML = htmlResponse
 }
-
 renderMaxtrixTable()
+const validateInput = (event) => {
+    const input = event.target;
+
+    console.log("test")
+    const value = input.value;
+    if (value.includes("-")) {
+        input.value = value.replace("-", "");
+    }
+};
+
+const applyTable = (code) => {
+    //take data to update
+    let updateData = {}
+    const dataRows = document.querySelectorAll(".data-row");
+    dataRows.forEach(row => {
+        const cells = row.querySelectorAll(".data-cell")
+        cells.forEach(cell => {
+            if (Number(cell.dataset.code) == Number(code)) {
+
+                const min = Number(cell.querySelector(".data-min").value)
+                const max = Number(cell.querySelector(".data-max").value)
+                const obj = {
+                    code,
+                    min,
+                    max
+                }
+                updateData = obj
+            }
+        })
+
+    })
+    //update data
+    if (!!updateData) {
+        datas.map(data => {
+            if (Number(data["Code"]) == Number(updateData["code"])) {
+                if (Number(data["CompetenceLevel"]) != Number(updateData["min"]) || Number(data["CompetenceLevelMax"]) != Number(updateData["max"])) {
+                    let isUpdate = false;
+                    let oldMin = data["CompetenceLevel"]
+                    let oldMax = data["CompetenceLevelMax"]
+                    data["CompetenceLevel"] = Number(updateData["min"]) > 0 && ( (Number(updateData["max"])>0&&Number(updateData["max"])>=Number(updateData["min"]))||(Number(updateData["max"])<=0))? Number(updateData["min"]) : data["CompetenceLevel"]
+                    data["CompetenceLevelMax"] = Number(updateData["max"]) > 0&&Number(updateData["max"])>=Number(updateData["min"]) ? Number(updateData["max"]) : data["CompetenceLevelMax"]
+                    if(oldMin !== data["CompetenceLevel"]||oldMax !== data["CompetenceLevelMax"] ){
+                        isUpdate = true
+                    }
+                    if (isUpdate) {
+                        updateData = data
+                        alert("Cập nhật khung năng lực thành công\n\n" + `Tên chức danh: ${updateData["PositionName"]}, Tên năng lực: ${updateData["CompetenceName"]}`);
+                    }
+
+                }
+            }
+        })
+    }
+
+    renderMaxtrixTable()
+
+}
