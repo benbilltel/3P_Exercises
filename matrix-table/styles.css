@@ -4,14 +4,88 @@ body {
     box-sizing: border-box;
     font-size: 16px;
     font-weight: 400;
-    padding: 100px;
+    padding: 50px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}
+/*notification*/
+.toasts {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    width: auto;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    display: none;
+}
+
+.toasts-success {
+    background-color: #1a6634;
+    color: #fff;
+}
+
+.toasts-fail {
+    background-color: #FD7676;
+    color: #fff;
+}
+.toasts div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.toasts p {
+    margin: 0;
+    display: inline-block;
+}
+
+.show {
+    display: block;
+}
+
+/*thead*/
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    text-wrap: nowrap;
+}
+
+table thead th {
+    color: #5A6276;
+}
+
+.vertical-cell {
+    background-color: white;
+    border: 1px solid #008000;
+    writing-mode: vertical-rl;
+    padding: 5px;
+}
+
+.border-none {
+    border: none;
 }
 
 .table-label {
     position: relative;
     width: 200px;
-    height: 40px;
-    border: 1px solid black;
+    height: 50px;
+    background-color: #ACC8B6;
+    font-weight: 700;
+}
+
+.header-top .table-label {
+    background-color: transparent;
+    height: 25px;
 }
 
 .table-label .label-top,
@@ -21,13 +95,14 @@ body {
 }
 
 .table-label .border-label {
-    width: 0px;
-    height: 201px;
-    top: 2px;
-    left: 0px;
-    border: 1px dashed black;
-    transform: rotate(-77deg);
-    transform-origin: 0 0;
+    position: absolute;
+    border: 1px dashed #000;
+    transform: translate(-50%, -50%) rotate(13deg);
+    display: block;
+    width: 100%;
+    right: 0;
+    top: 50%;
+    left: 50%;
 }
 
 .table-label .label-top {
@@ -46,54 +121,106 @@ body {
     padding-left: 10px;
 }
 
-
-
-/*competence*/
-.matrix-table table {
-    border-collapse: collapse;
-    border-spacing: 0;
+td,
+th,
+tr {
+    padding: 0px;
 }
 
-.matrix-table table thead tr .cell-header {
-    height: 50px;
+.header-bottom {
+    background-color: #D6E5DC;
 }
 
-.matrix-table table thead tr .competence-header {
-    border: 1px solid red;
-    border-bottom:none ;
+.competence-item {
+    padding: 0 15px;
 }
 
-.matrix-table table thead tr .competence-items {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    border-top: 1px solid black;
-}
-
-.matrix-table table thead tr .category-name {
-    width: calc(100% + 2px);
-    height: 20px;
-    padding: 10px 0;
-    text-wrap: nowrap;
-}
-
-.matrix-table table thead tr .category-name.header-empty {
-    border: none;
-}
-
-.matrix-table table thead tr .competence-item {
-    display: inline-block;
+.category-name {
+    height: 10px;
+    border: 1px solid #008000;
     padding: 0 10px;
+    color: black;
+    background-color: white;
 }
 
-.matrix-table table thead tr .competence-value {
+
+.competence-item--top {
+    font-weight: 700;
+}
+
+.competence-item--bottom {
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
 }
 
-.matrix-table table thead tr .competence-value div {
+.competence-item--bottom span {
     display: inline-block;
-    width: 50%;
-    padding: 5px 0;
+    font-weight: 300;
+}
+
+.add-action {
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+    color: #008000;
+    font-weight: 700;
+}
+
+tbody .add-action {
+    background-color: #D6E5DC;
+    padding: 10px;
+}
+
+.add-action:hover {
+    background-color: white;
+    cursor: pointer;
+}
+
+.add-action span {
+    padding-left: 5px;
+}
+
+tbody .add-action i {
+    margin-left: 10%;
+}
+/*tbody*/
+.position-name td:first-of-type {
+    border-top: 1px solid #008000;
+    border-bottom: 1px solid #008000;
+    background-color: #D6E5DC;
+    padding: 10px;
+}
+
+.position-name td:first-of-type div {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    align-items: center;
+}
+
+.position-name td:first-of-type div span {
+    display: inline-block;
+}
+
+.border-position {
+    width: 2px;
+    height: 16px;
+    background-color: #B7C8C4;
+}
+
+
+.data div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.cell {
+    border: none;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
 }

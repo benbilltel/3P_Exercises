@@ -88,6 +88,28 @@ let datas = [
         "LastModifiedTime": null
     },
     {
+        "PositionID": "KSTV",
+        "PositionName": "Kế toán trưởng",
+        "DepartmentName": "Kế toán",
+        "CompetenceID": "test1",
+        "CompetenceName": "năng lực 1",
+        "CategoryName": "Cốt lõi",
+        "DepartmentID": "AC",
+        "CategoryID": "CL",
+        "Category": 3,
+        "Department": 8,
+        "Code": 10693,
+        "Framework": 10103,
+        "Competence": 3,
+        "Position": 40,
+        "CompetenceLevel": 1,
+        "CompetenceLevelMax": 3,
+        "CreateBy": "Nguyễn Văn Hachi",
+        "CreateTime": "2024-03-29T16:58:03.67",
+        "LastModifiedBy": null,
+        "LastModifiedTime": null
+    },
+    {
         "PositionID": "BDGD",
         "PositionName": "Giám đốc",
         "DepartmentName": "Ban Giám đốc",
@@ -264,88 +286,157 @@ let datas = [
         "LastModifiedTime": null
     }
 ]
-let competenceArr = []
-let positionArr = []
-const renderMaxtrixTable = () => {
-    //loop to take header
+let mapCompetence = new Map();
+let mapPosition = new Map();
+
+const htmlHeaderTop = `<th class="vertical-cell border-none"></th>
+<th class="table-label"></th>
+<th></th>`
+const htmlHeaderBottom = `<th class="vertical-cell border-none"></th>
+<th>
+    <div class="table-label">
+        <div class="label-top">Năng lực</div>
+        <div class="border-label"></div>
+        <div class="label-bottom">Vị trí</div>
+    </div>
+</th>
+<th class="add-action">
+    <i class="fa-solid fa-circle-plus"></i>
+    <span style="display: inline-block;">Thêm năng lực</span>
+</th>`
+const htmlTbody = ` <tr>
+<td class="vertical-cell border-none"></td>
+<td class="add-action">
+    <i class="fa-solid fa-circle-plus"></i>
+    <span style="display: inline-block;">Thêm chức danh</span>
+</td>
+<td></td>
+</tr>`
+
+const loadData = () => {
+    mapCompetence.clear();
+    mapPosition.clear();
     datas.forEach(data => {
-        if (competenceArr.findIndex(c => c["CompetenceID"] == data["CompetenceID"]) == -1) {
-            competenceArr.push(data)
+        if (mapCompetence.has(data["CategoryName"])) {
+            let arrTemp = mapCompetence.get(data["CategoryName"])
+            if (arrTemp.findIndex(c => c == data["CompetenceName"]) == -1) {
+                arrTemp.push(data["CompetenceName"])
+            }
+            mapCompetence.set(data["CategoryName"], arrTemp)
+        } else {
+            let arrTemp = []
+            arrTemp.push(data["CompetenceName"])
+            mapCompetence.set(data["CategoryName"], arrTemp)
         }
-        if (positionArr.findIndex(c => c["PositionID"] == data["PositionID"]) == -1) {
-            positionArr.push(data)
+
+        if (mapPosition.has(data["DepartmentName"])) {
+            let arrTemp = mapPosition.get(data["DepartmentName"])
+            if (arrTemp.findIndex(c => c == data["PositionName"]) == -1) {
+                arrTemp.push(data["PositionName"])
+            }
+            mapPosition.set(data["DepartmentName"], arrTemp)
+        } else {
+            let arrTemp = []
+            arrTemp.push(data["PositionName"])
+            mapPosition.set(data["DepartmentName"], arrTemp)
         }
     })
-    renderPositionHeader()
+}
+
+const renderCompetenceHeader = () => {
+    let htmlCategory = ``
+    let htmlCompetence = ``
+    mapCompetence.forEach((value, key) => {
+        let competenceArr = value
+        let colspan = competenceArr.length
+        htmlCategory += ` <th class="category-name" colspan="${colspan}">${key}</th>`
+        competenceArr.forEach(competence => {
+            let htmlTemp = ``
+            if (competence == competenceArr[0]) {
+                htmlTemp = `<th class="competence-wrap" style="border-left: 1px solid #008000;">`
+            }
+            if (competence == competenceArr[colspan - 1]) {
+                htmlTemp = `<th class="competence-wrap" style="border-right: 1px solid #008000;">`
+            }
+            if (competence == competenceArr[0] && competence == competenceArr[colspan - 1]) {
+                htmlTemp = `<th class="competence-wrap" style="border-right: 1px solid #008000;border-left: 1px solid #008000;">`
+            }
+            htmlCompetence += htmlTemp + `            
+            <div class="competence-item">
+            <div class="competence-item--top">${competence}</div>
+            <div class="competence-item--bottom"><span>Min</span><span>Max</span></div>
+        </div></th>
+        `
+        })
+    })
+    const headerTop = document.querySelector(".header-top")
+    const headrBottom = document.querySelector(".header-bottom")
+    headerTop.innerHTML = htmlHeaderTop + htmlCategory
+    headrBottom.innerHTML = htmlHeaderBottom + htmlCompetence
+}
+const renderPositionSidebar = () => {
+    let htmlPosition = ``
+    mapPosition.forEach((value, key) => {
+        let positionArr = value
+        let rowspan = positionArr.length + 1
+        let htmlTemp = ``
+        htmlTemp += `
+        <tr class="department">
+                    <th class="vertical-cell" rowspan="${rowspan}">${key}</th>
+                </tr>
+        `
+        positionArr.forEach(p => {
+            htmlTemp += `<tr data-position-name = "${p}" class="position-name" >
+            <td ><div><span class="position-id"></span><span class="border-position"></span><span>${p}</span></div></td>
+            <td></td>
+            </tr>
+        `
+        })
+        htmlPosition += htmlTemp
+    })
+    const tbody = document.querySelector(".matrix-table tbody")
+    tbody.innerHTML = htmlTbody + htmlPosition
+}
+const renderDataTable = () => {
+    loadData()
+    renderPositionSidebar()
     renderCompetenceHeader()
-    let htmlResponse = ``
-    //render data in table using 2-dimensional array
-    for (let i = 0; i < positionArr.length; i++) {
-        let htmlResponseTemp = ``
-        for (let j = 0; j < competenceArr.length; j++) {
-            datas.forEach(data => {
-                if (data["PositionID"] == positionArr[i]["PositionID"] && data["CompetenceID"] == competenceArr[j]["CompetenceID"]) {
-                    const min = data["CompetenceLevel"] == null ? "" : data["CompetenceLevel"]
-                    const max = data["CompetenceLevelMax"] == null ? "" : data["CompetenceLevelMax"]
-                    htmlResponseTemp += `<div data-code = ${data["Code"]} class="cell-header data-cell"><input onblur="applyTable(${data["Code"]})" class="data-min" min="0" type="number" id="min-${data["Code"]}" value="${min}"><input onblur="applyTable(${data["Code"]})" class="data-max" min="0" type="number" id="max-${data["Code"]}" value="${max}"></div>`
-                }
+    mapCompetence.forEach((value, key) => {
+        let dataFilter = datas.filter(data => data["CategoryName"] == key)
+        let trPosition = document.querySelectorAll(".position-name")
+        if (dataFilter) {
+            dataFilter.forEach(data => {
+                trPosition.forEach(tr => {
+                    if (tr.dataset.positionName == data["PositionName"]) {
+                        const tdPositionId = tr.querySelector(".position-id")
+                        tdPositionId.innerHTML = `${data["PositionID"]}`
+                        tr.innerHTML += `<td class="data" data-code="${data["Code"]}"><div><input type="number" class="cell min-value" value="${data["CompetenceLevel"]}" onblur=(updateMinMax(${data["Code"]}))>
+                        <input type="number" class="cell max-value" value="${data["CompetenceLevelMax"]}" onblur=(updateMinMax(${data["Code"]}))></div>
+                        </td>`
+                    }
+                })
             })
         }
-        htmlResponse += `<div class="data-row">${htmlResponseTemp}</div>`
-    }
-    const tableData = document.querySelector(".table-data")
-    tableData.innerHTML = htmlResponse
-}
-//loop to take competenceArr
-const renderCompetenceHeader = () => {
-    const headerContainer = document.querySelector(".competence-items")
-    let htmlResponse = ``
-    competenceArr.forEach(item => {
-        htmlResponse += `<div class="competence-item cell-header"><div>${item["CompetenceName"]}</div><div><span>Min</span><span>Max</span></div></div>`
     })
-    headerContainer.innerHTML = htmlResponse
 }
-//loop to take positionArr
-const renderPositionHeader = () => {
-    const headerPosition = document.querySelector(".position--top")
-    let htmlResponse = ``
-    positionArr.forEach(item => {
-        htmlResponse += `<div class="position-item cell"><span>${item["PositionID"]}</span><span class="border-position"></span><span>${item["PositionName"]}</span></div>`
-    })
-    headerPosition.innerHTML = htmlResponse
-}
-renderMaxtrixTable()
-const validateInput = (event) => {
-    const input = event.target;
-
-    console.log("test")
-    const value = input.value;
-    if (value.includes("-")) {
-        input.value = value.replace("-", "");
-    }
-};
-
-const applyTable = (code) => {
+renderDataTable()
+const updateMinMax = (code) => {
     //take data to update
+    code = Number(code)
     let updateData = {}
-    const dataRows = document.querySelectorAll(".data-row");
-    dataRows.forEach(row => {
-        const cells = row.querySelectorAll(".data-cell")
-        cells.forEach(cell => {
-            if (Number(cell.dataset.code) == Number(code)) {
-
-                const min = Number(cell.querySelector(".data-min").value)
-                const max = Number(cell.querySelector(".data-max").value)
-                const obj = {
-                    code,
-                    min,
-                    max
-                }
-                updateData = obj
-            }
-        })
-
+    let min, max = 0;
+    let dataTd = document.querySelectorAll(".data")
+    dataTd.forEach(td => {
+        if (Number(td.dataset.code) == code) {
+            min = Number(td.querySelector(".min-value").value)
+            max = Number(td.querySelector(".max-value").value)
+        }
     })
+    updateData = {
+        code,
+        min,
+        max
+    }
     //update data
     if (!!updateData) {
         datas.map(data => {
@@ -354,21 +445,43 @@ const applyTable = (code) => {
                     let isUpdate = false;
                     let oldMin = data["CompetenceLevel"]
                     let oldMax = data["CompetenceLevelMax"]
-                    data["CompetenceLevel"] = Number(updateData["min"]) > 0 && ( (Number(updateData["max"])>0&&Number(updateData["max"])>=Number(updateData["min"]))||(Number(updateData["max"])<=0))? Number(updateData["min"]) : data["CompetenceLevel"]
-                    data["CompetenceLevelMax"] = Number(updateData["max"]) > 0&&Number(updateData["max"])>=Number(updateData["min"]) ? Number(updateData["max"]) : data["CompetenceLevelMax"]
-                    if(oldMin !== data["CompetenceLevel"]||oldMax !== data["CompetenceLevelMax"] ){
+                    data["CompetenceLevel"] = Number(updateData["min"]) > 0 && ((Number(updateData["max"]) > 0 && Number(updateData["max"]) >= Number(updateData["min"])) || (Number(updateData["max"]) <= 0)) ? Number(updateData["min"]) : data["CompetenceLevel"]
+                    data["CompetenceLevelMax"] = Number(updateData["max"]) > 0 && Number(updateData["max"]) >= Number(updateData["min"]) ? Number(updateData["max"]) : data["CompetenceLevelMax"]
+                    if (oldMin !== data["CompetenceLevel"] || oldMax !== data["CompetenceLevelMax"]) {
                         isUpdate = true
                     }
                     if (isUpdate) {
                         updateData = data
-                        alert("Cập nhật khung năng lực thành công\n\n" + `Tên chức danh: ${updateData["PositionName"]}, Tên năng lực: ${updateData["CompetenceName"]}`);
+                        showToast("Cập nhật khung năng lực thành công\n\n" + `Tên chức danh: ${updateData["PositionName"]}, Tên năng lực: ${updateData["CompetenceName"]}`,"toasts-success");
                     }
 
                 }
             }
         })
     }
-
-    renderMaxtrixTable()
-
+    renderDataTable()
 }
+
+
+
+
+function showToast(message, isSuccess,callback) {
+    var toastClass = isSuccess ? 'toasts-success' : 'toasts-fail';
+    var toastElement = document.createElement('div');
+    toastElement.classList.add('toasts', toastClass);
+    toastElement.innerHTML = '<div><i class="fa-regular fa-circle-' + (isSuccess ? 'check' : 'xmark') + ' pe-2"></i>' +
+      '<p class="toasts-text">' + message + '</p></div>';
+  toastElement.classList.add("d-flex","justify-content-start","align-items-center")
+    document.body.appendChild(toastElement);
+  
+    setTimeout(function () {
+      toastElement.classList.add('show');
+    }, 100);
+  
+    setTimeout(function () {
+      toastElement.remove();
+      if (typeof callback === 'function') {
+        callback(); 
+      }
+    }, 3000);
+  }
