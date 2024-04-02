@@ -110,6 +110,28 @@ let datas = [
         "LastModifiedTime": null
     },
     {
+        "PositionID": "KSTV",
+        "PositionName": "Kế toán trưởng",
+        "DepartmentName": "Kế toán",
+        "CompetenceID": "add1",
+        "CompetenceName": "add1",
+        "CategoryName": "Cốt lõi",
+        "DepartmentID": "AC",
+        "CategoryID": "CL",
+        "Category": 3,
+        "Department": 8,
+        "Code": 10694,
+        "Framework": 10103,
+        "Competence": 13,
+        "Position": 40,
+        "CompetenceLevel": null,
+        "CompetenceLevelMax": null,
+        "CreateBy": "Nguyễn Văn Hachi",
+        "CreateTime": "2024-03-29T16:58:03.67",
+        "LastModifiedBy": null,
+        "LastModifiedTime": null
+    },
+    {
         "PositionID": "BDGD",
         "PositionName": "Giám đốc",
         "DepartmentName": "Ban Giám đốc",
@@ -376,6 +398,10 @@ const renderCompetenceHeader = () => {
 }
 const renderPositionSidebar = () => {
     let htmlPosition = ``
+    let competenceArr = []
+    mapCompetence.forEach((value,key)=>{
+        competenceArr = competenceArr.concat(value)
+    })
     mapPosition.forEach((value, key) => {
         let positionArr = value
         let rowspan = positionArr.length + 1
@@ -385,14 +411,22 @@ const renderPositionSidebar = () => {
                     <th class="vertical-cell" rowspan="${rowspan}">${key}</th>
                 </tr>
         `
+       
         positionArr.forEach(p => {
+            let obj = datas.find(d=>d["PositionName"] == p)
             htmlTemp += `<tr data-position-name = "${p}" class="position-name" >
-            <td ><div><span class="position-id"></span><span class="border-position"></span><span>${p}</span></div></td>
+            <td><div><span class="position-id">${obj.PositionID}</span><span class="border-position"></span><span>${p}</span></div></td>
             <td></td>
-            </tr>
+            
         `
+        
+        competenceArr.forEach((competence)=>{
+            htmlTemp+= `<td data-competence-name="${competence}" data-position-name="${p}" class="data"><div><input type="number" class="cell min-value" disabled>
+            <input type="number" class="cell max-value" disabled></div>
+            </td>`
         })
-        htmlPosition += htmlTemp
+        })
+        htmlPosition += htmlTemp + `</tr>`
     })
     const tbody = document.querySelector(".matrix-table tbody")
     tbody.innerHTML = htmlTbody + htmlPosition
@@ -401,33 +435,27 @@ const renderDataTable = () => {
     loadData()
     renderPositionSidebar()
     renderCompetenceHeader()
-    mapCompetence.forEach((value, key) => {
-        let dataFilter = datas.filter(data => data["CategoryName"] == key)
-        let trPosition = document.querySelectorAll(".position-name")
-        if (dataFilter) {
-            dataFilter.forEach(data => {
-                trPosition.forEach(tr => {
-                    if (tr.dataset.positionName == data["PositionName"]) {
-                        const tdPositionId = tr.querySelector(".position-id")
-                        tdPositionId.innerHTML = `${data["PositionID"]}`
-                        tr.innerHTML += `<td class="data" data-code="${data["Code"]}"><div><input type="number" class="cell min-value" value="${data["CompetenceLevel"]}" onblur=(updateMinMax(${data["Code"]}))>
-                        <input type="number" class="cell max-value" value="${data["CompetenceLevelMax"]}" onblur=(updateMinMax(${data["Code"]}))></div>
-                        </td>`
-                    }
-                })
-            })
-        }
+    datas.forEach(data=>{
+        let inputs = document.querySelectorAll(".matrix-table .data")
+        
+        inputs.forEach(input=>{
+            if(input.dataset.competenceName == data["CompetenceName"] && input.dataset.positionName == data["PositionName"]){
+                input.innerHTML = `<div data-code="${data["Code"]}"><input type="number" class="cell min-value" value="${data["CompetenceLevel"]}" onblur=(updateMinMax(${data["Code"]}))>
+                <input type="number" class="cell max-value" value="${data["CompetenceLevelMax"]}" onblur=(updateMinMax(${data["Code"]}))></div>`
+            }
+        })
     })
 }
 renderDataTable()
 const updateMinMax = (code) => {
+    
     //take data to update
     code = Number(code)
     let updateData = {}
     let min, max = 0;
     let dataTd = document.querySelectorAll(".data")
     dataTd.forEach(td => {
-        if (Number(td.dataset.code) == code) {
+        if (Number(td.querySelector("div").dataset.code) == code) {
             min = Number(td.querySelector(".min-value").value)
             max = Number(td.querySelector(".max-value").value)
         }
@@ -447,12 +475,15 @@ const updateMinMax = (code) => {
                     let oldMax = data["CompetenceLevelMax"]
                     data["CompetenceLevel"] = Number(updateData["min"]) > 0 && ((Number(updateData["max"]) > 0 && Number(updateData["max"]) >= Number(updateData["min"])) || (Number(updateData["max"]) <= 0)) ? Number(updateData["min"]) : data["CompetenceLevel"]
                     data["CompetenceLevelMax"] = Number(updateData["max"]) > 0 && Number(updateData["max"]) >= Number(updateData["min"]) ? Number(updateData["max"]) : data["CompetenceLevelMax"]
+                    if(!data["CompetenceLevelMax"]&&data["CompetenceLevel"]){
+                        data["CompetenceLevelMax"] = data["CompetenceLevel"]
+                    }
                     if (oldMin !== data["CompetenceLevel"] || oldMax !== data["CompetenceLevelMax"]) {
                         isUpdate = true
                     }
                     if (isUpdate) {
                         updateData = data
-                        showToast("Cập nhật khung năng lực thành công\n\n" + `Tên chức danh: ${updateData["PositionName"]}, Tên năng lực: ${updateData["CompetenceName"]}`,"toasts-success");
+                        showToast("Cập nhật khung năng lực thành công\n\n" + `Tên chức danh: ${updateData["PositionName"]}, Tên năng lực: ${updateData["CompetenceName"]}`, "toasts-success");
                     }
 
                 }
@@ -465,23 +496,23 @@ const updateMinMax = (code) => {
 
 
 
-function showToast(message, isSuccess,callback) {
+function showToast(message, isSuccess, callback) {
     var toastClass = isSuccess ? 'toasts-success' : 'toasts-fail';
     var toastElement = document.createElement('div');
     toastElement.classList.add('toasts', toastClass);
     toastElement.innerHTML = '<div><i class="fa-regular fa-circle-' + (isSuccess ? 'check' : 'xmark') + ' pe-2"></i>' +
-      '<p class="toasts-text">' + message + '</p></div>';
-  toastElement.classList.add("d-flex","justify-content-start","align-items-center")
+        '<p class="toasts-text">' + message + '</p></div>';
+    toastElement.classList.add("d-flex", "justify-content-start", "align-items-center")
     document.body.appendChild(toastElement);
-  
+
     setTimeout(function () {
-      toastElement.classList.add('show');
+        toastElement.classList.add('show');
     }, 100);
-  
+
     setTimeout(function () {
-      toastElement.remove();
-      if (typeof callback === 'function') {
-        callback(); 
-      }
+        toastElement.remove();
+        if (typeof callback === 'function') {
+            callback();
+        }
     }, 3000);
-  }
+}
