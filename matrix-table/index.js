@@ -684,7 +684,7 @@ const htmlTbody = ` <tr>
     <i class="fa-solid fa-circle-plus"></i>
     <span style="display: inline-block;">Thêm chức danh</span>
 </td>
-<td></td>
+<td class="cell-none"></td>
 </tr>`
 
 const loadData = () => {
@@ -766,9 +766,9 @@ const renderPositionSidebar = () => {
 
         positionArr.forEach(p => {
             let obj = datas.find(d => d["PositionName"] == p)
-            htmlTemp += `<tr data-position-name = "${p}" class="position-name" >
+            htmlTemp += `<tr data-position-name = "${p}" class="position-name"  title="${obj.PositionID} | ${p}" >
             <td><div><span class="position-id">${obj.PositionID}</span><span class="border-position"></span><span>${p}</span></div></td>
-            <td></td>
+            <td class="cell-none"></td>
             
         `
 

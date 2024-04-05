@@ -59,7 +59,7 @@ input[type="number"] {
 
 /*thead*/
 table {
-    border-collapse: collapse;
+    border-collapse: separate;
     border-spacing: 0px;
     text-wrap: nowrap;
 }
@@ -76,7 +76,7 @@ table thead th {
 }
 
 .border-none {
-    border: none;
+    border-color: white;
 }
 
 .table-label {
@@ -88,7 +88,7 @@ table thead th {
 }
 
 .header-top .table-label {
-    background-color: transparent;
+    background-color: white;
     height: 25px;
 }
 
@@ -218,6 +218,12 @@ tbody .add-action i {
 
 .position-name td:first-of-type div span {
     display: inline-block;
+    
+    text-align: center;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: unset;
 }
 
 .border-position {
@@ -240,4 +246,69 @@ tbody .add-action i {
     width: 25px;
     height: 25px;
     text-align: center;
+}
+
+
+.matrix-table {
+    overflow: auto;
+
+}
+table thead {
+    position: sticky;
+    top: 0px;
+    z-index: 3;
+}
+table thead tr .vertical-cell{
+    position: sticky;
+    top: 0px;
+    left: 0px;
+}
+table thead tr:last-of-type th:nth-child(2){
+    position: sticky;
+    top: 0px;
+    left: 30px;
+    
+}
+
+table tbody .vertical-cell{
+    position: sticky;
+    left: 0px;
+}
+table tbody tr td:first-of-type{
+    position: sticky;
+    left: 30px;
+}
+table tbody tr:first-of-type td:first-of-type{
+    position: sticky;
+    left: 0px;
+    top: 75px;
+    z-index: 2;
+}
+table tbody tr:first-of-type td:nth-child(2){
+    position: sticky;
+    left: 30px;
+    top: 75px;
+    z-index: 2;
+}
+table thead tr:first-of-type th:nth-child(3){
+    position: sticky;
+    top: 0px;
+    left: 230px;
+    background-color: white;
+}
+table thead tr:last-of-type th.add-action{
+    position: sticky;
+    top: 0px;
+    left: 230px;
+    background-color: #D6E5DC;
+}
+table thead tr:first-of-type th.table-label{
+    position: sticky;
+    top: 0;
+    left: 30px;
+}
+table tbody tr td.cell-none{
+    background-color: white;
+    position: sticky;
+    left: 230px;
 }
