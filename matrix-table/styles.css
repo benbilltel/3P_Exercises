@@ -6,6 +6,7 @@ body {
     font-weight: 400;
     padding: 50px;
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -16,6 +17,7 @@ input[type="number"] {
     -moz-appearance: textfield;
     /* Firefox */
 }
+
 /*notification*/
 .toasts {
     position: fixed;
@@ -38,12 +40,14 @@ input[type="number"] {
     background-color: #FD7676;
     color: #fff;
 }
-.toasts div{
+
+.toasts div {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
+
 .toasts p {
     margin: 0;
     display: inline-block;
@@ -146,6 +150,16 @@ tr {
 
 .competence-item--top {
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+}
+.competence-item--top p{
+    margin: 0px;
+    text-align: center;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: unset;
 }
 
 .competence-item--bottom {
@@ -179,17 +193,20 @@ tbody .add-action {
 
 .add-action span {
     padding-left: 5px;
+    font-weight: 400;
 }
 
 tbody .add-action i {
     margin-left: 10%;
 }
+
 /*tbody*/
 .position-name td:first-of-type {
     border-top: 1px solid #008000;
     border-bottom: 1px solid #008000;
     background-color: #D6E5DC;
     padding: 10px;
+    font-weight: 900;
 }
 
 .position-name td:first-of-type div {
