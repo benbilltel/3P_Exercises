@@ -1,0 +1,10 @@
+<div>
+    <ul>
+        <li *ngFor="let hero of heroes">
+            <button type="button" (click)="sendId(hero.id)">
+                <span>ID: {{hero.id}}</span>
+                <span>Name: {{hero.name}}</span>
+            </button>
+        </li>
+    </ul>
+</div>

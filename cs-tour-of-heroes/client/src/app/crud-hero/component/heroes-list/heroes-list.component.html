@@ -1,0 +1,4 @@
+<div>
+    <h1>Heroes List</h1>
+    <app-heroes-item *ngIf="heroes" [heroes]="heroes" (getId)="sendId($event)"></app-heroes-item>
+</div>
