@@ -1,0 +1,89 @@
+@import "../../../../variables";
+
+.question-list {
+    overflow: auto;
+    max-height: 47vh;
+
+    .question-table {
+        width: 100%;
+        min-width: 1000px;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+
+        input:hover:before,
+        input:checked::before {
+            content: "\002714";
+            background-color: #008000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            font-size: 0.7rem;
+            align-items: center;
+            width: 0.85rem;
+            height: 0.85rem;
+            border-radius: 2px;
+        }
+
+        input:hover {
+            cursor: pointer;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 3;
+
+            tr {
+                background-color: $background-color-02;
+
+                th {
+                    padding: 20px 0;
+                    text-align: start;
+                    &.question-time{
+                        text-align: center;
+                    }
+                }
+                
+            }
+        }
+
+        tbody {
+            tr {
+                &.active{
+                    background-color: #598F6D;
+                }
+                background-color: white;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+                td {
+                    max-width: 500px;
+                    padding: 10px 0;
+                }
+                .question-time{
+                    text-align: center;
+                    font-weight: 700;
+                }
+               
+                .question-info {
+                    padding-right: 10px;
+                    .question-info-top {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        font-weight: 700;
+                    }
+                    .question-info-bot{
+                        padding-top: 5px;
+                        display: flex;
+                        gap: 10px;
+                        .question-info-border{
+                            width: 2px;
+                            height: 17px;
+                            background-color: $color-01;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

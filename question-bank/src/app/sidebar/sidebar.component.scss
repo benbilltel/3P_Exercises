@@ -1,7 +1,10 @@
 @import "../../variables";
 .sidebar{
     height: 100%;
-    width: 220px;
-    background-color: $background-color-01;
-    overflow-y: auto;
+    display: flex;
+    .sidebar-menu{
+        height: 100%;
+        width: 220px;
+        background-color: $background-color-01;
+    }
 }

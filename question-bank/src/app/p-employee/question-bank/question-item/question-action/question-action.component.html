@@ -1,0 +1,8 @@
+<div class="question-action"><button [ngClass]="{'active' : isAction}" (click)="toggle()" type="button"><i class="fa-solid fa-ellipsis"></i>
+<div [ngClass]="{'show' : isAction}" class="actions">
+    <div class="action" *ngFor="let action of actions">
+        {{action}}
+    </div>
+</div>
+</button>
+</div>

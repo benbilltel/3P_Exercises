@@ -1,7 +1,25 @@
+@import "./variables";
 body{
     font-size: 16px;
     box-sizing: border-box;
     padding: 0px;
     margin: 0px;
     font-family: "Mulish", sans-serif;
+    background-color: $background-color-02;
+}
+::-webkit-scrollbar{
+    z-index: 2;
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track{
+    background-color: transparent;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: $green-active-bold;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: $green-active-light;
 }

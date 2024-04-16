@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DTOModule } from '../../dtos/dTOModule';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-item',
@@ -8,7 +9,13 @@ import { DTOModule } from '../../dtos/dTOModule';
 })
 export class HeaderItemComponent implements OnInit {
   @Input() modules: DTOModule[] = []
+  currentUrl: string = ""
+  constructor(private router: Router) { }
   ngOnInit(): void {
-    console.log(this.modules)
+    
+  }
+  isActive(routePath: string = ""): boolean {
+    this.currentUrl = this.router.url;
+    return this.currentUrl.includes(routePath);
   }
 }

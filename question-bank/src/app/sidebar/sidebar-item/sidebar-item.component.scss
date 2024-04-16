@@ -1,0 +1,16 @@
+.sidebar-items {
+
+    padding: 10px;
+
+    .sidebar-item {
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: flex;
+        padding: 10px;
+        justify-content: start;
+        gap: 15px;
+        align-items: center;
+        text-shadow: 2px 2px 5px black;
+    }
+}

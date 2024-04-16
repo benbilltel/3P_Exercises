@@ -1,7 +1,7 @@
 <div *ngIf="modules" class="menu header-item">
     <ul class="menu-list">
-        <li class="menu-item" *ngFor="let module of modules"><a class="menu-link"
-               title={{module.moduleName}} href={{module.routePath}}>{{module.moduleName}}
+        <li class="menu-item" *ngFor="let module of modules" [ngClass]="{'active':isActive(module.routePath)}"><a
+                class="menu-link" title={{module.moduleName}} [routerLink]="module.routePath">{{module.moduleName}}
             </a>
             <span class="menu-border"></span>
         </li>

@@ -2,7 +2,8 @@ export class DTOModule {
     code?: number
     routePath?: string
     moduleName?: string
-    subModules?: object
+    subModules?: object[]
+    features?: object[]
     /*constructor(code: number, routePath: string, moduleName: string, subModules: object) {
         this.code = code
         this.routePath = routePath
