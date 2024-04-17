@@ -2,8 +2,8 @@
 
 .question-list {
     overflow: auto;
-    max-height: 47vh;
-
+    max-height: 50vh;
+    
     .question-table {
         width: 100%;
         min-width: 1000px;
@@ -31,7 +31,6 @@
         thead {
             position: sticky;
             top: 0;
-            z-index: 3;
 
             tr {
                 background-color: $background-color-02;

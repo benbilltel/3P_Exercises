@@ -13,7 +13,6 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
-
             border-bottom: 1px solid $color-01;
 
             .question-filter--status {
@@ -40,6 +39,7 @@
                         border-radius: 10px;
                         border: 1px solid white;
                         box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
                         &:hover,
                         &.active {
                             border-color: $green-active-bold;
@@ -92,14 +92,13 @@
                     gap: 10px;
                     transition: .5s;
 
-                    &.btn-new
-                    {
+                    &.btn-new {
                         background-color: $green-active-bold;
                         border-color: $green-active-bold;
                         color: white;
                     }
 
-                    &:hover  {
+                    &:hover {
                         background-color: $green-active-light;
                         border-color: $green-active-light;
                         color: white;
@@ -139,6 +138,7 @@
                     .search-reset--bot {
                         padding-top: 15px;
                         transition: .5s;
+
                         button {
                             border: none;
                             background-color: transparent;
@@ -182,20 +182,24 @@
                                 padding: 5px;
                                 padding-left: 20px;
                                 border-radius: 3px;
+
                                 &:focus-visible {
                                     border: none;
                                     outline: none;
                                 }
+
                                 min-width: 350px;
-                                
+
                             }
-                            i{
+
+                            i {
                                 position: absolute;
                                 left: 2px;
                                 top: 5px;
                             }
                         }
-                        .btn-search{
+
+                        .btn-search {
                             border: none;
                             background-color: $green-active-bold;
                             color: white;
@@ -203,10 +207,11 @@
                             display: flex;
                             gap: 5px;
                             align-items: center;
-                            border-radius: 5px ;
+                            border-radius: 5px;
                             box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
                             cursor: pointer;
-                            &:hover{
+
+                            &:hover {
                                 background-color: $green-active-light;
                             }
                         }

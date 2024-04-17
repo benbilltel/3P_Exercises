@@ -11,6 +11,10 @@ import { QuestionBankComponent } from './p-employee/question-bank/question-bank.
 import { SidebarItemComponent } from './sidebar/sidebar-item/sidebar-item.component';
 import { QuestionItemComponent } from './p-employee/question-bank/question-item/question-item.component';
 import { QuestionActionComponent } from './p-employee/question-bank/question-item/question-action/question-action.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { QuestionDrawerComponent } from './p-employee/question-drawer/question-drawer.component'
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,13 +27,18 @@ import { QuestionActionComponent } from './p-employee/question-bank/question-ite
     SidebarItemComponent,
     QuestionItemComponent,
     QuestionActionComponent,
+    QuestionDrawerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSidenavModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

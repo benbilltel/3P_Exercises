@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DTOQuestion } from '../../dtos/dTOQuestion';
+import { QuestionService } from './service/question.service';
 
 @Component({
   selector: 'app-question-bank',
@@ -10,6 +12,7 @@ export class QuestionBankComponent {
   isSending: boolean = false
   isApprove: boolean = false
   isInactive: boolean = false
+  questionEdit?: DTOQuestion
   filter(filter: number) {
     switch (filter) {
       case 0:
@@ -27,5 +30,22 @@ export class QuestionBankComponent {
       default:
         break;
     }
+  }
+  constructor(private questionService: QuestionService){
+    this.questionService.getQuestions()
+  }
+  openDrawer(code: number) {
+    if (code == -1) {
+      let dummyQuestion = new DTOQuestion
+      dummyQuestion.questionCode = ""
+      dummyQuestion.questionName = ""
+      dummyQuestion.questionGroup = ""
+      dummyQuestion.questionType = ""
+      dummyQuestion.questionTime = 30
+      dummyQuestion.questionStatus = "Đang soạn thảo"
+      dummyQuestion.questionCalculating = ""
+      this.questionEdit = dummyQuestion
+    }
+
   }
 }

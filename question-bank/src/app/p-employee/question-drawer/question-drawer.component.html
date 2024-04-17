@@ -1,0 +1,87 @@
+<mat-drawer-container *ngIf="questionForm" class="drawer-question">
+    <mat-drawer #drawerQuesion class="question-sidenav" mode="side" position="end">
+        <div class="drawer-position">
+            <div class="drawer-content">
+                <div class="drawer-header"><i class="fa-solid fa-sitemap"></i><span>Ngân hàng câu hỏi</span></div>
+                <div class="form">
+                    <form [formGroup]="questionForm">
+                        <div class="form-group">
+                            <div>
+                                <label for="questionName">Tên câu hỏi </label>
+                                <input id="questionName" type="text" formControlName="questionName" #questionNameInput>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group-left">
+                                <label for="questionCode">Mã câu hỏi </label>
+                                <input id="questionCode" type="text" formControlName="questionCode">
+                            </div>
+                            <div class="form-group-right">
+                                <label for="questionGroup">Phân nhóm </label>
+                                <select formControlName="questionGroup" id="questionGroup">
+                                    <option value="" disabled>--Chọn--</option>
+                                    <option value="Thương hiệu">Thương hiệu</option>
+                                    <option value="Văn hóa công ty">Văn hóa công ty</option>
+                                    <option value="Quy định nội bộ">Quy định nội bộ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label for="questionType">Loại câu hỏi</label>
+                                <select formControlName="questionType" id="questionType">
+                                    <option value="" disabled>--Chọn--</option>
+                                    <option value="Nhiều lựa chọn">Nhiều lựa chọn</option>
+                                    <option value="Một lựa chọn">Một lựa chọn</option>
+                                    <option value="Câu hỏi mã">Câu hỏi mã</option>
+                                    <option value="Câu hỏi yes/np">Câu hỏi yes/no</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label for="questionCalculating">Cách tính điểm</label>
+                                <select formControlName="questionCalculating" id="questionCalculating">
+                                    <option value="" disabled>--Chọn--</option>
+                                    <option value="Đúng hết đáp án">Đúng hết đáp án</option>
+                                    <option value="Từng đáp án đúng">Từng đáp án đúng</option>
+                                    <option value="Trừ đáp án sai">Trừ đáp án sai</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label for="questionTime">Thời gian làm bài (giây)</label>
+                                <input style="width: 30%;" id="questionTime" type="number" min="30"
+                                    formControlName="questionTime">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label for="questionStatus">Tình trạng</label>
+                                <select style="width: 35%;" formControlName="questionStatus" id="questionStatus">
+                                    <option value="Đang soạn thảo">Đang soạn thảo</option>
+                                    <option value="Gửi duyệt">Gửi duyệt</option>
+                                    <option value="Duyệt áp dụng">Duyệt áp dụng</option>
+                                    <option value="Ngưng áp dụng">Ngưng áp dụng</option>
+                                    <option value="Trả về">Trả về</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                    </form>
+                </div>
+                <div class="form-footer">
+                    <button type="button" (click)="csCloseDrawer()">
+                        Đóng
+                    </button>
+                    <button type="button" (click)="onSubmit()">
+                        Cập nhật
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </mat-drawer>
+
+</mat-drawer-container>

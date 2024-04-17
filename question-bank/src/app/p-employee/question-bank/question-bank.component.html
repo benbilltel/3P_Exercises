@@ -21,7 +21,7 @@
                 <button type="button" class="btn-action"><i class="fa-solid fa-upload"></i></button>
                 <button type="button" class="btn-action"><i
                         class="fa-solid fa-download"></i><span>Download</span></button>
-                <button type="button" class="btn-action btn-new"><i class="fa-solid fa-plus"></i><span>Thêm
+                <button (click)="openDrawer(-1)" type="button" class="btn-action btn-new"><i class="fa-solid fa-plus"></i><span>Thêm
                         mới</span></button>
             </div>
         </div>
@@ -48,6 +48,8 @@
         </div>
 
         <app-question-item></app-question-item>
-
+        <app-question-drawer [questionEdit]="questionEdit"></app-question-drawer>
+        
     </div>
+    
 </div>

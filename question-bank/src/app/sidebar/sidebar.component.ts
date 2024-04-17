@@ -13,7 +13,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.modulesService.modules$.subscribe(data => {
       this.modules = data
-      console.log(data)
     })
   }
 }
