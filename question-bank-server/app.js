@@ -89,7 +89,7 @@ let questions = [{
     code: "001",
     questionCode: "Q.001",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Đang soạn thảo",
@@ -98,7 +98,7 @@ let questions = [{
     code: "002",
     questionCode: "Q.002",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Gửi duyệt",
@@ -107,7 +107,7 @@ let questions = [{
     code: "003",
     questionCode: "Q.003",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Duyệt áp dụng",
@@ -116,7 +116,7 @@ let questions = [{
     code: "004",
     questionCode: "Q.004",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Ngưng áp dụng",
@@ -125,7 +125,7 @@ let questions = [{
     code: "005",
     questionCode: "Q.005",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Trả về",
@@ -134,7 +134,7 @@ let questions = [{
     code: "006",
     questionCode: "Q.006",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Đang soạn thảo",
@@ -143,7 +143,7 @@ let questions = [{
     code: "007",
     questionCode: "Q.007",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Gửi duyệt",
@@ -152,7 +152,7 @@ let questions = [{
     code: "008",
     questionCode: "Q.008",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Duyệt áp dụng",
@@ -161,7 +161,7 @@ let questions = [{
     code: "009",
     questionCode: "Q.009",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Ngưng áp dụng",
@@ -170,7 +170,7 @@ let questions = [{
     code: "010",
     questionCode: "Q.010",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Trả về",
@@ -179,7 +179,7 @@ let questions = [{
     code: "011",
     questionCode: "Q.011",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Đang soạn thảo",
@@ -188,7 +188,7 @@ let questions = [{
     code: "012",
     questionCode: "Q.012",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Gửi duyệt",
@@ -197,7 +197,7 @@ let questions = [{
     code: "013",
     questionCode: "Q.013",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Duyệt áp dụng",
@@ -206,7 +206,7 @@ let questions = [{
     code: "014",
     questionCode: "Q.014",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Ngưng áp dụng",
@@ -215,7 +215,7 @@ let questions = [{
     code: "015",
     questionCode: "Q.015",
     questionName: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
-    questionType: "Dạng một câu lựa chọn",
+    questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
     questionStatus: "Trả về",
@@ -238,6 +238,10 @@ app.get("/questions", (req, res) => {
     let { page, items, status, searchText } = req.query
     page = Number(page)
     items = Number(items)
+    if(String(status) != "undefined"){
+        status = JSON.parse(status)
+    }
+    
     if (!page > 0) {
         page = 1
 
@@ -248,6 +252,7 @@ app.get("/questions", (req, res) => {
     let questionFilter = []
     let questionDisplay = []
     if (Array.isArray(status)) {
+
         status.forEach(s => {
             questions.forEach(q => {
                 if (q.questionStatus == s) {
@@ -256,17 +261,17 @@ app.get("/questions", (req, res) => {
             })
         })
     } else {
-
         questionFilter = questions
-
     }
-    if (searchText) {
+    if (searchText && searchText != '') {
 
-        questionFilter.map(q => {
+        let questionTemp = []
+        questionFilter.forEach(q => {
             if (q.questionName.includes() || q.questionCode.includes(searchText)) {
-                return q
+                questionTemp.push(q)
             }
         })
+        questionFilter = questionTemp
     }
     let startIndex = (page - 1) * items
     let endIndex = page * items
