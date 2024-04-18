@@ -488,7 +488,6 @@ let questions = [
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
 
-
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -536,7 +535,6 @@ app.get("/modules", (req, res) => {
   res.json({ status: "OK", message: "Get modules successful", data: modules });
 });
 app.get("/questions", (req, res) => {
-
   let { page, items, status, searchText } = req.query;
   page = Number(page);
   items = Number(items);
@@ -557,7 +555,6 @@ app.get("/questions", (req, res) => {
       questions.forEach((q) => {
         if (q.questionStatus == s) {
           questionFilter.push(q);
-
         }
       });
     });
@@ -587,6 +584,80 @@ app.get("/questions", (req, res) => {
       items: items,
     },
   });
+});
+app.put("/questions/update", (req, res) => {
+  let { questionsUpdate, status } = req.body;
+  if (status != "Xóa") {
+    questionsUpdate.forEach((q) => {
+      if (status == "Gửi duyệt") {
+        if (
+          q.questionStatus == "Đang soạn thảo" ||
+          q.questionStatus == "Trả về"
+        ) {
+          q.questionStatus = "Gửi duyệt";
+        }
+      }
+      if (status == "Duyệt áp dụng") {
+        if (
+          q.questionStatus == "Gửi duyệt" ||
+          q.questionStatus == "Ngưng áp dụng"
+        ) {
+          q.questionStatus = "Duyệt áp dụng";
+        }
+      }
+      if (status == "Trả về") {
+        if (
+          q.questionStatus == "Gửi duyệt" ||
+          q.questionStatus == "Ngưng áp dụng"
+        ) {
+          q.questionStatus = "Trả về";
+        }
+      }
+      if (status == "Ngưng áp dụng") {
+        if (q.questionStatus == "Duyệt áp dụng") {
+          q.questionStatus = "Ngưng áp dụng";
+        }
+      }
+    });
+    questionsUpdate.forEach((q) => {
+      const index = questions.findIndex((qc) => qc.code == q.code);
+      if (index != -1) {
+        questions[index] = q;
+      } else {
+        res.json({
+          status: "FAIL",
+          message: "Update questions failed",
+          data: {},
+        });
+      }
+    });
+    res.json({
+      status: "OK",
+      message: "Update questions successful",
+      data: questionsUpdate,
+    });
+  } else {
+
+     questionsUpdate.forEach((q) => {
+      if (q.questionStatus == "Đang soạn thảo") {
+        let index = questions.findIndex(qs=>qs.code == q.code)
+        if(index != -1){
+          questions.splice(index,1)
+        }else{
+          res.json({
+            status: "FAIL",
+            message: "Delete questions failed",
+            data: [],
+          });
+        }
+      }
+    });
+    res.json({
+      status: "OK",
+      message: "Delete questions successful",
+      data: [],
+    });
+  }
 });
 app.put("/questions", (req, res) => {
   let questionUpdate = req.body.questionUpdate;

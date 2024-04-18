@@ -4,12 +4,15 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { DTOQuestion } from '../../../dtos/dTOQuestion';
+import { QuestionService } from '../service/question.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-question-item',
@@ -26,13 +29,21 @@ export class QuestionItemComponent implements OnInit, OnChanges {
   isActions = false
   questionsActive?: DTOQuestion[];
   actions : string[] = []
+  
   sendQuestion(question: DTOQuestion) {
     this.questionToSend.emit(question);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
   ngOnChanges(changes: SimpleChanges): void {
     this.checkedAllActive()
   }
+  constructor(private questionService : QuestionService){
+
+  }
+  
+
   displayActions() {
     this.actions = []
     this.questionsToAction?.forEach((q) => {
@@ -92,7 +103,7 @@ export class QuestionItemComponent implements OnInit, OnChanges {
         count++;
       }
     });
-    if (count == this.questions?.length){
+    if (count == this.questions?.length && count != 0){
       this.isAllActive = true
     }else{
       this.isAllActive = false

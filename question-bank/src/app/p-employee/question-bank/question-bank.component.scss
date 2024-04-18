@@ -8,7 +8,12 @@
         width: calc(100% - 55px);
         height: calc(100% - 20px);
         padding: 0px 40px 20px 15px;
-
+        .footer{
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
         .question-filter {
             width: 100%;
             display: flex;

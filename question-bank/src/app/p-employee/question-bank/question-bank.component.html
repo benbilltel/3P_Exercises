@@ -91,5 +91,20 @@
       [questionEdit]="questionEdit"
       (questionClear)="clearQuestionEdit($event)"
     ></app-question-drawer>
+    <div class="footer">
+      <div class="footer-left">
+        <label for="items">Hiển thị mỗi trang</label>
+        <select name="items" id="items" [(ngModel)]="items" (click)="setItems(items)">
+          <option
+            value="{{ option }}"
+            *ngFor="let option of optionItems"
+            [ngClass]="{'hide':option == items}"
+          >
+            {{ option }}
+          </option>
+        </select>
+      </div>
+      <div class="footer-right"></div>
+    </div>
   </div>
 </div>

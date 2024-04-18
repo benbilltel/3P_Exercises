@@ -18,6 +18,8 @@ export class QuestionBankComponent implements OnInit, OnDestroy {
   status: string[] = [];
   searchText: string = '';
   questionsToAction: DTOQuestion[] = [];
+  items : number = 3
+  optionItems : number[] = [3,6,12,15]
   private subscriptions: Subscription[] = [];
   filter(filter: number) {
     this.status = [];
@@ -51,7 +53,9 @@ export class QuestionBankComponent implements OnInit, OnDestroy {
     }
     this.search();
   }
-
+  setItems(items:number){
+    this.questionService.setItems(items)
+  }
   constructor(private questionService: QuestionService) {}
   ngOnDestroy(): void {
     if (this.subscriptions.length > 0) {
@@ -62,6 +66,23 @@ export class QuestionBankComponent implements OnInit, OnDestroy {
     this.questionService.setQuestionsToAction(questions);
   }
   ngOnInit(): void {
+    this.subscriptions.push(this.questionService.items$.subscribe(data=>{
+      this.items = data
+    }))
+    this.status = [];
+    if (this.isDraft) {
+      this.status.push('Đang soạn thảo', 'Trả về');
+    }
+    if (this.isSending) {
+      this.status.push('Gửi duyệt');
+    }
+    if (this.isApprove) {
+      this.status.push('Duyệt áp dụng');
+    }
+    if (this.isInactive) {
+      this.status.push('Ngưng áp dụng');
+    }
+    this.search();
     this.questionService.getQuestions();
     this.subscriptions.push(
       this.questionService.questions$.subscribe((data) => {

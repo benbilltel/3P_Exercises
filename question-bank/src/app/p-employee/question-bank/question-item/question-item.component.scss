@@ -38,7 +38,7 @@
         thead {
             position: sticky;
             top: 0;
-
+            z-index: 10;
             tr {
                 background-color: $background-color-02;
 

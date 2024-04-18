@@ -17,7 +17,7 @@ export class QuestionService {
   questions$: Observable<DTOQuestion[]> = this.questions.asObservable();
   private page = new BehaviorSubject<number>(1);
   page$: Observable<number> = this.page.asObservable();
-  private items = new BehaviorSubject<number>(15);
+  private items = new BehaviorSubject<number>(3);
   items$: Observable<number> = this.items.asObservable();
   private totalPages = new BehaviorSubject<number>(1);
   totalPages$: Observable<number> = this.totalPages.asObservable();
@@ -26,7 +26,8 @@ export class QuestionService {
   private status = new BehaviorSubject<string[]>([]);
   status$: Observable<string[]> = this.status.asObservable();
   private questionsToAction = new BehaviorSubject<DTOQuestion[]>([]);
-  questionsToAction$: Observable<DTOQuestion[]> = this.questionsToAction.asObservable();
+  questionsToAction$: Observable<DTOQuestion[]> =
+    this.questionsToAction.asObservable();
   private actions = new BehaviorSubject<string[]>([]);
   actions$: Observable<string[]> = this.actions.asObservable();
   constructor(private http: HttpClient) {}
@@ -46,8 +47,8 @@ export class QuestionService {
         this.totalPages.next(data.totalPages);
       });
   }
-  setQuestionsToAction(questions: DTOQuestion[]){
-    this.questionsToAction.next(questions)
+  setQuestionsToAction(questions: DTOQuestion[]) {
+    this.questionsToAction.next(questions);
   }
   search(status: string[], searchText: string = '') {
     this.status.next(status);
@@ -55,9 +56,39 @@ export class QuestionService {
     this.getQuestions();
   }
   updateQuestion(questionUpdate: DTOQuestion) {
-    this.http.put<DTOApi>(apiQuestion, {"questionUpdate":questionUpdate}).subscribe((data)=>{
-      this.getQuestions()
-    });
+    this.http
+      .put<DTOApi>(apiQuestion, { questionUpdate: questionUpdate })
+      .subscribe((data) => {
+        this.getQuestions();
+      });
   }
-  
+  clearQuestionsToActions() {
+    this.questionsToAction.next([]);
+  }
+  setItems(items : number){
+    this.items.next(items)
+    this.getQuestions()
+  }
+  updateQuestions(status: string) {
+    
+      let questionsUpdate: DTOQuestion[] = [];
+      this.questionsToAction$.subscribe((data) => {
+        questionsUpdate = data;
+      });
+      this.http
+      .put<DTOApi>(
+        apiQuestion + '/update',
+        {
+          questionsUpdate: questionsUpdate,
+          status: status,
+        },
+        httpOptions
+      )
+      .subscribe((api) => {
+        if (api.status == 'OK') {
+          this.clearQuestionsToActions();
+          this.getQuestions();
+        }
+      });
+  }
 }

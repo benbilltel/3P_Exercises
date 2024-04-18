@@ -1,6 +1,9 @@
 <div class="question-list">
-  <div *ngIf="questionsToAction.length>0" class="question-actions-area">
-    <app-question-actions [actions]="actions" [questionsToAction]="questionsToAction"></app-question-actions>
+  <div *ngIf="questionsToAction.length > 0" class="question-actions-area">
+    <app-question-actions
+      [actions]="actions"
+      [questionsToAction]="questionsToAction"
+    ></app-question-actions>
   </div>
   <table class="question-table">
     <thead>
@@ -51,4 +54,5 @@
       </tr>
     </tbody>
   </table>
+
 </div>
