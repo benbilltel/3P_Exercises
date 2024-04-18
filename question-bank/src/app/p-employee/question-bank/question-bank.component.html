@@ -1,55 +1,95 @@
 <div class="question-bank">
-    <div class="content">
-        <div class="question-filter">
-            <div class="question-filter--status">
-                <div class="btn-list">
-                    <button type="button" class="btn-filter" [ngClass]="{'active':isDraft}"
-                        (click)="filter(0)"><span>Đang soạn thảo</span><input type="checkbox" name="draft"
-                            id="draft"></button>
-                    <button type="button" class="btn-filter" [ngClass]="{'active':isSending}"
-                        (click)="filter(1)"><span>Gửi duyệt</span><input type="checkbox" name="sending"
-                            id="sending"></button>
-                    <button type="button" class="btn-filter" [ngClass]="{'active':isApprove}"
-                        (click)="filter(2)"><span>Đã duyệt</span><input type="checkbox" name="approve"
-                            id="approve"></button>
-                    <button type="button" class="btn-filter" [ngClass]="{'active':isInactive}"
-                        (click)="filter(3)"><span>Ngưng áp dụng</span><input type="checkbox" name="inactive"
-                            id="inactive"></button>
-                </div>
-            </div>
-            <div class="question-filter--actions">
-                <button type="button" class="btn-action"><i class="fa-solid fa-upload"></i></button>
-                <button type="button" class="btn-action"><i
-                        class="fa-solid fa-download"></i><span>Download</span></button>
-                <button (click)="openDrawer(-1)" type="button" class="btn-action btn-new"><i class="fa-solid fa-plus"></i><span>Thêm
-                        mới</span></button>
-            </div>
+  <div class="content">
+    <div class="question-filter" [ngClass]="{'disabled-element': questionsToAction.length>0}">
+      <div class="question-filter--status">
+        <div class="btn-list">
+          <button
+            type="button"
+            class="btn-filter"
+            [ngClass]="{ active: isDraft }"
+            (click)="filter(0)"
+          >
+            <span>Đang soạn thảo</span
+            ><input type="checkbox" name="draft" id="draft" />
+          </button>
+          <button
+            type="button"
+            class="btn-filter"
+            [ngClass]="{ active: isSending }"
+            (click)="filter(1)"
+          >
+            <span>Gửi duyệt</span
+            ><input type="checkbox" name="sending" id="sending" />
+          </button>
+          <button
+            type="button"
+            class="btn-filter"
+            [ngClass]="{ active: isApprove }"
+            (click)="filter(2)"
+          >
+            <span>Đã duyệt</span
+            ><input type="checkbox" name="approve" id="approve" />
+          </button>
+          <button
+            type="button"
+            class="btn-filter"
+            [ngClass]="{ active: isInactive }"
+            (click)="filter(3)"
+          >
+            <span>Ngưng áp dụng</span
+            ><input type="checkbox" name="inactive" id="inactive" />
+          </button>
         </div>
-        <div class="question-search">
-            <div class="content-search">
-                <div class="search-icon"><i class="fa-solid fa-filter"></i></div>
-                <div class="search-reset">
-                    <div class="search-reset--top">lọc dữ liệu</div>
-                    <div class="search-reset--bot"><button type="button">Reset dữ liệu</button></div>
-
-                </div>
-                <div class="search-input">
-                    <div class="search-input--top">Tìm kiếm</div>
-                    <div class="search-input--bot">
-                        <div class="search-input-text">
-                            <input type="text" placeholder="Tìm kiếm theo mã và câu hỏi">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-                        <button type="button" class="btn-search"><i
-                                class="fa-solid fa-magnifying-glass"></i><span>Tìm</span></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <app-question-item></app-question-item>
-        <app-question-drawer [questionEdit]="questionEdit"></app-question-drawer>
-        
+      </div>
+      <div class="question-filter--actions">
+        <button type="button" class="btn-action">
+          <i class="fa-solid fa-upload"></i>
+        </button>
+        <button type="button" class="btn-action">
+          <i class="fa-solid fa-download"></i><span>Download</span>
+        </button>
+        <button (click)="openDrawer()" type="button" class="btn-action btn-new">
+          <i class="fa-solid fa-plus"></i><span>Thêm mới</span>
+        </button>
+      </div>
     </div>
-    
+    <div class="question-search" [ngClass]="{'disabled-element': questionsToAction.length>0}">
+      <div class="content-search">
+        <div class="search-icon"><i class="fa-solid fa-filter"></i></div>
+        <div class="search-reset">
+          <div class="search-reset--top">lọc dữ liệu</div>
+          <div class="search-reset--bot">
+            <button type="button">Reset dữ liệu</button>
+          </div>
+        </div>
+        <div class="search-input">
+          <div class="search-input--top">Tìm kiếm</div>
+          <div class="search-input--bot">
+            <div class="search-input-text">
+              <input
+                [(ngModel)]="searchText"
+                type="text"
+                placeholder="Tìm kiếm theo mã và câu hỏi"
+              />
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <button (click)="search()" type="button" class="btn-search">
+              <i class="fa-solid fa-magnifying-glass"></i><span>Tìm</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-question-item
+      [questionsToAction]="questionsToAction"
+      (sendQuestionsToAction)="asyncQuestionsToAction($event)"
+      [questions]="questions"
+      (questionToSend)="openDrawerToEdit($event)"
+    ></app-question-item>
+    <app-question-drawer
+      [questionEdit]="questionEdit"
+      (questionClear)="clearQuestionEdit($event)"
+    ></app-question-drawer>
+  </div>
 </div>

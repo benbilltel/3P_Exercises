@@ -14,7 +14,8 @@ import { QuestionActionComponent } from './p-employee/question-bank/question-ite
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { QuestionDrawerComponent } from './p-employee/question-drawer/question-drawer.component'
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QuestionActionsComponent } from './p-employee/question-bank/question-item/question-actions/question-actions.component';
 
 
 @NgModule({
@@ -28,13 +29,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     QuestionItemComponent,
     QuestionActionComponent,
     QuestionDrawerComponent,
+    QuestionActionsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatSidenavModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()

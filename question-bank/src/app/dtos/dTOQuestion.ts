@@ -1,5 +1,5 @@
 export class DTOQuestion {
-    code?: number
+    code?: string
     questionCode?: string
     questionName?: string
     questionGroup?: string

@@ -1,7 +1,13 @@
 <div class="question-action"><button [ngClass]="{'active' : isAction}" (click)="toggle()" type="button"><i class="fa-solid fa-ellipsis"></i>
 <div [ngClass]="{'show' : isAction}" class="actions">
     <div class="action" *ngFor="let action of actions">
-        {{action}}
+        <button (click) = "questionToEdit()" *ngIf="action == 'Chỉnh sửa'" type="button">{{action}}</button>
+        <button (click) = "questionToEdit()" *ngIf="action == 'Xem chi tiết'" type="button">{{action}}</button>
+        <button (click) = "updateQuestion('Gửi duyệt')" *ngIf="action == 'Gửi duyệt'" type="button">{{action}}</button>
+        <button (click) = "updateQuestion('Duyệt áp dụng')" *ngIf="action == 'Phê duyệt'" type="button">{{action}}</button>
+        <button (click) = "updateQuestion('Ngưng áp dụng')" *ngIf="action == 'Ngưng hiển thị'" type="button">{{action}}</button>
+        <button (click) = "updateQuestion('Trả về')" *ngIf="action == 'Trả về'" type="button">{{action}}</button>
+        <button *ngIf="action == 'Xóa'" type="button">{{action}}</button>
     </div>
 </div>
 </button>
