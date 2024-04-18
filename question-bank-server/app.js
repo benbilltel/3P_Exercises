@@ -329,8 +329,10 @@ let questions = [
   {
     code: "001",
     questionCode: "Q.001",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -340,8 +342,10 @@ let questions = [
   {
     code: "002",
     questionCode: "Q.002",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -351,8 +355,10 @@ let questions = [
   {
     code: "003",
     questionCode: "Q.003",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -362,8 +368,10 @@ let questions = [
   {
     code: "004",
     questionCode: "Q.004",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -373,8 +381,10 @@ let questions = [
   {
     code: "005",
     questionCode: "Q.005",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -384,8 +394,10 @@ let questions = [
   {
     code: "006",
     questionCode: "Q.006",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -395,8 +407,10 @@ let questions = [
   {
     code: "007",
     questionCode: "Q.007",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -406,8 +420,10 @@ let questions = [
   {
     code: "008",
     questionCode: "Q.008",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -417,8 +433,10 @@ let questions = [
   {
     code: "009",
     questionCode: "Q.009",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -428,8 +446,10 @@ let questions = [
   {
     code: "010",
     questionCode: "Q.010",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -441,6 +461,7 @@ let questions = [
     questionCode: "Q.011",
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -450,8 +471,10 @@ let questions = [
   {
     code: "012",
     questionCode: "Q.012",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -461,8 +484,11 @@ let questions = [
   {
     code: "013",
     questionCode: "Q.013",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -472,8 +498,10 @@ let questions = [
   {
     code: "014",
     questionCode: "Q.014",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -483,8 +511,10 @@ let questions = [
   {
     code: "015",
     questionCode: "Q.015",
+
     questionName:
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci distinctio temporibus aliquid voluptatem rerum quasi?",
+
     questionType: "Một lựa chọn",
     questionGroup: "Thương hiệu",
     questionTime: 30,
@@ -506,6 +536,7 @@ app.get("/modules", (req, res) => {
   res.json({ status: "OK", message: "Get modules successful", data: modules });
 });
 app.get("/questions", (req, res) => {
+
   let { page, items, status, searchText } = req.query;
   page = Number(page);
   items = Number(items);
@@ -526,6 +557,7 @@ app.get("/questions", (req, res) => {
       questions.forEach((q) => {
         if (q.questionStatus == s) {
           questionFilter.push(q);
+
         }
       });
     });
