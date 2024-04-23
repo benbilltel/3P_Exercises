@@ -1,0 +1,33 @@
+<input type="text" [(ngModel)]="setSelectedDate" mask="00-00-0000">
+<div class="calendar">
+  <div>{{selectedDateFormatted}}</div>
+  <div class="calendar-nav">
+    <div>{{navDate.format('MMMM YYYY')}}</div>
+    <div>
+      <div class="calendar-nav-previous-month">
+        <button class="button is-text" (click) = "changeViewMonth(-1)">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+      </div>
+      <div class="calendar-nav-next-month">
+        <button class="button is-text" (click) = "changeViewMonth(1)">
+          <i class="fa fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="calendar-container">
+    <!-- <div class="calendar-header">
+        <div class="calendar-date"
+        *ngFor = "let day of weekDaysHeaderArr">
+        {{day}}
+      </div>
+    </div> -->
+    <div class="calendar-body">
+        <div *ngFor = "let day of gridArr" class="calendar-date" [class.is-current] = "checkCrrDate(day)" [ngClass]="{'is-selected': day.value == selectedDate?._d.getDate()}" [class.is-disabled] = "!day.available">
+            <button *ngIf = "day.value !== 0" class="date-item"  (click) = "selectDay(day)">{{day.value}}</button>
+            <button *ngIf = "day.value === 0" class="date-item"></button>
+         </div>
+      </div>
+  </div>
+</div>
