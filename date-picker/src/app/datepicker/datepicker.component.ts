@@ -1,7 +1,9 @@
 import {
   AfterContentChecked,
   Component,
+  ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnInit,
   Output,
@@ -22,7 +24,7 @@ import moment from 'moment';
   ],
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
-  localeString: string = 'en';
+  localeString: string = 'vi';
   navDate: any;
   // weekDaysHeaderArr: Array<string> = [];
   gridArr: Array<any> = [];
@@ -34,10 +36,15 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   onTouch: any = (val: any) => {
     this.writeValue(val);
   };
+  monthToString = '';
   daySelected = '';
   monthSelected = '';
   yearSelected = '';
-  constructor() {}
+  dateToBind: any;
+  isShow = false;
+  constructor(private elementRef: ElementRef) {
+    moment.updateLocale(this.localeString, {});
+  }
   writeValue(obj: any): void {
     this.selectedDate = obj;
     this.yearSelected = this.selectedDate?.year();
@@ -49,9 +56,10 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.selectedDate.date() < 10
         ? '0' + this.selectedDate.date()
         : this.selectedDate.date();
+    this.dateToBind = `${this.yearSelected}-${this.monthSelected}-${this.daySelected}`;
     this.makeGrid();
   }
-  setSelectedDate(obj: any) {
+  public setSelectdedDate(obj: any) {
     this.writeValue(obj);
   }
   registerOnChange(fn: any): void {
@@ -63,18 +71,101 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     throw new Error('Method not implemented.');
   }
-
   ngOnInit() {
-    moment.locale(this.localeString);
     this.crrDate = moment();
-    if (!this.selectedDate) {
-      this.navDate = moment();
 
-      // this.makeHeader();
-    } else {
-      this.navDate = this.selectedDate;
-    }
+    this.navDate = moment();
+
+    // this.makeHeader();
+
     this.makeGrid();
+    document.addEventListener('click', (event) => {
+      if (!this.elementRef.nativeElement.contains(event.target)) {
+        this.onClose(event);
+      }
+    });
+  }
+
+  onFocus(e: any) {
+    this.isShow = false;
+  }
+  onToggle() {
+    if (
+      !moment(
+        `${this.yearSelected}-${Number(this.monthSelected) - 1}-${Number(
+          this.daySelected
+        )}`
+      ).isBefore(
+        `${this.crrDate.year()}-${this.crrDate.month()}-${this.crrDate.date()}`
+      )
+    ) {
+      if (this.selectedDate) {
+        this.navDate = moment({
+          year: Number(this.yearSelected),
+          month: Number(this.monthSelected) - 1,
+        });
+        this.setSelectdedDate(this.selectedDate);
+      }
+    }
+
+    this.isShow = !this.isShow;
+  }
+  onOpen() {
+    if (this.selectedDate) {
+      this.navDate = moment({
+        year: Number(this.yearSelected),
+        month: Number(this.monthSelected) - 1,
+      });
+      this.setSelectdedDate(this.selectedDate);
+    }
+    this.isShow = true;
+  }
+  @HostListener('document:click', ['$event'])
+  onClose(event: any) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.isShow = false; // Assuming 'isShow' controls date picker visibility
+    }
+  }
+  convertMonth() {
+    const monthIndex = Number(this.navDate.month());
+    switch (monthIndex) {
+      case 1:
+        this.monthToString = 'hai';
+        break;
+      case 2:
+        this.monthToString = 'ba';
+        break;
+      case 3:
+        this.monthToString = 'tư';
+        break;
+      case 4:
+        this.monthToString = 'năm';
+        break;
+      case 5:
+        this.monthToString = 'sáu';
+        break;
+      case 6:
+        this.monthToString = 'bảy';
+        break;
+      case 7:
+        this.monthToString = 'tám';
+        break;
+      case 8:
+        this.monthToString = 'chín';
+        break;
+      case 9:
+        this.monthToString = 'mười';
+        break;
+      case 10:
+        this.monthToString = 'mười một';
+        break;
+      case 11:
+        this.monthToString = 'mười hai';
+        break;
+      case 0:
+        this.monthToString = 'một';
+        break;
+    }
   }
   checkSelected(day: any) {
     if (
@@ -98,14 +189,14 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     }
     return false;
   }
-  changeNavMonth(num: number){
-    if(this.canChangeNavMonth(num)){
+  changeNavMonth(num: number) {
+    if (this.canChangeNavMonth(num)) {
       this.navDate.add(num, 'month');
       this.makeGrid();
     }
   }
 
-  canChangeNavMonth(num: number){
+  canChangeNavMonth(num: number) {
     const clonedDate = moment(this.navDate);
     clonedDate.add(num, 'month');
     const minDate = moment().add(-1, 'month');
@@ -138,6 +229,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       }
       this.gridArr.push(obj);
     }
+    this.convertMonth();
   }
 
   isAvailable(num: number): boolean {
@@ -148,120 +240,49 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       return true;
     }
   }
-  changeDayInput(e: any) {
-    e = Number(e);
-    if (
-      moment(
-        `${this.crrDate.year()}-${this.crrDate.month() + 1}-${
-          this.crrDate.date() - 1
-        }`
-      ).isBefore(
-        `${this.yearSelected}-${this.monthSelected}-${this.daySelected}`
-      ) &&
-      e > 0
-    ) {
-      this.navDate = moment({
-        year: this.navDate.year(),
-        month: this.navDate.month(),
-        date: e,
-      });
-      this.onChange(this.navDate);
+  blurDateInput(event: any) {
+    let e = event.target.value;
+    e = e.split('-');
+    let year = Number(e[0]);
+    let month = Number(e[1]);
+    let day = Number(e[2]);
+    if (year && month && day) {
+      if (
+        !moment(`${year}-${month}-${day}`).isBefore(
+          `${this.crrDate.year()}-${this.crrDate.month()+1}-${this.crrDate.date()}`
+        )
+      ) {
+        
+        this.navDate = moment({
+          year: year,
+          month: month-1,
+          date: day,
+        });
+
+        this.onTouch(this.navDate);
+      } else {
+        this.setSelectdedDate(this.crrDate);
+      }
     } else {
+      this.setSelectdedDate(this.crrDate);
     }
   }
-  changeMonthInput(e: any) {
-    e = Number(e);
-    if (e >= this.crrDate.month() + 1 && e > 0) {
-      this.navDate = moment({
-        year: this.navDate.year(),
-        month: e - 1,
-        date: this.navDate.date(),
-      });
-      this.onChange(this.navDate);
-    } else {
-    }
-  }
-  changeYearInput(e: any) {
-    e = Number(e);
-    if (e >= this.crrDate.year() && e > 0) {
-      this.navDate = moment({
-        year: e,
-        month: this.navDate.month(),
-        date: this.navDate.date(),
-      });
-      this.onChange(this.navDate);
-    } else {
-    }
-  }
-  blurDayInput(event: any) {
-    let e = Number(event.target.value);
-    if (
-      moment(
-        `${this.crrDate.year()}-${
-          this.crrDate.month() + 1
-        }-${this.crrDate.date()}`
-      ).isBefore(
-        `${this.yearSelected}-${this.monthSelected}-${this.daySelected}`
-      ) &&
-      e > 0
-    ) {
-      this.navDate = moment({
-        year: this.navDate.year(),
-        month: this.navDate.month(),
-        date: e,
-      });
-      this.onTouch(this.navDate);
-    } else {
-      this.daySelected =
-        this.navDate.date() < 10
-          ? '0' + this.navDate.date()
-          : this.navDate.date();
-    }
-  }
-  blurMonthInput(event: any) {
-    let e = Number(event.target.value);
-    if (e >= this.crrDate.month() + 1 && e > 0) {
-      this.navDate = moment({
-        year: this.navDate.year(),
-        month: e - 1,
-        date: this.navDate.date(),
-      });
-      this.onTouch(this.navDate);
-    } else {
-      this.monthSelected =
-        this.navDate.month() + 1 < 10
-          ? '0' + (this.navDate.month() + 1)
-          : this.navDate.month() + 1;
-    }
-  }
-  blurYearInput(event: any) {
-    let e = Number(event.target.value);
-    if (e >= this.crrDate.year() && e > 0) {
-      this.navDate = moment({
-        year: e,
-        month: this.navDate.month(),
-        date: this.navDate.date(),
-      });
-      this.onTouch(this.navDate);
-    } else {
-      this.yearSelected = this.crrDate.year();
-    }
-  }
+
   dateFromNum(num: number, referenceDate: any): any {
     let returnDate = moment(referenceDate);
     return returnDate.date(num);
   }
   selectDay(day: any) {
     if (day.available) {
-      this.setSelectedDate(this.dateFromNum(day.value, this.navDate));
+      this.setSelectdedDate(this.dateFromNum(day.value, this.navDate));
     }
   }
   checkCrrDate(day: any) {
     if (
       day.value == this.crrDate.date() &&
       !moment(
-        `${this.crrDate.year()}-${this.crrDate.month()}-${this.crrDate.date()}`
-      ).isBefore(`${this.navDate.year()}-${this.navDate.month()}-${day.value}`)
+        `${this.crrDate.year()}-${this.crrDate.month()+1}-${this.crrDate.date()}`
+      ).isBefore(`${this.navDate.year()}-${this.navDate.month()+1}-${day.value}`)
     ) {
       return true;
     }

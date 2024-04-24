@@ -1,17 +1,14 @@
 <div class="cs-date-picker">
-  <div>
-    <input type="text" [(ngModel)]="daySelected" (ngModelChange)="changeDayInput($event)" placeholder="dd" mask="00" (blur)="blurDayInput($event)" />-<input
-      type="text"
-      [(ngModel)]="monthSelected"
-      placeholder="mm"
-      mask="00"
-      (ngModelChange)="changeMonthInput($event)" (blur)="blurMonthInput($event)"  />-<input type="text" [(ngModel)]="yearSelected" placeholder="yyyy" mask="0000" (ngModelChange)="changeYearInput($event)" (blur)="blurYearInput($event)" />
+  
+  <div class="input-date-picker">
+    <i class="fa-regular fa-calendar" (click)="onToggle()"></i>
+    <input type="date" [(ngModel)]="dateToBind" (focus)="onFocus($event)" (blur) = "blurDateInput($event)" title="datepicker" >
   </div>
-  <div class="calendar">
+  <div class="calendar" *ngIf="isShow">
     <div class="calendar-nav">
-      <div>{{ navDate.format("MMMM YYYY") }}</div>
+      <div>Tháng {{monthToString}}, {{navDate.format('yyyy')}}</div>
       <div>
-        <div *ngIf="canChangeNavMonth(-1)" class="calendar-nav-previous-month">
+        <div [ngClass]="{'is-inactive': !canChangeNavMonth(-1)}" class="calendar-nav-previous-month">
           <button class="button is-text" (click)="changeNavMonth(-1)">
             <i class="fa fa-chevron-left"></i>
           </button>
@@ -50,5 +47,4 @@
       </div>
     </div>
   </div>
-  
 </div>
