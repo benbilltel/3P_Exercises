@@ -41,7 +41,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   monthSelected = '';
   yearSelected = '';
   dateToBind: any;
-  isShow = false;
+  public isShow = false;
   constructor(private elementRef: ElementRef) {
     moment.updateLocale(this.localeString, {});
   }

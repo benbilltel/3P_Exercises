@@ -1,0 +1,38 @@
+.dialog{
+  display: inline-block;
+  min-width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 3px;
+  header{
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: white;
+  }
+  &.success{
+    header{
+      background-color: #008000;
+    }
+  }
+  &.info{
+    header{
+      background-color: #33A5FF;
+    }
+  }
+  &.danger{
+    header{
+      background-color: #dc143c;
+    }
+  }
+  main{
+    padding: 10px 20px;
+  }
+  footer{
+    border-top: 1px solid black;
+    padding: 10px;
+  }
+}

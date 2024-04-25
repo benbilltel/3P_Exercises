@@ -1,0 +1,24 @@
+<div
+  class="dialog"
+  [class.success]="dialogSucess ? true : false"
+  [class.info]="dialogInfo ? true : false"
+  [class.danger]="dialogDanger ? true : false"
+>
+  <header>
+    <ng-content select="[dialog-header]"></ng-content>
+  </header>
+  <main>
+    <div class="body-success" *ngIf="dialogSucess">
+      <ng-container [ngTemplateOutlet]="dialogSucess"></ng-container>
+    </div>
+    <div class="body-info" *ngIf="dialogInfo">
+      <ng-container [ngTemplateOutlet]="dialogInfo"></ng-container>
+    </div>
+    <div class="body-danger" *ngIf="dialogDanger">
+      <ng-container [ngTemplateOutlet]="dialogDanger"></ng-container>
+    </div>
+  </main>
+  <footer>
+    <ng-content select="[dialog-footer]"></ng-content>
+  </footer>
+</div>
